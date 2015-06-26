@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/user-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="user-black.png"
+   checksum="72109232660715674c269a748b6d3b94"
+   last-author="pberner"/>
+<delete-changelist
+   name="user-black.png"/>
+<committed
+   name="user-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="user-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/user-black.png"/>

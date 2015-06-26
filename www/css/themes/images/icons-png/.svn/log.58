@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/forward-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="forward-white.png"
+   checksum="486c47d6f12f7872c04a16a28f7ae6c3"
+   last-author="pberner"/>
+<delete-changelist
+   name="forward-white.png"/>
+<committed
+   name="forward-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="forward-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/forward-white.png"/>

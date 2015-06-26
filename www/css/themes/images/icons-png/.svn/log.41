@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/check-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="check-black.png"
+   checksum="358363d39df6c2d2e0afbad366b14231"
+   last-author="pberner"/>
+<delete-changelist
+   name="check-black.png"/>
+<committed
+   name="check-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="check-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/check-black.png"/>

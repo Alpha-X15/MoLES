@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows
+END
+package.windows.appxmanifest
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/package.windows.appxmanifest
+END
+package.windows10.appxmanifest
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/package.windows10.appxmanifest
+END
+VERSION
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/VERSION
+END
+CordovaApp.vs2012.sln
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/CordovaApp.vs2012.sln
+END
+CordovaApp.sln
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/CordovaApp.sln
+END
+package.windows80.appxmanifest
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/package.windows80.appxmanifest
+END
+CordovaApp.Windows.jsproj
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/CordovaApp.Windows.jsproj
+END
+CordovaApp.Windows10.jsproj
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/CordovaApp.Windows10.jsproj
+END
+package.phone.appxmanifest
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/package.phone.appxmanifest
+END
+CordovaApp.shproj
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/CordovaApp.shproj
+END
+config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/config.xml
+END
+CordovaApp.Windows80.jsproj
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/CordovaApp.Windows80.jsproj
+END
+CordovaApp_TemporaryKey.pfx
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/CordovaApp_TemporaryKey.pfx
+END
+CordovaApp.projitems
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/CordovaApp.projitems
+END
+CordovaApp.Phone.jsproj
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/CordovaApp.Phone.jsproj
+END

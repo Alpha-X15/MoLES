@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/gear-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="gear-black.png"
+   checksum="957fed4d5d46498e93cb74af8384f4b2"
+   last-author="pberner"/>
+<delete-changelist
+   name="gear-black.png"/>
+<committed
+   name="gear-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="gear-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/gear-black.png"/>

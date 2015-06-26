@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova
+END
+build
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/build
+END
+log
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/log
+END
+clean
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/clean
+END
+build.bat
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/build.bat
+END
+run
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/run
+END
+version
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/version
+END
+android_sdk_version
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/android_sdk_version
+END
+defaults.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/defaults.xml
+END
+log.bat
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/log.bat
+END
+check_reqs
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/check_reqs
+END
+clean.bat
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/clean.bat
+END
+run.bat
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/run.bat
+END
+version.bat
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/cordova/version.bat
+END

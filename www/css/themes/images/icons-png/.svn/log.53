@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/eye-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="eye-black.png"
+   checksum="03ce5e4016e1f8ab8d7b02a72d45e600"
+   last-author="pberner"/>
+<delete-changelist
+   name="eye-black.png"/>
+<committed
+   name="eye-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="eye-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/eye-black.png"/>

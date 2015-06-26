@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/plugins/cordova-plugin-whitelist
+END
+NOTICE
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/plugins/cordova-plugin-whitelist/NOTICE
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/plugins/cordova-plugin-whitelist/LICENSE
+END
+package.json
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/plugins/cordova-plugin-whitelist/package.json
+END
+CONTRIBUTING.md
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/plugins/cordova-plugin-whitelist/CONTRIBUTING.md
+END
+whitelist.js
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/plugins/cordova-plugin-whitelist/whitelist.js
+END
+RELEASENOTES.md
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/plugins/cordova-plugin-whitelist/RELEASENOTES.md
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/plugins/cordova-plugin-whitelist/README.md
+END
+plugin.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/plugins/cordova-plugin-whitelist/plugin.xml
+END

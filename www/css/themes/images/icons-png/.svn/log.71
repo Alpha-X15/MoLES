@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/lock-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="lock-black.png"
+   checksum="28a57a211fa4c6a69055a91cd3e2b688"
+   last-author="pberner"/>
+<delete-changelist
+   name="lock-black.png"/>
+<committed
+   name="lock-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="lock-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/lock-black.png"/>

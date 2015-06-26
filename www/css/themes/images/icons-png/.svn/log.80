@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/phone-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="phone-white.png"
+   checksum="3f351a2cf1b17acf767294695eb9a825"
+   last-author="pberner"/>
+<delete-changelist
+   name="phone-white.png"/>
+<committed
+   name="phone-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="phone-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/phone-white.png"/>

@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova
+END
+CordovaResourceApi.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaResourceApi.java
+END
+CordovaInterfaceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaInterfaceImpl.java
+END
+CordovaDialogsHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaDialogsHelper.java
+END
+NativeToJsMessageQueue.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/NativeToJsMessageQueue.java
+END
+CallbackContext.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CallbackContext.java
+END
+ConfigXmlParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/ConfigXmlParser.java
+END
+Config.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/Config.java
+END
+CordovaWebViewImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaWebViewImpl.java
+END
+CordovaBridge.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaBridge.java
+END
+CordovaArgs.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaArgs.java
+END
+CordovaActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaActivity.java
+END
+CordovaPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaPlugin.java
+END
+CordovaWebViewEngine.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaWebViewEngine.java
+END
+Whitelist.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/Whitelist.java
+END
+CordovaHttpAuthHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaHttpAuthHandler.java
+END
+CordovaInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaInterface.java
+END
+CordovaPreferences.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaPreferences.java
+END
+AuthenticationToken.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/AuthenticationToken.java
+END
+PluginEntry.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/PluginEntry.java
+END
+LOG.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/LOG.java
+END
+CordovaClientCertRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaClientCertRequest.java
+END
+CordovaWebView.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CordovaWebView.java
+END
+ICordovaHttpAuthHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/ICordovaHttpAuthHandler.java
+END
+CoreAndroid.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/CoreAndroid.java
+END
+PluginManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/PluginManager.java
+END
+ICordovaCookieManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/ICordovaCookieManager.java
+END
+ICordovaClientCertRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/ICordovaClientCertRequest.java
+END
+PluginResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/PluginResult.java
+END
+ExposedJsApi.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/src/org/apache/cordova/ExposedJsApi.java
+END

@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/forbidden-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="forbidden-black.png"
+   checksum="fcf54d3cda520f292d34592d4ae6d9ae"
+   last-author="pberner"/>
+<delete-changelist
+   name="forbidden-black.png"/>
+<committed
+   name="forbidden-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="forbidden-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/forbidden-black.png"/>

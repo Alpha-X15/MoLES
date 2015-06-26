@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/arrow-u-r-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="arrow-u-r-black.png"
+   checksum="25267137bba768f6f2b595398c6a2b92"
+   last-author="pberner"/>
+<delete-changelist
+   name="arrow-u-r-black.png"/>
+<committed
+   name="arrow-u-r-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="arrow-u-r-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/arrow-u-r-black.png"/>

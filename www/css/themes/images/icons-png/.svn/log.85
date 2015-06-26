@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/recycle-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="recycle-black.png"
+   checksum="04ae75ab4410ec64093da3b298fef31e"
+   last-author="pberner"/>
+<delete-changelist
+   name="recycle-black.png"/>
+<committed
+   name="recycle-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="recycle-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/recycle-black.png"/>

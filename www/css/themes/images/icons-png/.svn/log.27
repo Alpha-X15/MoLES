@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/bullets-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="bullets-black.png"
+   checksum="63e8e96e2deb4d60b69a68d6d9765df8"
+   last-author="pberner"/>
+<delete-changelist
+   name="bullets-black.png"/>
+<committed
+   name="bullets-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="bullets-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/bullets-black.png"/>

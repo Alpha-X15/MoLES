@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/clock-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="clock-white.png"
+   checksum="44cffb967f09ddf5fb8d13380745f273"
+   last-author="pberner"/>
+<delete-changelist
+   name="clock-white.png"/>
+<committed
+   name="clock-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="clock-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/clock-white.png"/>

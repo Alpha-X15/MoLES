@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/lock-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="lock-white.png"
+   checksum="827adbd30b32a8089a39bd5a40d956ca"
+   last-author="pberner"/>
+<delete-changelist
+   name="lock-white.png"/>
+<committed
+   name="lock-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="lock-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/lock-white.png"/>

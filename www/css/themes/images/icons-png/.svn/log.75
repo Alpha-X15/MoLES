@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/minus-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="minus-black.png"
+   checksum="92cc19063926bda68541c1c6213e0637"
+   last-author="pberner"/>
+<delete-changelist
+   name="minus-black.png"/>
+<committed
+   name="minus-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="minus-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/minus-black.png"/>

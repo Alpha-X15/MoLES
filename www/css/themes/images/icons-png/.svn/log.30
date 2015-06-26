@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/calendar-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="calendar-white.png"
+   checksum="215a42df136361f8b54b056a0ca6ae15"
+   last-author="pberner"/>
+<delete-changelist
+   name="calendar-white.png"/>
+<committed
+   name="calendar-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="calendar-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/calendar-white.png"/>

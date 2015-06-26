@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib
+END
+ScriptCallback.cs
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/ScriptCallback.cs
+END
+CordovaView.xaml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/CordovaView.xaml
+END
+CordovaView.xaml.cs
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/CordovaView.xaml.cs
+END
+CordovaCommandCall.cs
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/CordovaCommandCall.cs
+END
+OrientationHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/OrientationHelper.cs
+END
+BrowserMouseHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/BrowserMouseHelper.cs
+END
+PluginResult.cs
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/PluginResult.cs
+END
+MimeTypeMapper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/MimeTypeMapper.cs
+END
+ImageExifHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/ImageExifHelper.cs
+END
+IBrowserDecorator.cs
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/IBrowserDecorator.cs
+END
+XHRHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/XHRHelper.cs
+END
+ConsoleHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/ConsoleHelper.cs
+END
+ConfigHandler.cs
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/ConfigHandler.cs
+END
+CommandFactory.cs
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/CommandFactory.cs
+END
+NativeExecution.cs
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordovalib/NativeExecution.cs
+END

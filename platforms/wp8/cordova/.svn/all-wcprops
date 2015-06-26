@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova
+END
+build
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/build
+END
+clean
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/clean
+END
+build.bat
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/build.bat
+END
+run
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/run
+END
+defaults.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/defaults.xml
+END
+log.bat
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/log.bat
+END
+clean.bat
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/clean.bat
+END
+win_os_version.bat
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/win_os_version.bat
+END
+win_sdk_version.bat
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/win_sdk_version.bat
+END
+run.bat
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/run.bat
+END
+version.bat
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/wp8/cordova/version.bat
+END

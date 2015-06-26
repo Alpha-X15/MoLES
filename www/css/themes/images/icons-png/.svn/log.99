@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/video-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="video-black.png"
+   checksum="3e9650ab48d52565ff42b9f67e1ea617"
+   last-author="pberner"/>
+<delete-changelist
+   name="video-black.png"/>
+<committed
+   name="video-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="video-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/video-black.png"/>

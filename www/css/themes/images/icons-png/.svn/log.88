@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/refresh-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="refresh-white.png"
+   checksum="705e7dd6e46b24381e9d123be4721787"
+   last-author="pberner"/>
+<delete-changelist
+   name="refresh-white.png"/>
+<committed
+   name="refresh-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="refresh-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/refresh-white.png"/>

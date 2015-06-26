@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/info-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="info-white.png"
+   checksum="a776b029342f4ef75889d2b9853a0e59"
+   last-author="pberner"/>
+<delete-changelist
+   name="info-white.png"/>
+<committed
+   name="info-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="info-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/info-white.png"/>

@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/location-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="location-black.png"
+   checksum="173cf9e0989ea6f0bb6254a1fc0334ab"
+   last-author="pberner"/>
+<delete-changelist
+   name="location-black.png"/>
+<committed
+   name="location-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="location-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/location-black.png"/>

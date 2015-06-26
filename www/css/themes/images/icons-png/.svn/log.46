@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/cloud-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="cloud-white.png"
+   checksum="c71b429d726c0b8c94fc6dd33f885574"
+   last-author="pberner"/>
+<delete-changelist
+   name="cloud-white.png"/>
+<committed
+   name="cloud-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="cloud-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/cloud-white.png"/>

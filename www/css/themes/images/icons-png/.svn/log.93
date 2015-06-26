@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/star-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="star-black.png"
+   checksum="741986dbcdfb3f8e4b86a58a5de62b4e"
+   last-author="pberner"/>
+<delete-changelist
+   name="star-black.png"/>
+<committed
+   name="star-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="star-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/star-black.png"/>

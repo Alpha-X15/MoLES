@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib
+END
+project.properties
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/project.properties
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/.project
+END
+AndroidManifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/AndroidManifest.xml
+END
+cordova.gradle
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/cordova.gradle
+END
+build.gradle
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/CordovaLib/build.gradle
+END

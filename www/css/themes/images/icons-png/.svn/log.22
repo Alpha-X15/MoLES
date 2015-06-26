@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/audio-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="audio-white.png"
+   checksum="7c90c384a65cbfef572bbdd02b9d8edb"
+   last-author="pberner"/>
+<delete-changelist
+   name="audio-white.png"/>
+<committed
+   name="audio-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="audio-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/audio-white.png"/>

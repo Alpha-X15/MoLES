@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/tag-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="tag-white.png"
+   checksum="63d500360386f0352234ea160a235650"
+   last-author="pberner"/>
+<delete-changelist
+   name="tag-white.png"/>
+<committed
+   name="tag-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="tag-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/tag-white.png"/>

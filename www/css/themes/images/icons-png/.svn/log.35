@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/carat-l-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="carat-l-black.png"
+   checksum="01df9e30c853da8996684cd08c3a7917"
+   last-author="pberner"/>
+<delete-changelist
+   name="carat-l-black.png"/>
+<committed
+   name="carat-l-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="carat-l-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/carat-l-black.png"/>

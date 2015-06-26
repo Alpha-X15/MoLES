@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/tag-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="tag-black.png"
+   checksum="d5fc58dc0ecabd4e37cb41e2a8c6f871"
+   last-author="pberner"/>
+<delete-changelist
+   name="tag-black.png"/>
+<committed
+   name="tag-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="tag-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/tag-black.png"/>

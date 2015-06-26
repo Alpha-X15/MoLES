@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/power-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="power-black.png"
+   checksum="d9a9cd79c18b61953483b15e78b7b6b6"
+   last-author="pberner"/>
+<delete-changelist
+   name="power-black.png"/>
+<committed
+   name="power-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="power-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/power-black.png"/>

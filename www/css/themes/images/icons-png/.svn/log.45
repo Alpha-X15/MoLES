@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/cloud-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="cloud-black.png"
+   checksum="c0c7bf5a98f76f252d14f1af232a0ee1"
+   last-author="pberner"/>
+<delete-changelist
+   name="cloud-black.png"/>
+<committed
+   name="cloud-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="cloud-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/cloud-black.png"/>

@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/navigation-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="navigation-white.png"
+   checksum="59bdad3cbad70b98a5580f59f4b0f89d"
+   last-author="pberner"/>
+<delete-changelist
+   name="navigation-white.png"/>
+<committed
+   name="navigation-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="navigation-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/navigation-white.png"/>

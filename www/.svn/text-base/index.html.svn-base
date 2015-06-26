@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>MoLES-Player</title> 
+        <script>
+        
+        var title = "";
+                            function checklanguage() {
+                                var languageCode = "default";
+                                navigator.globalization.getPreferredLanguage(
+                                    function (language) {console.log(language.value); languageCode = language.value},
+                                    function () {console.log("keine language");}                                    
+                                );
+                                    
+                                var req = new XMLHttpRequest();
+                                req.open('GET', 'language/language.xml', true);
+                                req.onreadystatechange = function() {
+                                    if (req.readyState === 4) {
+                                        var doc = req.responseXML;
+                                        var entrie = getCode(doc); 
+                                    }
+                                    
+                                    function getCode(doc){
+                                        var entries = doc.getElementsByTagName('languageKey');
+                                        var labels = doc.getElementsByTagName('label');
+                                        for (var i = 0, l = entries.length; i < l; i++) {
+                                            var entry = entries[i];
+                                            var label = labels[i];
+                                            if(languageCode == entry.getAttribute("index"))
+                                            {
+                                                if(label.getAttribute("index") == "login")
+                                                {
+                                                    title = entry.getElementsByTagName('label')[0].textContent;
+                                                    console.log(entry.getElementsByTagName('label')[0].textContent);
+                                                    console.log(label.getAttribute("index"));
+                                                    changeTitle();
+                                                }
+                                                
+                                            }
+                                            else {
+                                                if(label.getAttribute("index") == "login")
+                                                {
+                                                    title = "Login";
+                                                }
+                                                
+                                            }
+                                        }
+                                    }
+                                };
+                                req.send(null);
+                            } 
+                            
+                        
+       </script>  
+    </head>
+    <body>
+        <div id="wrapper">
+          <header>
+                <ul>
+                    <li id="title"><img src="./img/header.png" alt="MoLES" /><h3 id="headerTitle">Login</h3></li>
+                 </ul>
+            </header>
+            <div id="main">
+                    <div class="app">
+                        <div id="deviceready" class="blink">
+                            <p class="event listening">Connecting to Device</p>
+                            <p class="event received">Device is Ready</p>
+                        </div>
+                    </div>
+                        
+                        <script type="text/javascript" src="cordova.js"></script>
+                        <script type="text/javascript" src="js/index.js"></script>
+                        <script type="text/javascript">
+                                app.initialize();
+                                function changeTitle(){
+                                    document.getElementById('headerTitle').innerHTML = title;
+                                }    
+                        </script>
+                        
+                        <!-- <form id="loginForm">
+                                <label for="username">Username:</label>
+                                <input type="text" name="username" id="username" value="" placeholder="Username" />
+
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" id="password" value="" placeholder="Password" />
+                    
+                            <input type="submit" onclick="checklanguage()" value="Login" id="submitButton">
+                        </form> -->
+                        
+                        
+                        
+            </div>
+            <footer>
+                <button value="Klick mich!" onclick="checklanguage()">Klick mich!</button>
+            </footer>
+        </div>        
+    </body>
+</html>

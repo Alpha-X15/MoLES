@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/mail-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="mail-black.png"
+   checksum="13106c83b8c7a9e78e5d0fbcf275f027"
+   last-author="pberner"/>
+<delete-changelist
+   name="mail-black.png"/>
+<committed
+   name="mail-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="mail-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/mail-black.png"/>

@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/shop-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="shop-white.png"
+   checksum="bed77b8b0aa66b98bb2c53d5ace2d736"
+   last-author="pberner"/>
+<delete-changelist
+   name="shop-white.png"/>
+<committed
+   name="shop-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="shop-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/shop-white.png"/>

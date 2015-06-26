@@ -1,0 +1,14 @@
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name=""
+   last-author="pberner"/>
+<delete-changelist
+   name=""/>
+<committed
+   name=""
+   revision="364"/>
+<modify-wcprop
+   name=""
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png"/>

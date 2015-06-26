@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/index.html.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="index.html"
+   checksum="76da5435f34a2c31c80a639deecbfca2"
+   last-author="pberner"/>
+<delete-changelist
+   name="index.html"/>
+<committed
+   name="index.html"
+   revision="364"/>
+<modify-wcprop
+   name="index.html"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/index.html"/>

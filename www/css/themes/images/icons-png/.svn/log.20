@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/arrow-u-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="arrow-u-white.png"
+   checksum="9f6cd65e48648b4823e236b0da1e54b0"
+   last-author="pberner"/>
+<delete-changelist
+   name="arrow-u-white.png"/>
+<committed
+   name="arrow-u-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="arrow-u-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/arrow-u-white.png"/>

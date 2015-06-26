@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/delete-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="delete-white.png"
+   checksum="478fa064c1e2234032e7a3de1884f4ed"
+   last-author="pberner"/>
+<delete-changelist
+   name="delete-white.png"/>
+<committed
+   name="delete-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="delete-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/delete-white.png"/>

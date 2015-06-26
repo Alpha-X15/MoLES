@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/navigation-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="navigation-black.png"
+   checksum="f36cc2c09123d935278e9fdbe1722769"
+   last-author="pberner"/>
+<delete-changelist
+   name="navigation-black.png"/>
+<committed
+   name="navigation-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="navigation-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/navigation-black.png"/>

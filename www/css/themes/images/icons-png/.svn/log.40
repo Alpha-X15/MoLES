@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/carat-u-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="carat-u-white.png"
+   checksum="3bde6d2e6ab2936a25b69767de4ac7c3"
+   last-author="pberner"/>
+<delete-changelist
+   name="carat-u-white.png"/>
+<committed
+   name="carat-u-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="carat-u-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/carat-u-white.png"/>

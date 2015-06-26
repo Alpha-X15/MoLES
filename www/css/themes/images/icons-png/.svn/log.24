@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/back-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="back-white.png"
+   checksum="e78ad3c61a492b120a7ba0a789d4b2e0"
+   last-author="pberner"/>
+<delete-changelist
+   name="back-white.png"/>
+<committed
+   name="back-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="back-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/back-white.png"/>

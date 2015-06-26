@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/calendar-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="calendar-black.png"
+   checksum="9116cef9549b26ddc4d9e96bec5dfd41"
+   last-author="pberner"/>
+<delete-changelist
+   name="calendar-black.png"/>
+<committed
+   name="calendar-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="calendar-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/calendar-black.png"/>

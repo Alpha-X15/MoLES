@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib
+END
+run.js
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/run.js
+END
+check_reqs.js
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/check_reqs.js
+END
+WindowsStoreAppUtils.ps1
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/WindowsStoreAppUtils.ps1
+END
+MSBuildTools.js
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/MSBuildTools.js
+END
+list-started-emulators.bat
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/list-started-emulators.bat
+END
+clean.js
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/clean.js
+END
+ConfigParser.js
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/ConfigParser.js
+END
+exec.js
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/exec.js
+END
+list-devices.bat
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/list-devices.bat
+END
+Version.js
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/Version.js
+END
+spawn.js
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/spawn.js
+END
+package.js
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/package.js
+END
+prepare.js
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/prepare.js
+END
+list-emulator-images.bat
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/list-emulator-images.bat
+END
+target-list.js
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/target-list.js
+END
+build.js
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/build.js
+END
+utils.js
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/windows/cordova/lib/utils.js
+END

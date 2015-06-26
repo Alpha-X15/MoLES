@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/power-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="power-white.png"
+   checksum="4e785618f27780944e6d8a13fee251b0"
+   last-author="pberner"/>
+<delete-changelist
+   name="power-white.png"/>
+<committed
+   name="power-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="power-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/power-white.png"/>

@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/refresh-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="refresh-black.png"
+   checksum="1da2deb97177b5676c80be327ddc82e3"
+   last-author="pberner"/>
+<delete-changelist
+   name="refresh-black.png"/>
+<committed
+   name="refresh-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="refresh-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/refresh-black.png"/>

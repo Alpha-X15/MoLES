@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/header.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="header.png"
+   checksum="06b277756d3e5aa93a232219927e5fa3"
+   last-author="pberner"/>
+<delete-changelist
+   name="header.png"/>
+<committed
+   name="header.png"
+   revision="364"/>
+<modify-wcprop
+   name="header.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/img/header.png"/>

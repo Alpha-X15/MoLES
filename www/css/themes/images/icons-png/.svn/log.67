@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/info-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="info-black.png"
+   checksum="ecc9460bc8b0a3de72a6638c8fc39d36"
+   last-author="pberner"/>
+<delete-changelist
+   name="info-black.png"/>
+<committed
+   name="info-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="info-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/info-black.png"/>

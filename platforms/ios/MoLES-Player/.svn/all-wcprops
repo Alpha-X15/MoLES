@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/MoLES-Player
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/MoLES-Player/main.m
+END
+config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/MoLES-Player/config.xml
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/MoLES-Player/.gitignore
+END
+MoLES-Player-Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/MoLES-Player/MoLES-Player-Info.plist
+END
+MoLES-Player-Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/MoLES-Player/MoLES-Player-Prefix.pch
+END

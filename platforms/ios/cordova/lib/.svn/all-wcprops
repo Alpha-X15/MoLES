@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib
+END
+run.js
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/run.js
+END
+check_reqs.js
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/check_reqs.js
+END
+spawn.js
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/spawn.js
+END
+start-emulator
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/start-emulator
+END
+versions.js
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/versions.js
+END
+list-emulator-images
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/list-emulator-images
+END
+list-started-emulators
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/list-started-emulators
+END
+build.js
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/build.js
+END
+copy-www-build-step.sh
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/copy-www-build-step.sh
+END
+list-devices
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/list-devices
+END
+clean.js
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/moles/!svn/ver/354/trunk/MoLES_Player_2015/MoLES-Player/platforms/ios/cordova/lib/clean.js
+END

@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/mail-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="mail-white.png"
+   checksum="006089860dcf971fe6f65ec3ad289e3a"
+   last-author="pberner"/>
+<delete-changelist
+   name="mail-white.png"/>
+<committed
+   name="mail-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="mail-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/mail-white.png"/>

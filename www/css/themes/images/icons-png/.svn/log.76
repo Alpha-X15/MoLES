@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/minus-white.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="minus-white.png"
+   checksum="9e2ff829356531c31e954eb48d69b1c5"
+   last-author="pberner"/>
+<delete-changelist
+   name="minus-white.png"/>
+<committed
+   name="minus-white.png"
+   revision="364"/>
+<modify-wcprop
+   name="minus-white.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/minus-white.png"/>

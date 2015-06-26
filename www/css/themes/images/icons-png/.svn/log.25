@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/bars-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="bars-black.png"
+   checksum="d638db196907b36c3e0bfefb8a698cc8"
+   last-author="pberner"/>
+<delete-changelist
+   name="bars-black.png"/>
+<committed
+   name="bars-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="bars-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/bars-black.png"/>

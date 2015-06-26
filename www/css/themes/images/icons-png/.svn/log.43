@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/clock-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="clock-black.png"
+   checksum="c92ab62b3c0ca2ca1ae11bcc940c20a6"
+   last-author="pberner"/>
+<delete-changelist
+   name="clock-black.png"/>
+<committed
+   name="clock-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="clock-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/clock-black.png"/>

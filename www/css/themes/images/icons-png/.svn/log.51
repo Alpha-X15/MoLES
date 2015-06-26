@@ -1,0 +1,17 @@
+<rm
+   name=".svn/prop-base/edit-black.png.svn-revert"/>
+<modify-entry
+   committed-rev="364"
+   committed-date="2015-06-26T15:56:33.464752Z"
+   name="edit-black.png"
+   checksum="3bed8f0eeea77c23adcce4870c391286"
+   last-author="pberner"/>
+<delete-changelist
+   name="edit-black.png"/>
+<committed
+   name="edit-black.png"
+   revision="364"/>
+<modify-wcprop
+   name="edit-black.png"
+   propname="svn:wc:ra_dav:version-url"
+   propval="/svn/moles/!svn/ver/364/trunk/MoLES_Player_2015/MoLES-Player/www/css/themes/images/icons-png/edit-black.png"/>
