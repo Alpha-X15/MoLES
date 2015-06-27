@@ -1,7 +1,61 @@
-.ui-icon-myapp-email {
-    background-image: url("../img/header.png");
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    .ui-icon-myapp-video {
+    background-image: url("../img/icon_slate2.png");
+    background-size: 16px 16px;
     background-repeat: no-repeat;
-    background-position: left center;
+    background-position: center 10px;
+    }
+
+    .ui-icon-myapp-picture {
+    background-image: url("../img/icon_slr2.png");
+    background-size: 16px 14px;
+    background-repeat: no-repeat;
+    background-position: center 11px;
+    }
+
+    .ui-icon-myapp-text {
+    background-image: url("../img/icon_pencil43.png");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    }
+
+    .ui-icon-myapp-sound {
+    background-image: url("../img/icon_microphone9.png");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    }
+}
+
+@media only screen {
+    .ui-icon-myapp-video {
+    background-image: url("../img/icon_slate2.png");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    }
+
+    .ui-icon-myapp-picture {
+    background-image: url("../img/icon_slr2.png");
+    background-size: 16px 14px;
+    background-repeat: no-repeat;
+    background-position: center 11px;
+    }
+
+    .ui-icon-myapp-text {
+    background-image: url("../img/icon_pencil43.png");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    }
+
+    .ui-icon-myapp-sound {
+    background-image: url("../img/icon_microphone9.png");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    }
 }
 
 #subnav {
@@ -22,7 +76,7 @@
 }
 
 .app {
-    width: 70%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
 }

@@ -58,6 +58,50 @@
             <div id="main">
                 <div class="app">
                     <h1>Antwortengeben:</h1>
+                        
+                        <a title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-mini="true" data-inline="true" onclick="getPicture()">Picture</a>
+                        <a title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-mini="true" data-inline="true" onclick="getVideo()">Video</a>
+                        <a title=" sound " data-role="button" data-icon="myapp-sound" data-iconpos="top" data-mini="true" data-inline="true" onclick="getSound()">Sound</a>
+                        <a title=" text " data-role="button" data-icon="myapp-text" data-iconpos="top" data-mini="true" data-inline="true" onclick="getText()">Text</a>
+                        
+                        <button value="Klick mich!" onclick="changePage()">Antworten</button>
+                        
+                        <script>
+                            function changePage(){
+                                window.location = "answers.html";
+                            }
+                            
+                            function getPicture(){
+                                navigator.camera.getPicture(onSuccess, onFail, { quality: 75,
+                                    destinationType: Camera.DestinationType.DATA_URL
+                                });
+                                
+                                function onSuccess(imageData) {
+                                    var image = document.getElementById('myImage');
+                                    image.src = "data:image/jpeg;base64," + imageData;
+                                }
+                                
+                                function onFail(message) {
+                                    alert('Failed because: ' + message);
+                                }
+                            }
+                            
+                            function getVideo(){
+                                navigator.camera.getVideo(onSuccess2, onFail2, { quality: 75,
+                                    destinationType: Camera.DestinationType.DATA_URL
+                                });
+                                
+                                function onSuccess2(imageData) {
+                                    var image = document.getElementById('myImage');
+                                    image.src = "data:image/jpeg;base64," + imageData;
+                                }
+                                
+                                function onFail2(message) {
+                                    alert('Failed because: ' + message);
+                                }
+                            }
+                        </script> 
+                        <script type="text/javascript" src="cordova.js"></script>
                         <a href="answers.html">---Antworten---</a>
                 </div>
             </div>
