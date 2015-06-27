@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "MoLES-Player"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "MoLES-Player"
         }
     },
     "dependent_plugins": {}

@@ -69,4 +69,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <feature name="Notification">
+        <param name="wp-package" value="Notification" />
+    </feature>
 </widget>
