@@ -86,7 +86,7 @@ var app = {
                 localStorage.setItem('_authToken', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
                 // app.report("Data: "+data.data.id);
                 getGameList();
-                window.location = "data/games.html";
+                // window.location = "data/games.html";
             })
             .fail(function(jqXHR, textStatus) 
             {
@@ -123,8 +123,10 @@ function getGameList()
             withCredentials: true
         },
         crossDomain: true,
+        type: 'GET',
         beforeSend: function(xhr) 
         {
+            app.report("Authtoken: "+localStorage.getItem('_authToken'));
             xhr.setRequestHeader('Authorization', localStorage.getItem('_authToken'));
             xhr.setRequestHeader('pragma', 'no-cache');
             xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
@@ -135,11 +137,12 @@ function getGameList()
     {
         app.report("GameList Loaded");
         app.report(data.data.gameInstances);
+        window.location = "data/games.html";
     })
     .fail(function(jqXHR, textStatus) 
     {
-        // app.report("StatusCode: "+jqXHR.status);
-        // app.report("Status: "+textStatus);
+        app.report("StatusCode: "+jqXHR.status);
+        app.report("Status: "+textStatus);
         app.report("Failed loading the GameList");
     });
 }
