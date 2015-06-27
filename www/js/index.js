@@ -136,7 +136,25 @@ function getGameList()
     .done(function(data, textStatus, jqXHR) 
     {
         app.report("GameList Loaded");
-        app.report(data.data.gameInstances);
+        var gameInstances = data.data.gameInstances;
+        app.report(gameInstances[0]["GameInstance"]["name"]);
+
+        // var contentList = '';
+        // for(var i = 0; i<gameInstances.length; i++)
+        // {
+        //     contentList += '<tr><td>';
+        //     contentList += gameInstances[0]["GameInstance"]["name"];
+        //     contentList += '</td></tr>';
+        // }
+        // // app.report($('#gameList'));
+        // $('#gameList').appendChild(contentList);
+        // app.report(data.data.gameInstances);
+        // for(var i = 0; i<gameInstances.length; i++)
+        // {
+        //     $('#gameList').append('<li><a>'+gameInstances[i]["GameInstance"]["name"]+'</a></li>');
+        // }
+        // $('#gameList').listview("refresh");
+        
         window.location = "data/games.html";
     })
     .fail(function(jqXHR, textStatus) 
