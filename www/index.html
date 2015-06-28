@@ -124,20 +124,21 @@
                         </div>
                             
                         <form id="loginForm">
-                            <label for="username">Username:</label>
-                            <input type="text" name="username" id="username" value="" placeholder="Username" autocorrect="off" autocapitalize="off"/>
-                                    
-                            <label for="password">Password:</label>
-                            <input type="password" name="password" id="password" value="" placeholder="Password" autocorrect="off" autocapitalize="off"/>
-                        
+                            <!-- <label for="username">Username:</label> -->
+                            <img src="img/icon_profile.png" alt="Username:" />
+                            <div class="input">
+                                <input type="text" name="username" id="username" value="" placeholder="Username" autocorrect="off" autocapitalize="off"/>
+                            </div>        
+                            <img src="img/icon_key142.png" alt="Passwort:" />
+                            <div class="input">
+                                <input type="password" name="password" id="password" value="" placeholder="Password" autocorrect="off" autocapitalize="off"/>
+                            </div>
                             <input type="submit" value="Login" id="submitButton">
                         </form>
                             
                         <button value="GoToGames" onclick="changePage()">Go to Games</button>
                         <button value="Klick mich!" onclick="checklanguage()">Klick mich!</button>
                     </div>
-                            
-                    
                     <script type="text/javascript">
                                     app.initialize();
                                     function changeTitle(){
