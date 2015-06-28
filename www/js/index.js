@@ -84,9 +84,7 @@ var app = {
                 localStorage.setItem('_userID', data.data.id);
                 localStorage.setItem('_loggedIn', "true");
                 localStorage.setItem('_authToken', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
-                // app.report("Data: "+data.data.id);
                 getGameList();
-                // window.location = "data/games.html";
             })
             .fail(function(jqXHR, textStatus) 
             {
@@ -137,25 +135,17 @@ function getGameList()
     {
         app.report("GameList Loaded");
         var gameInstances = data.data.gameInstances;
-        app.report(gameInstances[0]["GameInstance"]["name"]);
+        // app.report(gameInstances[0]["GameInstance"]["name"]);
 
-        // var contentList = '';
-        // for(var i = 0; i<gameInstances.length; i++)
-        // {
-        //     contentList += '<tr><td>';
-        //     contentList += gameInstances[0]["GameInstance"]["name"];
-        //     contentList += '</td></tr>';
-        // }
-        // // app.report($('#gameList'));
-        // $('#gameList').appendChild(contentList);
-        // app.report(data.data.gameInstances);
-        // for(var i = 0; i<gameInstances.length; i++)
-        // {
-        //     $('#gameList').append('<li><a>'+gameInstances[i]["GameInstance"]["name"]+'</a></li>');
-        // }
-        // $('#gameList').listview("refresh");
-        
-        window.location = "data/games.html";
+        var gamesListContent = '';
+        for(var i = 0; i<gameInstances.length; i++)
+        {
+            gamesListContent += '<li><a>'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
+
+        }
+        $('#gameList').append(gamesListContent);
+
+        window.location = '#games_page';
     })
     .fail(function(jqXHR, textStatus) 
     {
