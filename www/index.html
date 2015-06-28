@@ -101,6 +101,7 @@
           <div data-role="page" id="login_page"> 
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Login</h1>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Login</h1>
                     <a href="#positionWindow" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow" data-overlay-theme="a">
@@ -149,7 +150,7 @@
                     </script>  
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <h1>TEXT</h1>
+                    <img id="login_footer_img" src="img/uni_imis.png" />
                 </footer>
             </div>
 
@@ -276,16 +277,16 @@
                 <div data-role="main" id="main">
                     <div class="app">
                         <h1>Antwortengeben:</h1>
-                            
-                            <a title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-mini="true" data-inline="true" onclick="getPicture()">Picture</a>
-                            <a title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-mini="true" data-inline="true" onclick="getVideo()">Video</a>
-                            <a title=" sound " data-role="button" data-icon="myapp-sound" data-iconpos="top" data-mini="true" data-inline="true" onclick="getSound()">Sound</a>
-                            <a title=" text " data-role="button" data-icon="myapp-text" data-iconpos="top" data-mini="true" data-inline="true" onclick="getText()">Text</a>
-                            
-                            <button value="Klick mich!" onclick="changePage()">Antworten</button>
+                            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <a title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-inline="true" onclick="getPicture()">Picture</a>
+                                <a title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-inline="true" onclick="getVideo()">Video</a>
+                                <a title=" sound " data-role="button" data-icon="myapp-sound" data-iconpos="top" data-inline="true" onclick="getSound()">Sound</a>
+                                <a title=" text " data-role="button" data-icon="myapp-text" data-iconpos="top" data-inline="true" onclick="getText()">Text</a>
+                            </div>
+                            <button value="Klick mich!" onclick="changePage2()">Antworten</button>
                             
                             <script>
-                                function changePage()
+                                function changePage2()
                                 {
                                     window.location = "#answers_page";
                                 }
