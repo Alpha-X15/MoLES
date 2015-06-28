@@ -23,6 +23,7 @@ var app = {
       SERVER_URL: 'http://molescore.mesh.de/',
       LOGIN_URL: 'users/canLogin.json',
       GAMELIST_URL: 'gameInstances/index/index.json',
+      LOCATION_URL: 'gameInstanceLocations/getUserLastLocations/instance:1.json',
     },
 
     // Application Constructor
@@ -153,4 +154,49 @@ function getGameList()
         app.report("Status: "+textStatus);
         app.report("Failed loading the GameList");
     });
+}
+
+function getLocationList()
+{
+    $.ajax(
+    {
+        url: app.cons.SERVER_URL + app.cons.GAMELIST_URL,
+        dataType: 'json',
+        xhrFields: 
+        {
+            withCredentials: true
+        },
+        crossDomain: true,
+        type: 'GET',
+        beforeSend: function(xhr) 
+        {
+            app.report("Authtoken: "+localStorage.getItem('_authToken'));
+            xhr.setRequestHeader('Authorization', localStorage.getItem('_authToken'));
+            xhr.setRequestHeader('pragma', 'no-cache');
+            xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        }
+    })
+    .done(function(data, textStatus, jqXHR) 
+    {
+        app.report("GameList Loaded");
+        var gameInstances = data.data.gameInstances;
+        // app.report(gameInstances[0]["GameInstance"]["name"]);
+
+        var gamesListContent = '';
+        for(var i = 0; i<gameInstances.length; i++)
+        {
+            gamesListContent += '<li><a>'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
+
+        }
+        $('#gameList').append(gamesListContent);
+
+        window.location = '#games_page';
+    })
+    .fail(function(jqXHR, textStatus) 
+    {
+        app.report("StatusCode: "+jqXHR.status);
+        app.report("Status: "+textStatus);
+        app.report("Failed loading the GameList");
+    }); 
 }
