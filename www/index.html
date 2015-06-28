@@ -102,7 +102,6 @@
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Login</h1>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Login</h1>
                     <a href="#positionWindow" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -135,6 +134,13 @@
                             </div>
                             <input type="submit" value="Login" id="submitButton">
                         </form>
+                        
+                        <!-- <div data-position-to="window" data-rel="popup" data-overlay-theme="a"> -->
+                            <div data-position-to="window" data-role="popup" id="positionWindowError" data-overlay-theme="a">
+                                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                                <h1>Login Faild!</h1>
+                            </div>
+                        <!-- </div> -->
                             
                         <button value="GoToGames" onclick="changePage()">Go to Games</button>
                         <button value="Klick mich!" onclick="checklanguage()">Klick mich!</button>
