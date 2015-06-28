@@ -24,6 +24,8 @@ var app = {
       LOGIN_URL: 'users/canLogin.json',
       GAMELIST_URL: 'gameInstances/index/index.json',
       LOCATION_URL: 'gameInstanceLocations/getUserLastLocations/instance:1.json',
+      LOCATION_URL2: 'gameInstanceLocations/add.json',
+      ALLMISSIONS_URL: '/games/view/{GameID}.json',
     },
 
     // Application Constructor
@@ -141,7 +143,7 @@ function getGameList()
         var gamesListContent = '';
         for(var i = 0; i<gameInstances.length; i++)
         {
-            gamesListContent += '<li><a>'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
+            gamesListContent += '<li><a href="javascript:void(null)" onclick="setGameSelection('+gameInstances[i]["GameInstance"]["game_id"]+','+gameInstances[i]["GameInstance"]["name"]+')">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
 
         }
         $('#gameList').append(gamesListContent);
@@ -157,10 +159,16 @@ function getGameList()
 }
 
 function getLocationList()
-{
+{   
+    app.report("Should get Location List");
+    var data = {
+        // "user_id": localStorage.getItem('_userID'),
+        "game_instance_id": localStorage('_gameID')
+    };
+
     $.ajax(
     {
-        url: app.cons.SERVER_URL + app.cons.GAMELIST_URL,
+        url: app.cons.SERVER_URL + app.cons.ALLMISSIONS_URL,
         dataType: 'json',
         xhrFields: 
         {
@@ -168,6 +176,7 @@ function getLocationList()
         },
         crossDomain: true,
         type: 'GET',
+        data: data,
         beforeSend: function(xhr) 
         {
             app.report("Authtoken: "+localStorage.getItem('_authToken'));
@@ -179,24 +188,33 @@ function getLocationList()
     })
     .done(function(data, textStatus, jqXHR) 
     {
-        app.report("GameList Loaded");
-        var gameInstances = data.data.gameInstances;
-        // app.report(gameInstances[0]["GameInstance"]["name"]);
+        app.report("LocationList Loaded");
+        // var gameInstances = data.data.gameInstances;
+        // // app.report(gameInstances[0]["GameInstance"]["name"]);
 
-        var gamesListContent = '';
-        for(var i = 0; i<gameInstances.length; i++)
-        {
-            gamesListContent += '<li><a>'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
+        // var gamesListContent = '';
+        // for(var i = 0; i<gameInstances.length; i++)
+        // {
+        //     gamesListContent += '<li><a>'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
 
-        }
-        $('#gameList').append(gamesListContent);
+        // }
+        // $('#gameList').append(gamesListContent);
 
-        window.location = '#games_page';
+        window.location = '#places_page';
     })
     .fail(function(jqXHR, textStatus) 
     {
         app.report("StatusCode: "+jqXHR.status);
         app.report("Status: "+textStatus);
-        app.report("Failed loading the GameList");
+        app.report("Failed loading the LocationList");
     }); 
+}
+
+function setGameSelection(game_id, name)
+{
+    app.report("Should set game selection");
+    localStorage.setItem('_gameID', game_id);
+    localStorage.setItem('_gameName', name);
+
+    getLocationList();
 }
