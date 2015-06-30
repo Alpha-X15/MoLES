@@ -33,6 +33,27 @@
     background-repeat: no-repeat;
     background-position: center 10px;
     }
+    
+    .ui-icon-myapp-home {
+    background-image: url("../img/icon_home153.png");
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    }
+    
+    .ui-icon-myapp-map {
+    background-image: url("../img/icon_location32.png");
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    }
+    
+    .ui-icon-myapp-map {
+    background-image: url("../img/icon_upload36.png");
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    }
 }
 
 @media only screen {
@@ -69,6 +90,26 @@
     background-size: 16px 16px;
     background-repeat: no-repeat;
     background-position: center 10px;
+    }
+    .ui-icon-myapp-home {
+    background-image: url("../img/icon_home153.png");
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    }
+    
+    .ui-icon-myapp-map {
+    background-image: url("../img/icon_location32.png");
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    }
+    
+    .ui-icon-myapp-upload {
+    background-image: url("../img/icon_upload36.png");
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center 0;
     }
 }
 
@@ -122,6 +163,23 @@
 .input {
     width: 90%%;
     margin-left: 35px;
+}
+
+footer div {
+    text-align: center;
+    width: 100%;
+}
+
+footer div a {
+    width: 25%;
+}
+
+footer .ui-btn-icon-top::after {
+    display: none;
+}
+
+footer .ui-btn {
+    padding-top: 65px;
 }
 
 /*

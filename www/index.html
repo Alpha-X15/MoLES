@@ -97,7 +97,7 @@
        </script>  
     </head>
     <body>
-        <div id="wrapper">
+        <!-- <div id="wrapper"> -->
           <div data-role="page" id="login_page"> 
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
@@ -165,7 +165,7 @@
             <div data-role="page" id="games_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Spielliste</h1>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Spielliste</h1>
                     <a href="#positionWindow2" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow2" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -189,11 +189,11 @@
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <ul>
-                        <li id="home"><a href="#games_page"><img /><h3>Home</h3></a></li>
-                        <li id="map"><a href="#maps_page"><img /><h3>Karte</h3></a></li>
-                        <li id="upload"><a href="#upload_page"><img /><h3>Upload</h3></a></li>
-                    </ul>
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                    </div>
                 </footer>
             </div>
 
@@ -201,7 +201,7 @@
             <div data-role="page" id="places_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#games_page"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Ort</h1>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Ort</h1>
                     <a href="#positionWindow3" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow3" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -222,11 +222,11 @@
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <ul>
-                        <li id="home"><a href="#games_page"><img /><h3>Home</h3></a></li>
-                        <li id="map"><a href="#maps_page"><img /><h3>Karte</h3></a></li>
-                        <li id="upload"><a href="#upload_page"><img /><h3>Upload</h3></a></li>
-                    </ul>
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                    </div>
                 </footer>
             </div>
 
@@ -234,7 +234,7 @@
             <div data-role="page" id="questions_list_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="places.html"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Fragen</h1>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Fragen</h1>
                     <a href="#positionWindow4" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow4" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -255,11 +255,11 @@
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <ul>
-                        <li id="home"><a href="#games_page"><img /><h3>Home</h3></a></li>
-                        <li id="map"><a href="#maps_page"><img /><h3>Karte</h3></a></li>
-                        <li id="upload"><a href="#upload_page"><img /><h3>Upload</h3></a></li>
-                    </ul>
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                    </div>
                 </footer>
             </div>
 
@@ -267,7 +267,7 @@
             <div data-role="page" id="question_detail">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="questions.html"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Frage</h1>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Frage</h1>
                     <a href="#positionWindow5" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow5" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -334,11 +334,11 @@
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <ul>
-                        <li id="home"><a href="#games_page"><img /><h3>Home</h3></a></li>
-                        <li id="map"><a href="#maps_page"><img /><h3>Karte</h3></a></li>
-                        <li id="upload"><a href="#upload_page"><img /><h3>Upload</h3></a></li>
-                    </ul>
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                    </div>
                 </footer>
             </div>
 
@@ -346,7 +346,7 @@
             <div data-role="page" id="answers_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="question.html"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Antworten</h1>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Antworten</h1>
                     <a href="#positionWindow6" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow6" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -367,11 +367,11 @@
                         </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <ul>
-                        <li id="home"><a href="#games_page"><img /><h3>Home</h3></a></li>
-                        <li id="map"><a href="#maps_page"><img /><h3>Karte</h3></a></li>
-                        <li id="upload"><a href="#upload_page"><img /><h3>Upload</h3></a></li>
-                    </ul>
+                   <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                    </div>
                 </footer>
             </div>
 
@@ -379,7 +379,7 @@
             <div data-role="page" id="maps_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Map</h1>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Map</h1>
                     <a href="#positionWindow7" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow7" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -399,11 +399,11 @@
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <ul>
-                        <li id="home"><a href="#games_page"><img /><h3>Home</h3></a></li>
-                        <li id="map"><a href="#maps_page"><img /><h3>Karte</h3></a></li>
-                        <li id="upload"><a href="#upload_page"><img /><h3>Upload</h3></a></li>
-                    </ul>
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                    </div>
                 </footer>
             </div>
 
@@ -411,7 +411,7 @@
             <div data-role="page" id="options_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Optionen</h1>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Optionen</h1>
                     <a href="#positionWindow8" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow8" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -431,11 +431,11 @@
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <ul>
-                        <li id="home"><a href="#games_page"><img /><h3>Home</h3></a></li>
-                        <li id="map"><a href="#maps_page"><img /><h3>Karte</h3></a></li>
-                        <li id="upload"><a href="#upload_page"><img /><h3>Upload</h3></a></li>
-                    </ul>
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                    </div>
                 </footer>
             </div>
 
@@ -443,7 +443,7 @@
             <div data-role="page" id="upload_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Upload</h1>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Upload</h1>
                     <a href="#positionWindow9" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow9" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -463,11 +463,11 @@
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <ul>
-                        <li id="home"><a href="#games_page"><img /><h3>Home</h3></a></li>
-                        <li id="map"><a href="#maps_page"><img /><h3>Karte</h3></a></li>
-                        <li id="upload"><a href="#upload_page"><img /><h3>Upload</h3></a></li>
-                    </ul>
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                    </div>
                 </footer>
             </div>
 
@@ -475,7 +475,7 @@
             <div data-role="page" id="help_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-email" aria-level="1" role="heading" tabindex="0">Hilfe</h1>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Hilfe</h1>
                     <a href="#positionWindow10" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow10" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -495,13 +495,13 @@
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <ul>
-                        <li id="home"><a href="#games_page"><img /><h3>Home</h3></a></li>
-                        <li id="map"><a href="#maps_page"><img /><h3>Karte</h3></a></li>
-                        <li id="upload"><a href="#upload_page"><img /><h3>Upload</h3></a></li>
-                    </ul>
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                    </div>
                 </footer>
             </div>
-        </div>        
+        <!-- </div>   -->      
     </body>
 </html>
