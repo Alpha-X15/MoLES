@@ -45,6 +45,11 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        
+        //Set Database
+        var dbShell = window.openDatabase("LOGIN", "1.0", "LOGIN", 100);
+        dbShell.transaction(setupTable,dbErrorHandler,getEntries);
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -59,6 +64,7 @@ var app = {
 
         $(document).on('submit', '#loginForm', function() 
         {
+        				
             app.report("Before ajax");
             localStorage.setItem('_userID', '0');
             app.report("User: "+$('input[name=username]').val());
@@ -87,6 +93,12 @@ var app = {
                 localStorage.setItem('_userID', data.data.id);
                 localStorage.setItem('_loggedIn', "true");
                 localStorage.setItem('_authToken', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+                
+                //Create JSON Node
+                var node = {"id": "","user": getAuth($('input[name=username]').val(), $('input[name=password]').val())[1]};
+                //Insert Node into Database                
+                saveUser(node);
+                
                 getGameList();
             })
             .fail(function(jqXHR, textStatus) 
@@ -104,6 +116,40 @@ var app = {
         console.log("Report: "+ id);
     }
 };
+
+//LOGIN DATABASE BEGIN //
+// Create Database
+function setupTable(tx){
+	tx.executeSql('CREATE TABLE IF NOT EXISTS LOGIN (id unique, username, status)');
+	app.report("SetupTaple");
+}
+
+//Database Errorhandling		
+function dbErrorHandler(tx, err){
+	app.report("DB Error: "+err.message + "\nCode="+err.code);
+}
+
+//Get Database Entries			
+function getEntries() {
+	app.report("GetEntries");
+	dbShell.transaction(function(tx) {
+		tx.executeSql("select id, username, status",[],dbErrorHandler);
+		if(tx.executeSql.status)
+		{
+			getGameList();
+		}
+	}, dbErrorHandler);
+}
+
+//Insert into Database LOGIN			
+function saveUser(node, cb) {
+	app.report("SaveNode");
+	dbShell.transaction(function(tx) {
+		if(node.id == "") 
+			tx.executeSql('insert into LOGIN(username,status) VALUES (node.user, true)');
+	}, dbErrorHandler,cb);
+}
+//LOGIN DATABASE END //
 
 function getAuth(name, pwd) 
 {
@@ -139,7 +185,6 @@ function getGameList()
         app.report("GameList Loaded");
         var gameInstances = data.data.gameInstances;
         // app.report(gameInstances[0]["GameInstance"]["name"]);
-
         var gamesListContent = '';
         for(var i = 0; i<gameInstances.length; i++)
         {
