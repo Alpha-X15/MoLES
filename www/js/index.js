@@ -95,11 +95,13 @@ var app = {
                 localStorage.setItem('_authToken', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
                 
                 //Create JSON Node
-                var node = {"id": "","user": getAuth($('input[name=username]').val(), $('input[name=password]').val())[1]};
+                var node = {"id": "","user": $('input[name=username]').val()};
+                app.report("node: " + node.id + " - " + node.user);
                 //Insert Node into Database                
-                saveUser(node);
                 
                 getGameList();
+                saveUser(node);
+
             })
             .fail(function(jqXHR, textStatus) 
             {
@@ -120,8 +122,9 @@ var app = {
 //LOGIN DATABASE BEGIN //
 // Create Database
 function setupTable(tx){
+	//tx.executeSql('DROP TABLE IF EXISTS LOGIN');
 	tx.executeSql('CREATE TABLE IF NOT EXISTS LOGIN (id unique, username, status)');
-	app.report("SetupTaple");
+	//app.report("SetupTaple");
 }
 
 //Database Errorhandling		
@@ -130,23 +133,34 @@ function dbErrorHandler(tx, err){
 }
 
 //Get Database Entries			
-function getEntries() {
-	app.report("GetEntries");
+function getEntries() {	
 	dbShell.transaction(function(tx) {
-		tx.executeSql("select id, username, status",[],dbErrorHandler);
-		if(tx.executeSql.status)
-		{
-			getGameList();
-		}
+		tx.executeSql("select id, status",[],getLogin,dbErrorHandler);		
 	}, dbErrorHandler);
+	app.report("GetEntries");
+}
+
+function getLogin(tx,results){
+	if(results.rows.item(0).status)
+	{
+		getGameList();
+	}
+	else
+		{
+			app.report("No Entries");
+		}
+	
 }
 
 //Insert into Database LOGIN			
 function saveUser(node, cb) {
+	app.report("Node-Save: " + node.id + " - " + node.user);
 	app.report("SaveNode");
 	dbShell.transaction(function(tx) {
 		if(node.id == "") 
 			tx.executeSql('insert into LOGIN(username,status) VALUES (node.user, true)');
+		else
+			app.report("Fail to save!");
 	}, dbErrorHandler,cb);
 }
 //LOGIN DATABASE END //
