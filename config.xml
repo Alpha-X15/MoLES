@@ -16,7 +16,7 @@
   <preference name="show-splash-screen-spinner" value="true"/>
   <preference name="auto-hide-splash-screen" value="true"/>
   <preference name="disable-cursor" value="false"/>
-  <preference name="android-minSdkVersion" value="7"/>
+  <preference name="android-minSdkVersion" value="10"/>
   <preference name="android-installLocation" value="auto"/>
   <gap:plugin name="org.apache.cordova.battery-status"/>
   <gap:plugin name="org.apache.cordova.camera"/>
@@ -64,6 +64,7 @@
   <access origin="*"/>
   <access origin="http://molescore.mesh.de" subdomains="true"/>
   <plugin name="cordova-plugin-whitelist" version="1"/>
+  <plugin name="SQLitePlugin" value="SQLitePlugin" />
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
@@ -77,4 +78,9 @@
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
   </platform>
+  <feature name="debug-server" required="true">
+  <param name="domain" value="http://192.168.178.31:8080"/>
+  <param name="key" value="MoLes123"/>
+</feature>
+
 </widget>

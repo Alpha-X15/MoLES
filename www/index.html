@@ -27,7 +27,7 @@
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        
+
         <link rel="stylesheet" href="css/themes/jqueryTheme.min.css" />
         <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
@@ -36,42 +36,43 @@
         <script src="js/crypto-min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        
+        <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script>
+
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>MoLES-Player</title> 
+        <title>MoLES-Player</title>
         <script>
             var title = "";
-            function checklanguage() 
+            function checklanguage()
             {
                 var languageCode = "default";
-                navigator.globalization.getPreferredLanguage(function (language) 
+                navigator.globalization.getPreferredLanguage(function (language)
                 {
                     console.log(language.value); languageCode = language.value
                 },
                 function () {
                     console.log("keine language");
                 });
-                                    
+
                 var req = new XMLHttpRequest();
                 req.open('GET', 'language/language.xml', true);
-                req.onreadystatechange = function() 
+                req.onreadystatechange = function()
                 {
-                    if (req.readyState === 4) 
+                    if (req.readyState === 4)
                     {
                         var doc = req.responseXML;
-                        var entrie = getCode(doc); 
+                        var entrie = getCode(doc);
                     }
-                                    
+
                     function getCode(doc)
                     {
                         var entries = doc.getElementsByTagName('languageKey');
                         var labels = doc.getElementsByTagName('label');
-                        
-                        for (var i = 0, l = entries.length; i < l; i++) 
+
+                        for (var i = 0, l = entries.length; i < l; i++)
                         {
                             var entry = entries[i];
                             var label = labels[i];
-                                            
+
                             if(languageCode == entry.getAttribute("index"))
                             {
                                 if(label.getAttribute("index") == "login")
@@ -80,25 +81,25 @@
                                     console.log(entry.getElementsByTagName('label')[0].textContent);
                                     console.log(label.getAttribute("index"));
                                     changeTitle();
-                                }                   
+                                }
                             }
-                            else 
+                            else
                             {
                                 if(label.getAttribute("index") == "login")
                                 {
                                     title = "Login";
-                                }                    
+                                }
                             }
                         }
                     }
                 };
                 req.send(null);
-            }         
-       </script>  
+            }
+       </script>
     </head>
     <body>
         <!-- <div id="wrapper"> -->
-          <div data-role="page" id="login_page"> 
+          <div data-role="page" id="login_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Login</h1>
@@ -121,27 +122,27 @@
                             <p class="event listening">Connecting to Device</p>
                             <p class="event received">Device is Ready</p>
                         </div>
-                            
+
                         <form id="loginForm">
                             <!-- <label for="username">Username:</label> -->
                             <img src="img/icon_profile.png" alt="Username:" />
                             <div class="input">
                                 <input type="text" name="username" id="username" value="" placeholder="Username" autocorrect="off" autocapitalize="off"/>
-                            </div>        
+                            </div>
                             <img src="img/icon_key142.png" alt="Passwort:" />
                             <div class="input">
                                 <input type="password" name="password" id="password" value="" placeholder="Password" autocorrect="off" autocapitalize="off"/>
                             </div>
                             <input type="submit" value="Login" id="submitButton">
                         </form>
-                        
+
                         <!-- <div data-position-to="window" data-rel="popup" data-overlay-theme="a"> -->
                             <div data-position-to="window" data-role="popup" id="positionWindowError" data-overlay-theme="a">
                                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                                 <h1>Login Faild!</h1>
                             </div>
                         <!-- </div> -->
-                            
+
                         <button value="GoToGames" onclick="changePage()">Go to Games</button>
                         <button value="Klick mich!" onclick="checklanguage()">Klick mich!</button>
                     </div>
@@ -149,12 +150,12 @@
                                     app.initialize();
                                     function changeTitle(){
                                         document.getElementById('headerTitle').innerHTML = title;
-                                    }    
-                                    
+                                    }
+
                                     function changePage(){
                                         window.location = "#games_page";
                                     }
-                    </script>  
+                    </script>
                 </div>
                 <footer data-role="footer" data-position="fixed">
                     <img id="login_footer_img" src="img/uni_imis.png" />
@@ -183,7 +184,7 @@
                     <div class="app">
                         <h1>Wähle ein Spiel:</h1>
                         <ul id="gameList" data-role="listview">
-                                                 
+
                         </ul>
                         <a href="#places_page">---Spiel_XYZ---</a>
                     </div>
@@ -291,45 +292,45 @@
                                 <a title=" text " data-role="button" data-icon="myapp-text" data-iconpos="top" data-inline="true" onclick="getText()">Text</a>
                             </div>
                             <button value="Klick mich!" onclick="changePage2()">Antworten</button>
-                            
+
                             <script>
                                 function changePage2()
                                 {
                                     window.location = "#answers_page";
                                 }
-                                
+
                                 function getPicture()
                                 {
                                     navigator.camera.getPicture(onSuccess, onFail, { quality: 75,
                                         destinationType: Camera.DestinationType.DATA_URL
                                     });
-                                    
+
                                     function onSuccess(imageData) {
                                         var image = document.getElementById('myImage');
                                         image.src = "data:image/jpeg;base64," + imageData;
                                     }
-                                    
+
                                     function onFail(message) {
                                         alert('Failed because: ' + message);
                                     }
                                 }
-                                
+
                                 function getVideo()
                                 {
                                     navigator.camera.getVideo(onSuccess2, onFail2, { quality: 75,
                                         destinationType: Camera.DestinationType.DATA_URL
                                     });
-                                    
+
                                     function onSuccess2(imageData) {
                                         var image = document.getElementById('myImage');
                                         image.src = "data:image/jpeg;base64," + imageData;
                                     }
-                                    
+
                                     function onFail2(message) {
                                         alert('Failed because: ' + message);
                                     }
                                 }
-                            </script> 
+                            </script>
                             <a href="#answers_page">---Antworten---</a>
                     </div>
                 </div>
@@ -362,7 +363,7 @@
                 </header>
                 <div data-role="main" id="main">
                     <div class="app">
-                        
+
                             <h1>Eigene Antworten:</h1>
                         </div>
                 </div>
@@ -502,6 +503,6 @@
                     </div>
                 </footer>
             </div>
-        <!-- </div>   -->      
+        <!-- </div>   -->
     </body>
 </html>

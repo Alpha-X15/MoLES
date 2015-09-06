@@ -11,6 +11,10 @@
                         {
                             "xml": "<feature name=\"Notification\"><param name=\"wp-package\" value=\"Notification\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"wp-package\" value=\"SQLitePlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -22,6 +26,9 @@
             "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
         },
         "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
+        },
+        "io.litehelpers.cordova.sqlite": {
             "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
         }
     },
