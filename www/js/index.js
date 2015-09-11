@@ -46,7 +46,8 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-
+		 app.report(device.platform);
+);
         //Set Database
         var dbShell = window.openDatabase("LOGIN", "1.0", "LOGIN", 100);
         dbShell.transaction(setupTable,dbErrorHandler,getEntries);
