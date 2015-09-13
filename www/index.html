@@ -99,9 +99,10 @@
     </head>
     <body>
         <!-- <div id="wrapper"> -->
+        <!-- Page with Login here -->
           <div data-role="page" id="login_page">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
+                    <!--<a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a> -->
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Login</h1>
                     <a href="#positionWindow" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow" data-overlay-theme="a">
@@ -110,7 +111,7 @@
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="#help_page">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
-                                    <li><a href="#login_page">Logout</a></li>
+                                    <!-- <li><a href="#login_page">Logout</a></li> -->
                                 </ul>
                             </div>
                         </div>
@@ -165,7 +166,7 @@
             <!-- Page with gameslist here -->
             <div data-role="page" id="games_page">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
+                    <!-- <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a> -->
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Spielliste</h1>
                     <a href="#positionWindow2" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow2" data-overlay-theme="a">
@@ -285,7 +286,7 @@
                 <div data-role="main" id="main">
                     <div class="app">
                         <h1>Antwortengeben:</h1>
-                            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <div id="answers" data-role="controlgroup" data-type="horizontal" data-mini="true">
                                 <a title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-inline="true" onclick="getPicture()">Picture</a>
                                 <a title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-inline="true" onclick="getVideo()">Video</a>
                                 <a title=" sound " data-role="button" data-icon="myapp-sound" data-iconpos="top" data-inline="true" onclick="getSound()">Sound</a>

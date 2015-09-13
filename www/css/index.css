@@ -64,6 +64,14 @@
     background-position: left center;
     }
     
+    .ui-controlgroup-horizontal .ui-controlgroup-controls {
+        display: block;
+    }
+    
+    #answers a {
+        width: 15%;
+    }
+    
     .ui-icon-myapp-video {
     background-image: url("../img/icon_slate2.png");
     background-size: 16px 16px;
