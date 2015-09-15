@@ -44,6 +44,8 @@
 		529EC0BD3639424B8F766AAB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90AA69F3FAC48F085F90F85 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		EF56730676E44534A4CB904D /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3712B721E1C147478B13B0B9 /* SQLitePlugin.m */; };
 		62FF537116FA4D3F82D8E3A7 /* sqlite3.c in Resources */ = {isa = PBXBuildFile; fileRef = 32CB2F49386E4A2FA177C06E /* sqlite3.c */; };
+		4218B3DE42C24B9FACC489D5 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC343759A714D37862C04F6 /* CDVDevice.m */; };
+		40BA306F5678410F8CB7463F /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE9141DE8D34D578D91AB13 /* CDVSplashScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,10 @@
 		32CB2F49386E4A2FA177C06E /* sqlite3.c */ = {isa = PBXFileReference; lastKnownFileType = unknown; name = "sqlite3.c"; path = "io.litehelpers.cordova.sqlite/sqlite3.c"; sourceTree = "<group>"; fileEncoding = 4; };
 		B1E40A044B7746DCABC36A88 /* SQLitePlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SQLitePlugin.h"; path = "io.litehelpers.cordova.sqlite/SQLitePlugin.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		0ED504B2F95F497480CD9315 /* sqlite3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "sqlite3.h"; path = "io.litehelpers.cordova.sqlite/sqlite3.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		0DC343759A714D37862C04F6 /* CDVDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVDevice.m"; path = "org.apache.cordova.device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		40AE598B3A7F4D9590F4FAC3 /* CDVDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVDevice.h"; path = "org.apache.cordova.device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		BBE9141DE8D34D578D91AB13 /* CDVSplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVSplashScreen.m"; path = "org.apache.cordova.splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		54574AEF872C48F9BE026EB5 /* CDVSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSplashScreen.h"; path = "org.apache.cordova.splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +230,10 @@
 				32CB2F49386E4A2FA177C06E /* sqlite3.c */,
 				B1E40A044B7746DCABC36A88 /* SQLitePlugin.h */,
 				0ED504B2F95F497480CD9315 /* sqlite3.h */,
+				0DC343759A714D37862C04F6 /* CDVDevice.m */,
+				40AE598B3A7F4D9590F4FAC3 /* CDVDevice.h */,
+				BBE9141DE8D34D578D91AB13 /* CDVSplashScreen.m */,
+				54574AEF872C48F9BE026EB5 /* CDVSplashScreen.h */,
 			);
 			name = Plugins;
 			path = "MoLES-Player/Plugins";
@@ -412,6 +422,8 @@
 				EB3C3C2609A2458597F86088 /* CDVNotification.m in Sources */,
 				EF56730676E44534A4CB904D /* SQLitePlugin.m in Sources */,
 				62FF537116FA4D3F82D8E3A7 /* sqlite3.c in Resources */,
+				4218B3DE42C24B9FACC489D5 /* CDVDevice.m in Sources */,
+				40BA306F5678410F8CB7463F /* CDVSplashScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

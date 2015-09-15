@@ -488,4 +488,10 @@
     <ItemGroup>
         <Compile Include="Plugins\io.litehelpers.cordova.sqlite\where_c.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.device\Device.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.splashscreen\SplashScreen.cs" />
+    </ItemGroup>
 </Project>

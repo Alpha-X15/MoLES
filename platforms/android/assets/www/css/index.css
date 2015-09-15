@@ -5,7 +5,7 @@
     background-repeat: no-repeat;
     background-position: left center;
     }
-    
+
     .ui-icon-myapp-video {
     background-image: url("../img/icon_slate2.png");
     background-size: 16px 16px;
@@ -33,21 +33,21 @@
     background-repeat: no-repeat;
     background-position: center 10px;
     }
-    
+
     .ui-icon-myapp-home {
     background-image: url("../img/icon_home153.png");
     background-size: 60px 60px;
     background-repeat: no-repeat;
     background-position: center 0;
     }
-    
+
     .ui-icon-myapp-map {
     background-image: url("../img/icon_location32.png");
     background-size: 60px 60px;
     background-repeat: no-repeat;
     background-position: center 0;
     }
-    
+
     .ui-icon-myapp-map {
     background-image: url("../img/icon_upload36.png");
     background-size: 60px 60px;
@@ -63,7 +63,7 @@
     background-repeat: no-repeat;
     background-position: left center;
     }
-    
+
     .ui-icon-myapp-video {
     background-image: url("../img/icon_slate2.png");
     background-size: 16px 16px;
@@ -97,14 +97,14 @@
     background-repeat: no-repeat;
     background-position: center 0;
     }
-    
+
     .ui-icon-myapp-map {
     background-image: url("../img/icon_location32.png");
     background-size: 60px 60px;
     background-repeat: no-repeat;
     background-position: center 0;
     }
-    
+
     .ui-icon-myapp-upload {
     background-image: url("../img/icon_upload36.png");
     background-size: 60px 60px;
@@ -120,12 +120,12 @@
     background-color: #656565;
     border-radius: 0.6em;
 }
-    
+
 #subnav li {
     height: 40px;
     margin-top: 15px;
     width: 180px;
-} 
+}
 
 #subnav li a {
     /*border: 1px solid #bbbbbb;*/
@@ -144,11 +144,7 @@
     margin-right: auto;
     display: block;
     margin-top: 5px;
-    margin-bottom: 5px;       
-}
-
-#loginForm {
-
+    margin-bottom: 5px;
 }
 
 #loginForm img{
@@ -182,6 +178,16 @@ footer .ui-btn {
     padding-top: 65px;
 }
 
+#gameList > li{
+  border-radius: 10px !important;
+}
+
+#placesList > li{
+  border-radius: 10px !important;
+}
+
+#map { height: 180px; }
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -201,13 +207,13 @@ footer .ui-btn {
  * under the License.
  */
 /** {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); 
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 body {
-    -webkit-touch-callout: none;                
-    -webkit-text-size-adjust: none;             
-    -webkit-user-select: none;                  
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -webkit-user-select: none;
     background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
@@ -302,18 +308,18 @@ header ul li {
     width: 60px;
     height: 80px;
     padding-top: 15px;
-    display: none;    
+    display: none;
 }
 
 header ul:hover li ul {
-    display: block;    
+    display: block;
 }
 
 header ul li ul li {
     width: 60px;
     text-align: right;
     margin-right: 15px;
-    margin-left: 
+    margin-left:
     clear: both;
     margin-left: -30px;
     height: 25px;
@@ -389,7 +395,7 @@ footer ul li img{
 
 footer ul li h3 {
     margin-left: 26%;
-    margin-top: 0px;   
+    margin-top: 0px;
 }
 
 #home {
@@ -427,14 +433,14 @@ footer ul li h3 {
 
 /* Portrait layout (default) */
 /*.app {
-    background:url(../img/logo.png) no-repeat center top; 
-    position:absolute;             
+    background:url(../img/logo.png) no-repeat center top;
+    position:absolute;
     left:50%;
     top:40%;
-    height:50px;                   
-    width:300px;                   
+    height:50px;
+    width:300px;
     text-align:center;
-    margin:-115px 0px 0px -112px;  
+    margin:-115px 0px 0px -112px;
 }*/
 
 /*input {
@@ -460,9 +466,9 @@ button {
 /*@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
     .app {
         background-position:left center;
-        padding:75px 0px 75px 170px;  
-        margin:-90px 0px 0px -198px;  
-                                      
+        padding:75px 0px 75px 170px;
+        margin:-90px 0px 0px -198px;
+
     }
 }
 
@@ -498,13 +504,13 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 @-webkit-keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;

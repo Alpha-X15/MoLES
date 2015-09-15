@@ -31,14 +31,10 @@
         <link rel="stylesheet" href="css/themes/jqueryTheme.min.css" />
         <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-        <script src="js/crypto-min.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script>
-
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/leaflet.css" />
+
+
         <title>MoLES-Player</title>
         <script>
             var title = "";
@@ -98,7 +94,6 @@
        </script>
     </head>
     <body>
-        <!-- <div id="wrapper"> -->
           <div data-role="page" id="login_page">
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
@@ -123,8 +118,7 @@
                             <p class="event received">Device is Ready</p>
                         </div>
 
-                        <form id="loginForm">
-                            <!-- <label for="username">Username:</label> -->
+                        <div id="loginForm">
                             <img src="img/icon_profile.png" alt="Username:" />
                             <div class="input">
                                 <input type="text" name="username" id="username" value="" placeholder="Username" autocorrect="off" autocapitalize="off"/>
@@ -133,8 +127,8 @@
                             <div class="input">
                                 <input type="password" name="password" id="password" value="" placeholder="Password" autocorrect="off" autocapitalize="off"/>
                             </div>
-                            <input type="submit" value="Login" id="submitButton">
-                        </form>
+                            <button id="submitButton">Login</button>
+                      </div>
 
                         <!-- <div data-position-to="window" data-rel="popup" data-overlay-theme="a"> -->
                             <div data-position-to="window" data-role="popup" id="positionWindowError" data-overlay-theme="a">
@@ -147,14 +141,14 @@
                         <button value="Klick mich!" onclick="checklanguage()">Klick mich!</button>
                     </div>
                     <script type="text/javascript">
-                                    app.initialize();
+                                    // app.initialize();
                                     function changeTitle(){
                                         document.getElementById('headerTitle').innerHTML = title;
                                     }
 
-                                    function changePage(){
-                                        window.location = "#games_page";
-                                    }
+                                    // function changePage(){
+                                    //     window.location = "#games_page";
+                                    // }
                     </script>
                 </div>
                 <footer data-role="footer" data-position="fixed">
@@ -186,7 +180,7 @@
                         <ul id="gameList" data-role="listview">
 
                         </ul>
-                        <a href="#places_page">---Spiel_XYZ---</a>
+                        <!-- <a href="#places_page">---Spiel_XYZ---</a> -->
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
@@ -218,8 +212,13 @@
                 </header>
                 <div data-role="main" id="main">
                     <div class="app">
-                        <h1>Wähle einen Ort:</h1>
-                            <a href="#questions_list_page">---Fragen---</a>
+                        <h1 id="placesTitle"></h1>
+                        <p id="placesText"></p>
+                        <h3>Wählen Sie einen Ort aus:</h3>
+                        <ul id="placesList" data-role="listview">
+
+                        </ul>
+                        <a href="#questions_list_page">---Fragen---</a>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
@@ -397,6 +396,11 @@
                 <div data-role="main" id="main">
                     <div class="app">
                         <h1>Map:</h1>
+                        <div id="map">
+                          <script>
+                            var map = L.map('map').setView([51.505, -0.09], 13);
+                          </script>
+                        </div>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
@@ -504,5 +508,15 @@
                 </footer>
             </div>
         <!-- </div>   -->
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/crypto-min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/leaflet.js"></script>
+        <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script>
+        <script>
+          app.initialize();
+        </script>
     </body>
 </html>

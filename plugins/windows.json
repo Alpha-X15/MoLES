@@ -15,6 +15,12 @@
         },
         "io.litehelpers.cordova.sqlite": {
             "PACKAGE_NAME": "MoLES-Player"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "org.apache.cordova.splashscreen": {
+            "PACKAGE_NAME": "MoLES-Player"
         }
     },
     "dependent_plugins": {}

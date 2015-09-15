@@ -45,12 +45,13 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        // navigator.splashscreen.show();
         app.receivedEvent('deviceready');
-
         //Set Database
-        var dbShell = window.openDatabase("LOGIN", "1.0", "LOGIN", 100);
-        dbShell.transaction(setupTable,dbErrorHandler,getEntries);
+        // var db = window.sqlitePlugin.openDatabase("LOGIN", "1.0", "LOGIN", 100);
+        // var db = window.sqlitePlugin.openDatabase({name: "DB"});
 
+        // setupTable();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -61,12 +62,14 @@ var app = {
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        app.report('Received Event: ' + id);
 
-        $(document).on('submit', '#loginForm', function()
+        // Test for getting OS and version
+        app.report(window.device.platform);
+        app.report(window.device.version);
+
+        $(document).on('click', '#submitButton', function()
         {
-
-            app.report("Before ajax");
             localStorage.setItem('_userID', '0');
             app.report("User: "+$('input[name=username]').val());
             app.report("User: "+$('input[name=password]').val());
@@ -81,33 +84,31 @@ var app = {
                 crossDomain: true,
                 beforeSend: function(xhr)
                 {
-                    app.report("beforeSend");
-                    app.report("Auth: "+getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+                    navigator.notification.activityStart('Login..', 'loading');
                     xhr.setRequestHeader('Authorization', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
                     xhr.setRequestHeader('pragma', 'no-cache');
                     xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
                     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                },
+                success: function(msg)
+                {
+                  // app.report(JSON.stringify(msg, null, 4));
+                  if(msg.data.valid == true)
+                  {
+                    localStorage.setItem('_userID', msg.data.id);
+                    localStorage.setItem('_loggedIn', "true");
+                    localStorage.setItem('_authToken', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+
+                    getGameList();
+                  }
+
                 }
-            })
-            .done(function(data, textStatus, jqXHR)
-            {
-                localStorage.setItem('_userID', data.data.id);
-                localStorage.setItem('_loggedIn', "true");
-                localStorage.setItem('_authToken', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
-
-                //Create JSON Node
-                var node = {"id": "","user": $('input[name=username]').val()};
-                app.report("node: " + node.id + " - " + node.user);
-                //Insert Node into Database
-
-                getGameList();
-                saveUser(node);
-
             })
             .fail(function(jqXHR, textStatus)
             {
                 app.report("Status: " + jqXHR.status);
                 app.report("Login request failed: " + textStatus);
+                navigator.notification.activityStop();
               // if(jqXHR.status == 403 || (jqXHR.status == 404 && jqXHR.responseJSON.data == 'Invalid post data')) $('div.alert.alert1').show();
               // else $('div.alert.alert2').show();
               // setContentVisibility(true);
@@ -121,11 +122,12 @@ var app = {
 };
 
 //LOGIN DATABASE BEGIN //
-// Create Database
-function setupTable(tx){
-	//tx.executeSql('DROP TABLE IF EXISTS LOGIN');
+// Create Table
+function setupTable(tx)
+{
+	tx.executeSql('DROP TABLE IF EXISTS LOGIN');
 	tx.executeSql('CREATE TABLE IF NOT EXISTS LOGIN (id unique, username, status)');
-	//app.report("SetupTaple");
+	app.report("SetupTaple");
 }
 
 //Database Errorhandling
@@ -141,25 +143,25 @@ function getEntries() {
 	app.report("GetEntries");
 }
 
-function getLogin(tx,results){
-	if(results.rows.item(0).status)
+function getLogin(tx,results)
+{
+  if(results.rows.item(0).status)
 	{
 		getGameList();
 	}
 	else
-		{
+	{
 			app.report("No Entries");
-		}
-
+	}
 }
 
 //Insert into Database LOGIN
 function saveUser(node, cb) {
-	app.report("Node-Save: " + node.id + " - " + node.user);
-	app.report("SaveNode");
-	dbShell.transaction(function(tx) {
+	  app.report("Node-Save: " + node.id + " - " + node.user);
+	  app.report("SaveNode");
+	  dbShell.transaction(function(tx) {
 		if(node.id == "")
-			tx.executeSql('insert into LOGIN(username,status) VALUES (node.user, true)');
+			tx.executeSql('INSERT INTO LOGIN(username,status) VALUES (node.user, true)');
 		else
 			app.report("Fail to save!");
 	}, dbErrorHandler,cb);
@@ -170,7 +172,7 @@ function getAuth(name, pwd)
 {
     var bytes = Crypto.charenc.Binary.stringToBytes(name+':'+pwd);
     var base64 = Crypto.util.bytesToBase64(bytes);
-    console.log(base64);
+    app.report(base64);
     return "Basic " + base64;
 }
 
@@ -188,7 +190,7 @@ function getGameList()
         type: 'GET',
         beforeSend: function(xhr)
         {
-            app.report("Authtoken: "+localStorage.getItem('_authToken'));
+            // app.report("Authtoken: "+localStorage.getItem('_authToken'));
             xhr.setRequestHeader('Authorization', localStorage.getItem('_authToken'));
             xhr.setRequestHeader('pragma', 'no-cache');
             xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
@@ -197,39 +199,34 @@ function getGameList()
     })
     .done(function(data, textStatus, jqXHR)
     {
-        app.report("GameList Loaded");
         var gameInstances = data.data.gameInstances;
-        app.report(gameInstances[0]["GameInstance"]["game_id"]);
-        app.report(gameInstances[0]["GameInstance"]["id"]);
-        app.report(gameInstances[0]["GameInstance"]["name"]);
         var gamesListContent = '';
         for(var i = 0; i<gameInstances.length; i++)
         {
-            // gamesListContent += '<li><a onclick="setGameSelection('+gameInstances[i]["GameInstance"]["game_id"]+','+gameInstances[i]["GameInstance"]["name"]+')">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
-            gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'">'+gameInstances[i]["GameInstance"]["name"]+'</li>';
-
+            gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'"><a href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
         }
         $('#gameList').append(gamesListContent);
-        $('#gameList').delegate('li', 'click', function(){
+        $('#gameList').delegate('li', 'click', function()
+        {
           var cgame = $(this).attr('id').split('-');
           setGameSelection(cgame[0], cgame[1]);
         });
 
-        window.location = '#games_page';
+        navigator.notification.activityStop();
+        $.mobile.changePage($('#games_page'));
     })
     .fail(function(jqXHR, textStatus)
     {
         app.report("StatusCode: "+jqXHR.status);
         app.report("Status: "+textStatus);
         app.report("Failed loading the GameList");
+        navigator.notification.activityStop();
     });
 }
 
 function getLocationList()
 {
-    app.report("Should get Location List");
     app.report("locationlist for "+localStorage.getItem('_gameID'));
-    // app.report(app.cons.SERVER_URL + app.cons.ALLMISSIONS_URL.replace("{GameID}", localStorage.getItem('_gameID')));
 
     $.ajax(
     {
@@ -243,7 +240,7 @@ function getLocationList()
         type: 'GET',
         beforeSend: function(xhr)
         {
-            app.report("Authtoken: "+localStorage.getItem('_authToken'));
+            navigator.notification.activityStart('LoadLocationList..', 'loading');
             xhr.setRequestHeader('Authorization', localStorage.getItem('_authToken'));
             xhr.setRequestHeader('pragma', 'no-cache');
             xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
@@ -253,20 +250,25 @@ function getLocationList()
     .done(function(data, textStatus, jqXHR)
     {
         app.report("LocationList Loaded");
-        app.report(textStatus);
-        app.report(JSON.stringify(data.data.game, null, 4));
-        var gameInstances = data.data.gameInstances;
-        app.report(gameInstances[0]["GameInstance"]["name"]);
+        // app.report(textStatus);
+        // app.report(JSON.stringify(data.data.game, null, 4));
+        var placeInstances = data.data.game;
+        // app.report(JSON.stringify(placeInstances["Mission"]));
 
-        var gamesListContent = '';
-        for(var i = 0; i<gameInstances.length; i++)
+        $('#placesTitle').append(localStorage.getItem('_gameName'));
+        $('#placesText').append(placeInstances["Game"]["description"]);
+
+        // app.report(JSON.stringify(placeInstances["Mission"][0]["Question"]));
+
+        var placesListContent = '';
+        for(var i = 0; i<placeInstances["Mission"].length; i++)
         {
-            gamesListContent += '<li><a>'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
-
+            placesListContent += '<li><a>'+placeInstances["Mission"][i]["name"]+'</a></li>';
         }
-        $('#gameList').append(gamesListContent);
+        $('#placesList').append(placesListContent);
 
-        window.location = '#places_page';
+        navigator.notification.activityStop();
+        $.mobile.changePage($('#places_page'));
     })
     .fail(function(jqXHR, textStatus)
     {
