@@ -63,7 +63,19 @@
     background-repeat: no-repeat;
     background-position: left center;
     }
+<<<<<<< HEAD
 
+=======
+    
+    .ui-controlgroup-horizontal .ui-controlgroup-controls {
+        display: block;
+    }
+    
+    #answers a {
+        width: 15%;
+    }
+    
+>>>>>>> 2b9b2d4672f920a47fb8b40cb4375a974d73c9c3
     .ui-icon-myapp-video {
     background-image: url("../img/icon_slate2.png");
     background-size: 16px 16px;
