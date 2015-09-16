@@ -62,6 +62,14 @@
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: left center;
+  }
+
+    .ui-controlgroup-horizontal .ui-controlgroup-controls {
+        display: block;
+    }
+
+    #answers a {
+        width: 15%;
     }
 
     .ui-icon-myapp-video {
@@ -186,7 +194,9 @@ footer .ui-btn {
   border-radius: 10px !important;
 }
 
-#map { height: 180px; }
+#map {
+  height: 180px;
+}
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one

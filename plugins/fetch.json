@@ -38,5 +38,14 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.suarez.cordova.mapsforge": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/afsuarez/mapsforge-cordova-plugin.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

@@ -54,6 +54,9 @@
         },
         "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
+        },
+        "com.suarez.cordova.mapsforge": {
+            "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
         }
     },
     "dependent_plugins": {}

@@ -37,6 +37,8 @@
 
         <title>MoLES-Player</title>
         <script>
+
+
             var title = "";
             function checklanguage()
             {
@@ -94,11 +96,7 @@
        </script>
     </head>
     <body>
-<<<<<<< HEAD
-=======
-        <!-- <div id="wrapper"> -->
         <!-- Page with Login here -->
->>>>>>> 2b9b2d4672f920a47fb8b40cb4375a974d73c9c3
           <div data-role="page" id="login_page">
                 <header data-role="header" data-position="fixed">
                     <!--<a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a> -->
@@ -402,9 +400,7 @@
                     <div class="app">
                         <h1>Map:</h1>
                         <div id="map">
-                          <script>
-                            var map = L.map('map').setView([51.505, -0.09], 13);
-                          </script>
+
                         </div>
                     </div>
                 </div>
@@ -521,6 +517,12 @@
         <script type="text/javascript" src="js/leaflet.js"></script>
         <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script>
         <script>
+
+          var map = L.map('map').setView([51.505, -0.09], 13);
+          L.tileLayer('http://{s}tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18
+          }).addTo(map);
+
           app.initialize();
         </script>
     </body>

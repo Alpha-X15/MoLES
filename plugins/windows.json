@@ -21,6 +21,9 @@
         },
         "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "MoLES-Player"
+        },
+        "com.suarez.cordova.mapsforge": {
+            "PACKAGE_NAME": "MoLES-Player"
         }
     },
     "dependent_plugins": {}

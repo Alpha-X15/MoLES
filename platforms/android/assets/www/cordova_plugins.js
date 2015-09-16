@@ -39,6 +39,27 @@ module.exports = [
         "clobbers": [
             "navigator.splashscreen"
         ]
+    },
+    {
+        "file": "plugins/com.suarez.cordova.mapsforge/www/mapsforge.js",
+        "id": "com.suarez.cordova.mapsforge.mapsforge_plugin",
+        "clobbers": [
+            "mapsforge.plugin"
+        ]
+    },
+    {
+        "file": "plugins/com.suarez.cordova.mapsforge/www/mapsforgeNative.js",
+        "id": "com.suarez.cordova.mapsforge.mapsforge_native",
+        "clobbers": [
+            "mapsforge.embedded"
+        ]
+    },
+    {
+        "file": "plugins/com.suarez.cordova.mapsforge/www/mapsforgeOfflineCache.js",
+        "id": "com.suarez.cordova.mapsforge.mapsforge_cache",
+        "clobbers": [
+            "mapsforge.cache"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -48,7 +69,8 @@ module.exports.metadata =
     "org.apache.cordova.dialogs": "0.3.0",
     "io.litehelpers.cordova.sqlite": "0.7.10",
     "org.apache.cordova.device": "0.3.0",
-    "org.apache.cordova.splashscreen": "1.0.0"
+    "org.apache.cordova.splashscreen": "1.0.0",
+    "com.suarez.cordova.mapsforge": "0.1.1"
 }
 // BOTTOM OF METADATA
 });

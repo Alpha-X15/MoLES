@@ -47,6 +47,11 @@ var app = {
     onDeviceReady: function() {
         // navigator.splashscreen.show();
         app.receivedEvent('deviceready');
+<<<<<<< HEAD
+=======
+		 app.report(device.platform);
+);
+>>>>>>> 2b9b2d4672f920a47fb8b40cb4375a974d73c9c3
         //Set Database
         // var db = window.sqlitePlugin.openDatabase("LOGIN", "1.0", "LOGIN", 100);
         // var db = window.sqlitePlugin.openDatabase({name: "DB"});

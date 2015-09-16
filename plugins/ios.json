@@ -60,6 +60,9 @@
         },
         "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "com.suarez.cordova.mapsforge": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
     "dependent_plugins": {}
