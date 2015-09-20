@@ -34,11 +34,8 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/leaflet.css" />
 
-
         <title>MoLES-Player</title>
         <script>
-
-
             var title = "";
             function checklanguage()
             {
@@ -399,7 +396,7 @@
                 <div data-role="main" id="main">
                     <div class="app">
                         <h1>Map:</h1>
-                        <div id="map">
+                        <div id="map" >
 
                         </div>
                     </div>
@@ -508,21 +505,14 @@
                     </div>
                 </footer>
             </div>
-        <!-- </div>   -->
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/crypto-min.js"></script>
+        <script type="text/javascript" src="js/leaflet.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/leaflet.js"></script>
         <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script>
         <script>
-
-          var map = L.map('map').setView([51.505, -0.09], 13);
-          L.tileLayer('http://{s}tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 18
-          }).addTo(map);
-
           app.initialize();
         </script>
     </body>

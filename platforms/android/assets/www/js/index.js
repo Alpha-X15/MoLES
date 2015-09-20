@@ -47,11 +47,8 @@ var app = {
     onDeviceReady: function() {
         // navigator.splashscreen.show();
         app.receivedEvent('deviceready');
-<<<<<<< HEAD
-=======
-		 app.report(device.platform);
-);
->>>>>>> 2b9b2d4672f920a47fb8b40cb4375a974d73c9c3
+		    app.report(device.platform);
+
         //Set Database
         // var db = window.sqlitePlugin.openDatabase("LOGIN", "1.0", "LOGIN", 100);
         // var db = window.sqlitePlugin.openDatabase({name: "DB"});
@@ -72,6 +69,12 @@ var app = {
         // Test for getting OS and version
         app.report(window.device.platform);
         app.report(window.device.version);
+
+        $(document).on("pageshow","#maps_page",function(){ // When entering pagetwo
+            // alert("pagetwo is now shown");
+            initializeMap();
+            // map.invalidateSize();
+        });
 
         $(document).on('click', '#submitButton', function()
         {
@@ -290,4 +293,20 @@ function setGameSelection(game_id, name)
     localStorage.setItem('_gameName', name);
 
     getLocationList();
+}
+
+function initializeMap()
+{
+    var map = L.map('map',{
+      center: [51.505, -0.09],
+      zoom: 13
+    });
+    //
+    // L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   maxZoom: 18
+    // }).addTo(map);
+
+    L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',{
+      maxZoom: 18
+    }).addTo(map);
 }
