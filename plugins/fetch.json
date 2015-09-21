@@ -15,14 +15,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "io.litehelpers.cordova.sqlite": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-sqlite-storage"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "org.apache.cordova.device": {
         "source": {
             "type": "registry",
@@ -35,15 +27,6 @@
         "source": {
             "type": "registry",
             "id": "org.apache.cordova.splashscreen"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "com.suarez.cordova.mapsforge": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/afsuarez/mapsforge-cordova-plugin.git",
-            "subdir": "."
         },
         "is_top_level": true,
         "variables": {}

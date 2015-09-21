@@ -1,2 +1,1 @@
 <plugin name="Storage" value="org.apache.cordova.Storage" />
-<plugin name="SQLitePlugin" value="org.pgsqlite.SQLitePlugin"/>

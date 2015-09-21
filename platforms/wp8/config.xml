@@ -72,9 +72,6 @@
     <feature name="Notification">
         <param name="wp-package" value="Notification" />
     </feature>
-    <feature name="SQLitePlugin">
-        <param name="wp-package" value="SQLitePlugin" />
-    </feature>
     <feature name="Device">
         <param name="wp-package" value="Device" />
     </feature>

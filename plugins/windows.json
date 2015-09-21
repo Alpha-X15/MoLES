@@ -13,16 +13,10 @@
         "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "MoLES-Player"
         },
-        "io.litehelpers.cordova.sqlite": {
-            "PACKAGE_NAME": "MoLES-Player"
-        },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "MoLES-Player"
         },
         "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "MoLES-Player"
-        },
-        "com.suarez.cordova.mapsforge": {
             "PACKAGE_NAME": "MoLES-Player"
         }
     },

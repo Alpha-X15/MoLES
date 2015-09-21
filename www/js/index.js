@@ -16,7 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var db;
+
 var app = {
+
     cons:
     {
       // SERVER_URL: 'http://141.83.80.180/',
@@ -47,8 +50,7 @@ var app = {
     onDeviceReady: function() {
         // navigator.splashscreen.show();
         app.receivedEvent('deviceready');
-		    app.report(device.platform);
-
+        initializeDatabase();
         //Set Database
         // var db = window.sqlitePlugin.openDatabase("LOGIN", "1.0", "LOGIN", 100);
         // var db = window.sqlitePlugin.openDatabase({name: "DB"});
@@ -103,9 +105,29 @@ var app = {
                   // app.report(JSON.stringify(msg, null, 4));
                   if(msg.data.valid == true)
                   {
+                    db.transaction(function(tx)
+                    {
+                        tx.executeSql('INSERT INTO users (userID, user, pw, authToken, status, lastUser) VALUES (?,?,?,?,?,?);',[msg.data.id, $('input[name=username]').val(), $('input[name=password]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()), "true", 1], function(tx, res)
+                        {
+                          app.report("inserted id"+res.insertId);
+                          app.report("Affected rows"+res.rowsAffected);
+                        }
+                        );
+                    },
+                    function(err)
+                    {
+                      app.report(err);
+                    },
+                    function(suc)
+                    {
+                      app.report("Insert done");
+                    });
+
                     localStorage.setItem('_userID', msg.data.id);
                     localStorage.setItem('_loggedIn', "true");
                     localStorage.setItem('_authToken', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+
+
 
                     getGameList();
                   }
@@ -128,28 +150,6 @@ var app = {
         console.log("Report: "+ id);
     }
 };
-
-//LOGIN DATABASE BEGIN //
-// Create Table
-function setupTable(tx)
-{
-	tx.executeSql('DROP TABLE IF EXISTS LOGIN');
-	tx.executeSql('CREATE TABLE IF NOT EXISTS LOGIN (id unique, username, status)');
-	app.report("SetupTaple");
-}
-
-//Database Errorhandling
-function dbErrorHandler(tx, err){
-	app.report("DB Error: "+err.message + "\nCode="+err.code);
-}
-
-//Get Database Entries
-function getEntries() {
-	dbShell.transaction(function(tx) {
-		tx.executeSql("select id, status",[],getLogin,dbErrorHandler);
-	}, dbErrorHandler);
-	app.report("GetEntries");
-}
 
 function getLogin(tx,results)
 {
@@ -186,6 +186,32 @@ function getAuth(name, pwd)
 
 function getGameList()
 {
+    db.readTransaction(function(tx)
+    {
+        tx.executeSql("SELECT * FROM users;", [], function(tx, results)
+        {
+          // if(!results.rowsAffected)
+          // {
+          //   app.report("No rows");
+          //   return false;
+          // }
+          app.report(results.insertId);
+          app.report(JSON.stringify(results, null, 4));
+        },
+        function(errCB)
+        {
+          app.report(errCB);
+        }
+        );
+    },
+    function(err) {
+      app.report(err);
+    },
+    function(suc) {
+      app.report("Supergeile Jessica Alba");
+    }
+  );
+
     $.ajax(
     {
         url: app.cons.SERVER_URL + app.cons.GAMELIST_URL,
@@ -301,12 +327,37 @@ function initializeMap()
       center: [51.505, -0.09],
       zoom: 13
     });
-    //
-    // L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //   maxZoom: 18
-    // }).addTo(map);
 
     L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',{
       maxZoom: 18
     }).addTo(map);
+}
+
+function initializeDatabase()
+{
+  if(window.device.platform == 'android')
+  {
+    db = window.sqlitePlugin.openDatabase({name: "moles.db", androidDatabaseImplementation: 2, androidLockWorkaround: 1});
+    alert(JSON.stringify(db));
+  }
+  else
+  {
+    db = window.sqlitePlugin.openDatabase({name: "moles.db", location: 1});
+    alert(JSON.stringify(db));
+  }
+
+
+    setupTables();
+}
+
+function setupTables()
+{
+  db.transaction(function(tx) {
+    tx.executeSql('DROP TABLE IF EXISTS users');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS users (userID INTEGER, user TEXT, pw TEXT, authToken TEXT, status TEXT, lastUser INTEGER)', [])
+  }, function(err){
+    app.report(err);
+  },function(suc){
+    app.report("Table Created");
+  });
 }
