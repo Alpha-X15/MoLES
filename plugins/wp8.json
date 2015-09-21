@@ -19,6 +19,18 @@
                         {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"wp-package\" value=\"SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"wp-package\" value=\"NetworkStatus\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"wp-package\" value=\"File\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Capture\"><param name=\"wp-package\" value=\"Capture\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -28,6 +40,30 @@
                     "/Deployment/App/Capabilities": [
                         {
                             "xml": "<Capability Name=\"ID_CAP_IDENTITY_DEVICE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_NETWORKING\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_AUDIO\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_PHOTO\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_PLAYBACK\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MICROPHONE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_ISV_CAMERA\" />",
                             "count": 1
                         }
                     ]
@@ -47,7 +83,17 @@
         },
         "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
+        },
+        "org.apache.cordova.network-information": {
+            "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
+        },
+        "org.apache.cordova.media-capture": {
+            "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
+        }
+    }
 }

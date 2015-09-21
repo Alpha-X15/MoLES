@@ -16,8 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var db;
-
 var app = {
 
     cons:
@@ -50,12 +48,7 @@ var app = {
     onDeviceReady: function() {
         // navigator.splashscreen.show();
         app.receivedEvent('deviceready');
-        initializeDatabase();
-        //Set Database
-        // var db = window.sqlitePlugin.openDatabase("LOGIN", "1.0", "LOGIN", 100);
-        // var db = window.sqlitePlugin.openDatabase({name: "DB"});
-
-        // setupTable();
+        app.report(JSON.stringify(navigator.connection));
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -72,77 +65,13 @@ var app = {
         app.report(window.device.platform);
         app.report(window.device.version);
 
-        $(document).on("pageshow","#maps_page",function(){ // When entering pagetwo
-            // alert("pagetwo is now shown");
+        $(document).on("pageshow","#maps_page",function(){
             initializeMap();
-            // map.invalidateSize();
         });
 
         $(document).on('click', '#submitButton', function()
         {
-            localStorage.setItem('_userID', '0');
-            app.report("User: "+$('input[name=username]').val());
-            app.report("User: "+$('input[name=password]').val());
-
-            $.ajax({
-                url: app.cons.SERVER_URL + app.cons.LOGIN_URL,
-                dataType: 'json',
-                xhrFields:
-                {
-                    withCredentials: true
-                },
-                crossDomain: true,
-                beforeSend: function(xhr)
-                {
-                    navigator.notification.activityStart('Login..', 'loading');
-                    xhr.setRequestHeader('Authorization', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
-                    xhr.setRequestHeader('pragma', 'no-cache');
-                    xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
-                    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                },
-                success: function(msg)
-                {
-                  // app.report(JSON.stringify(msg, null, 4));
-                  if(msg.data.valid == true)
-                  {
-                    db.transaction(function(tx)
-                    {
-                        tx.executeSql('INSERT INTO users (userID, user, pw, authToken, status, lastUser) VALUES (?,?,?,?,?,?);',[msg.data.id, $('input[name=username]').val(), $('input[name=password]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()), "true", 1], function(tx, res)
-                        {
-                          app.report("inserted id"+res.insertId);
-                          app.report("Affected rows"+res.rowsAffected);
-                        }
-                        );
-                    },
-                    function(err)
-                    {
-                      app.report(err);
-                    },
-                    function(suc)
-                    {
-                      app.report("Insert done");
-                    });
-
-                    localStorage.setItem('_userID', msg.data.id);
-                    localStorage.setItem('_loggedIn', "true");
-                    localStorage.setItem('_authToken', getAuth($('input[name=username]').val(), $('input[name=password]').val()));
-
-
-
-                    getGameList();
-                  }
-
-                }
-            })
-            .fail(function(jqXHR, textStatus)
-            {
-                app.report("Status: " + jqXHR.status);
-                app.report("Login request failed: " + textStatus);
-                navigator.notification.activityStop();
-              // if(jqXHR.status == 403 || (jqXHR.status == 404 && jqXHR.responseJSON.data == 'Invalid post data')) $('div.alert.alert1').show();
-              // else $('div.alert.alert2').show();
-              // setContentVisibility(true);
-            });
+          loginWebservice($('input[name=username]').val(), $('input[name=password]').val());
         });
     },
     report: function(id)
@@ -150,31 +79,6 @@ var app = {
         console.log("Report: "+ id);
     }
 };
-
-function getLogin(tx,results)
-{
-  if(results.rows.item(0).status)
-	{
-		getGameList();
-	}
-	else
-	{
-			app.report("No Entries");
-	}
-}
-
-//Insert into Database LOGIN
-function saveUser(node, cb) {
-	  app.report("Node-Save: " + node.id + " - " + node.user);
-	  app.report("SaveNode");
-	  dbShell.transaction(function(tx) {
-		if(node.id == "")
-			tx.executeSql('INSERT INTO LOGIN(username,status) VALUES (node.user, true)');
-		else
-			app.report("Fail to save!");
-	}, dbErrorHandler,cb);
-}
-//LOGIN DATABASE END //
 
 function getAuth(name, pwd)
 {
@@ -184,34 +88,52 @@ function getAuth(name, pwd)
     return "Basic " + base64;
 }
 
+function loginWebservice(user, passw)
+{
+  localStorage.setItem('_userID', '0');
+  app.report("User: "+user);
+  app.report("User: "+passw);
+
+  $.ajax({
+      url: app.cons.SERVER_URL + app.cons.LOGIN_URL,
+      dataType: 'json',
+      xhrFields:
+      {
+          withCredentials: true
+      },
+      crossDomain: true,
+      beforeSend: function(xhr)
+      {
+          navigator.notification.activityStart('Login..', 'loading');
+          xhr.setRequestHeader('Authorization', getAuth(user, passw));
+          xhr.setRequestHeader('pragma', 'no-cache');
+          xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
+          xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+      },
+      success: function(msg)
+      {
+        // app.report(JSON.stringify(msg, null, 4));
+        if(msg.data.valid == true)
+        {
+          localStorage.setItem('_userID', msg.data.id);
+          localStorage.setItem('_loggedIn', "true");
+          localStorage.setItem('_authToken', getAuth(user, passw));
+
+          getGameList();
+        }
+      }
+  })
+  .fail(function(jqXHR, textStatus)
+  {
+      app.report("Status: " + jqXHR.status);
+      app.report("Login request failed: " + textStatus);
+      navigator.notification.activityStop();
+      alert("Der Login ist fehlgeschlagen.");
+  });
+}
+
 function getGameList()
 {
-    db.readTransaction(function(tx)
-    {
-        tx.executeSql("SELECT * FROM users;", [], function(tx, results)
-        {
-          // if(!results.rowsAffected)
-          // {
-          //   app.report("No rows");
-          //   return false;
-          // }
-          app.report(results.insertId);
-          app.report(JSON.stringify(results, null, 4));
-        },
-        function(errCB)
-        {
-          app.report(errCB);
-        }
-        );
-    },
-    function(err) {
-      app.report(err);
-    },
-    function(suc) {
-      app.report("Supergeile Jessica Alba");
-    }
-  );
-
     $.ajax(
     {
         url: app.cons.SERVER_URL + app.cons.GAMELIST_URL,
@@ -224,7 +146,6 @@ function getGameList()
         type: 'GET',
         beforeSend: function(xhr)
         {
-            // app.report("Authtoken: "+localStorage.getItem('_authToken'));
             xhr.setRequestHeader('Authorization', localStorage.getItem('_authToken'));
             xhr.setRequestHeader('pragma', 'no-cache');
             xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
@@ -234,6 +155,11 @@ function getGameList()
     .done(function(data, textStatus, jqXHR)
     {
         var gameInstances = data.data.gameInstances;
+
+        localStorage.setItem('_gameList', JSON.stringify(gameInstances));
+
+        // app.report(localStorage.getItem('_gameList'));
+
         var gamesListContent = '';
         for(var i = 0; i<gameInstances.length; i++)
         {
@@ -243,7 +169,8 @@ function getGameList()
         $('#gameList').delegate('li', 'click', function()
         {
           var cgame = $(this).attr('id').split('-');
-          setGameSelection(cgame[0], cgame[1]);
+          // setGameSelection(cgame[0], cgame[1]);
+          getLocationList(cgame[0], cgame[1]);
         });
 
         navigator.notification.activityStop();
@@ -258,13 +185,16 @@ function getGameList()
     });
 }
 
-function getLocationList()
+function getLocationList(choosen_game_id, game_name)
 {
-    app.report("locationlist for "+localStorage.getItem('_gameID'));
+    // app.report("locationlist for "+localStorage.getItem('_gameID'));
+    app.report("locationlist for "+choosen_game_id);
+    app.report(choosen_game_id+' '+game_name);
 
     $.ajax(
     {
-        url: app.cons.SERVER_URL + app.cons.ALLMISSIONS_URL.replace("{GameID}", localStorage.getItem('_gameID')),
+        // url: app.cons.SERVER_URL + app.cons.ALLMISSIONS_URL.replace("{GameID}", localStorage.getItem('_gameID')),
+        url: app.cons.SERVER_URL + app.cons.ALLMISSIONS_URL.replace("{GameID}", choosen_game_id),
         dataType: 'json',
         xhrFields:
         {
@@ -287,9 +217,13 @@ function getLocationList()
         // app.report(textStatus);
         // app.report(JSON.stringify(data.data.game, null, 4));
         var placeInstances = data.data.game;
+        localStorage.setItem('_places', JSON.stringify(placeInstances));
+
+        app.report(localStorage.getItem('_places'));
         // app.report(JSON.stringify(placeInstances["Mission"]));
 
-        $('#placesTitle').append(localStorage.getItem('_gameName'));
+        // $('#placesTitle').append(localStorage.getItem('_gameName'));
+        $('#placesTitle').append(game_name);
         $('#placesText').append(placeInstances["Game"]["description"]);
 
         // app.report(JSON.stringify(placeInstances["Mission"][0]["Question"]));
@@ -297,9 +231,15 @@ function getLocationList()
         var placesListContent = '';
         for(var i = 0; i<placeInstances["Mission"].length; i++)
         {
-            placesListContent += '<li><a>'+placeInstances["Mission"][i]["name"]+'</a></li>';
+            placesListContent += '<li id="'+placeInstances["Mission"][i]["id"]+'-'+placeInstances["Mission"][i]["name"]+'"><a href="javaScript:void(0)">'+placeInstances["Mission"][i]["name"]+'</a></li>';
         }
         $('#placesList').append(placesListContent);
+        $('#placesList').delegate('li', 'click', function()
+        {
+          var cplace = $(this).attr('id').split('-');
+          app.report(cplace[0]+' '+cplace[1]);
+          $.mobile.changePage($('#questions_list_page'));
+        });
 
         navigator.notification.activityStop();
         $.mobile.changePage($('#places_page'));
@@ -312,14 +252,14 @@ function getLocationList()
     });
 }
 
-function setGameSelection(game_id, name)
-{
-    app.report("Should set game selection with id="+game_id+' and name='+name);
-    localStorage.setItem('_gameID', game_id);
-    localStorage.setItem('_gameName', name);
-
-    getLocationList();
-}
+// function setGameSelection(game_id, name)
+// {
+//     app.report("Should set game selection with id="+game_id+' and name='+name);
+//     localStorage.setItem('_gameID', game_id);
+//     localStorage.setItem('_gameName', name);
+//
+//     getLocationList(game_id, name);
+// }
 
 function initializeMap()
 {
@@ -331,33 +271,4 @@ function initializeMap()
     L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',{
       maxZoom: 18
     }).addTo(map);
-}
-
-function initializeDatabase()
-{
-  if(window.device.platform == 'android')
-  {
-    db = window.sqlitePlugin.openDatabase({name: "moles.db", androidDatabaseImplementation: 2, androidLockWorkaround: 1});
-    alert(JSON.stringify(db));
-  }
-  else
-  {
-    db = window.sqlitePlugin.openDatabase({name: "moles.db", location: 1});
-    alert(JSON.stringify(db));
-  }
-
-
-    setupTables();
-}
-
-function setupTables()
-{
-  db.transaction(function(tx) {
-    tx.executeSql('DROP TABLE IF EXISTS users');
-    tx.executeSql('CREATE TABLE IF NOT EXISTS users (userID INTEGER, user TEXT, pw TEXT, authToken TEXT, status TEXT, lastUser INTEGER)', [])
-  }, function(err){
-    app.report(err);
-  },function(suc){
-    app.report("Table Created");
-  });
 }

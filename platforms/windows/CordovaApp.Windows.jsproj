@@ -64,7 +64,4 @@
     </ItemGroup>
     <Import Label="Shared" Project="CordovaApp.projitems" />
     <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
-    <ItemGroup>
-        <ProjectReference Include="Z:\Studium\Medieninformatik\SS15\MoLES\plugins\io.litehelpers.cordova.sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows\SQLite3.Windows.vcxproj" />
-    </ItemGroup>
 </Project>
