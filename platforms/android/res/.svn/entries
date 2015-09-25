@@ -1,76 +1,0 @@
-9
-
-dir
-363
-https://dev-test.imis.uni-luebeck.de/svn/moles/trunk/MoLES_Player_2015/MoLES-Player/platforms/android/res
-https://dev-test.imis.uni-luebeck.de/svn/moles
-
-
-
-2015-06-24T11:11:21.747184Z
-354
-pberner
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-c9d56c9a-c506-11e1-a6bb-55e6a5cc2902
-
-drawable-land-hdpi
-dir
-
-drawable
-dir
-
-drawable-xxhdpi
-dir
-
-drawable-land-ldpi
-dir
-
-drawable-land-mdpi
-dir
-
-drawable-port-hdpi
-dir
-
-drawable-port-ldpi
-dir
-
-drawable-port-mdpi
-dir
-
-drawable-xhdpi
-dir
-
-values
-dir
-
-xml
-dir
-
-drawable-hdpi
-dir
-
-drawable-ldpi
-dir
-
-drawable-land-xhdpi
-dir
-
-drawable-mdpi
-dir
-
-drawable-port-xhdpi
-dir
-

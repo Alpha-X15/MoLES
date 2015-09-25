@@ -7,44 +7,17 @@
         "files": {
             "package.windows.appxmanifest": {
                 "parents": {
-                    "/Package/Capabilities": [
-                        {
-                            "xml": "<DeviceCapability Name=\"microphone\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<DeviceCapability Name=\"webcam\" />",
-                            "count": 1
-                        }
-                    ]
+                    "/Package/Capabilities": []
                 }
             },
             "package.windows80.appxmanifest": {
                 "parents": {
-                    "/Package/Capabilities": [
-                        {
-                            "xml": "<DeviceCapability Name=\"microphone\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<DeviceCapability Name=\"webcam\" />",
-                            "count": 1
-                        }
-                    ]
+                    "/Package/Capabilities": []
                 }
             },
             "package.phone.appxmanifest": {
                 "parents": {
-                    "/Package/Capabilities": [
-                        {
-                            "xml": "<DeviceCapability Name=\"microphone\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<DeviceCapability Name=\"webcam\" />",
-                            "count": 1
-                        }
-                    ]
+                    "/Package/Capabilities": []
                 }
             }
         }
@@ -65,13 +38,9 @@
         "org.apache.cordova.network-information": {
             "PACKAGE_NAME": "MoLES-Player"
         },
-        "org.apache.cordova.media-capture": {
+        "com.brodysoft.sqlitePlugin": {
             "PACKAGE_NAME": "MoLES-Player"
         }
     },
-    "dependent_plugins": {
-        "org.apache.cordova.file": {
-            "PACKAGE_NAME": "MoLES-Player"
-        }
-    }
+    "dependent_plugins": {}
 }

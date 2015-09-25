@@ -233,7 +233,7 @@
             <!-- page with list of questions here -->
             <div data-role="page" id="questions_list_page">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="places.html"> Back </a>
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#places_page"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Fragen</h1>
                     <a href="#positionWindow4" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow4" data-overlay-theme="a">
@@ -250,8 +250,13 @@
                 </header>
                 <div data-role="main" id="main">
                     <div class="app">
-                        <h1>Fragen auswählen:</h1>
-                            <a href="#question_detail">---Frage---</a>
+                        <h1 id="locationTitle"></h1>
+                        <p id="locationText"></p>
+                        <h3>Fragen auswählen:</h3>
+                        <ul id="taskList" data-role="listview">
+
+                        </ul>
+                        <a href="#question_detail">---Frage---</a>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
@@ -266,7 +271,7 @@
             <!-- detail question page here -->
             <div data-role="page" id="question_detail">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="questions.html"> Back </a>
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#questions_list_page"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Frage</h1>
                     <a href="#positionWindow5" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow5" data-overlay-theme="a">
@@ -283,7 +288,9 @@
                 </header>
                 <div data-role="main" id="main">
                     <div class="app">
-                        <h1>Antwortengeben:</h1>
+                        <h1 id="taskTitle"></h1>
+                        <p id="taskText"></p>
+                        <h3>Antwortengeben:</h3>
                             <div id="answers" data-role="controlgroup" data-type="horizontal" data-mini="true">
                                 <a title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-inline="true" onclick="getPicture()">Picture</a>
                                 <a title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-inline="true" onclick="getVideo()">Video</a>
@@ -510,6 +517,7 @@
         <script src="js/crypto-min.js"></script>
         <script type="text/javascript" src="js/leaflet.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script>
         <!-- <script src="http://192.168.0.18:8080/target/target-script-min.js#anonymous"></script> -->

@@ -186,13 +186,13 @@ footer .ui-btn {
     padding-top: 65px;
 }
 
-#gameList > li{
+#gameList > li, #placesList > li, #taskList > li {
   border-radius: 10px !important;
 }
 
-#placesList > li{
+/*#placesList > li{
   border-radius: 10px !important;
-}
+}*/
 
 #map {
   /*width: 180px;*/

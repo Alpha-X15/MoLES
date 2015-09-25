@@ -40,6 +40,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+
     },
     // deviceready Event Handler
     //
@@ -49,6 +50,9 @@ var app = {
         // navigator.splashscreen.show();
         app.receivedEvent('deviceready');
         app.report(JSON.stringify(navigator.connection));
+        localStorage.clear();
+
+        setUpDatabase();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -80,6 +84,189 @@ var app = {
     }
 };
 
+function setUpDatabase()
+{
+  if(window.device.platform == "Android")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", androidLockWorkaround: 1});
+  }
+  else if(window.device.platform == "iOS")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", location: 1});
+  }
+  else
+  {
+    var db =  window.sqlitePlugin.openDatabase({name: "Moles.db"});
+  }
+
+  db.transaction(function(tx) {
+    tx.executeSql('DROP TABLE IF EXISTS moles_users');
+    tx.executeSql('DROP TABLE IF EXISTS moles_games');
+    tx.executeSql('DROP TABLE IF EXISTS moles_locations');
+    tx.executeSql('DROP TABLE IF EXISTS moles_tasks');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS moles_users (id integer primary key, moles_uid integer, username text, authToken text, validUser text)');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS moles_games (id integer primary key, moles_uid integer, game_inst_id integer, game_id integer, group_id integer, game_name text, game_description text)');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS moles_locations (id integer primary key, moles_uid integer, mission_id integer, game_id integer, name text, description text, location text, lat real, lng real)');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS moles_tasks (id integer primary key, moles_uid integer, task_id integer, mission_id integer, name text, description text, location text, lat real, lng real)');
+  });
+}
+
+function storeUserLogin(userid, username, authToken, validUser)
+{
+  if(window.device.platform == "Android")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", androidLockWorkaround: 1});
+  }
+  else if(window.device.platform == "iOS")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", location: 1});
+  }
+  else
+  {
+    var db =  window.sqlitePlugin.openDatabase({name: "Moles.db"});
+  }
+
+  db.transaction(function(tx) {
+    tx.executeSql('INSERT INTO moles_users (moles_uid, username, authToken, validUser) VALUES (?,?,?,?)', [userid, username, authToken, validUser], function(tx, res) {
+      app.report("InsertedId: "+res.insertId);
+      app.report("AffectedRows: "+res.rowsAffected);
+    });
+  });
+
+  db.transaction(function(tx) {
+      tx.executeSql("SELECT * FROM moles_users", [], function(tx, res) {
+        app.report("res.rows.length: " + res.rows.length);
+        app.report("res.rows.item(0): " + JSON.stringify(res.rows.item(0)));
+        app.report("res.rows: "+JSON.stringify(res.rows));
+      });
+    });
+}
+
+function storeGameList(user, gameList)
+{
+  if(window.device.platform == "Android")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", androidLockWorkaround: 1});
+  }
+  else if(window.device.platform == "iOS")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", location: 1});
+  }
+  else
+  {
+    var db =  window.sqlitePlugin.openDatabase({name: "Moles.db"});
+  }
+
+  db.transaction(function(tx){
+    for(var i = 0; i<gameList.length; i++)
+    {
+      tx.executeSql('INSERT INTO moles_games (moles_uid, game_inst_id, game_id, group_id, game_name, game_description) VALUES (?,?,?,?,?,?)',
+      [
+        user,
+        gameList[i]["GameInstance"]["id"],
+        gameList[i]["Game"]["id"],
+        gameList[i]["GameInstance"]["group_id"],
+        gameList[i]["GameInstance"]["name"],
+        gameList[i]["Game"]["description"]
+      ], function(tx, res)
+      {
+        app.report("InsertedGameId: "+res.insertId);
+      });
+    }
+  });
+
+  // db.transaction(function(tx) {
+  //     tx.executeSql("SELECT * FROM moles_games", [], function(tx, res) {
+  //       app.report(" game res.rows.length: " + res.rows.length);
+  //       app.report(" game res.rows.item(0): " + JSON.stringify(res.rows.item(0)));
+  //     });
+  //   });
+}
+
+function storeLocationList(user, locationList)
+{
+  if(window.device.platform == "Android")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", androidLockWorkaround: 1});
+  }
+  else if(window.device.platform == "iOS")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", location: 1});
+  }
+  else
+  {
+    var db =  window.sqlitePlugin.openDatabase({name: "Moles.db"});
+  }
+
+  db.transaction(function(tx)
+  {
+    for(var i = 0; i<locationList["Mission"].length; i++)
+    {
+      tx.executeSql('INSERT INTO moles_locations (moles_uid, mission_id, game_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
+      [
+        user,
+        locationList["Mission"][i]["id"],
+        locationList["Mission"][i]["game_id"],
+        locationList["Mission"][i]["name"],
+        locationList["Mission"][i]["description"],
+        locationList["Mission"][i]["location"],
+        locationList["Mission"][i]["lat"],
+        locationList["Mission"][i]["lng"]
+      ], function(tx, res)
+      {
+        app.report("InsertedLocationId: "+res.insertId);
+      });
+    }
+  });
+
+  var questions = [];
+  for(var j = 0; j<locationList["Mission"].length; j++)
+  {
+    for(var k = 0; k<locationList["Mission"][j]["Question"].length; k++)
+    {
+        questions.push(locationList["Mission"][j]["Question"][k]);
+    }
+  }
+
+  db.transaction(function(tx)
+  {
+    for(var l = 0; l<questions.length; l++)
+    {
+      tx.executeSql('INSERT INTO moles_tasks (moles_uid, task_id, mission_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
+      [
+        user,
+        questions[l]["id"],
+        questions[l]["mission_id"],
+        questions[l]["name"],
+        questions[l]["description"],
+        questions[l]["location"],
+        questions[l]["lat"],
+        questions[l]["lng"]
+      ], function(tx, res)
+      {
+        app.report("inserted task: "+res.insertId);
+      });
+    }
+  });
+
+  // db.transaction(function(tx){
+  //   tx.executeSql('SELECT * FROM moles_locations', [], function(tx, res){
+  //     app.report("location rows length "+res.rows.length);
+  //     app.report("location item 0 "+JSON.stringify(res.rows.item(0)));
+  //   });
+  // });
+  //
+  // db.transaction(function(tx){
+  //   tx.executeSql('SELECT * FROM moles_tasks', [], function(tx, res){
+  //     app.report("tasks rows length "+res.rows.length);
+  //     app.report("tasks item 0 "+JSON.stringify(res.rows.item(0)));
+  //   });
+  // });
+}
+
+/*
+* function for building an authtoken for authentification
+*/
 function getAuth(name, pwd)
 {
     var bytes = Crypto.charenc.Binary.stringToBytes(name+':'+pwd);
@@ -88,6 +275,9 @@ function getAuth(name, pwd)
     return "Basic " + base64;
 }
 
+/*
+* Ajax request for login
+*/
 function loginWebservice(user, passw)
 {
   localStorage.setItem('_userID', '0');
@@ -112,12 +302,13 @@ function loginWebservice(user, passw)
       },
       success: function(msg)
       {
-        // app.report(JSON.stringify(msg, null, 4));
         if(msg.data.valid == true)
         {
           localStorage.setItem('_userID', msg.data.id);
           localStorage.setItem('_loggedIn', "true");
           localStorage.setItem('_authToken', getAuth(user, passw));
+
+          storeUserLogin(msg.data.id, user, getAuth(user, passw), "true");
 
           getGameList();
         }
@@ -134,6 +325,7 @@ function loginWebservice(user, passw)
 
 function getGameList()
 {
+    app.report("getGameList");
     $.ajax(
     {
         url: app.cons.SERVER_URL + app.cons.GAMELIST_URL,
@@ -150,31 +342,29 @@ function getGameList()
             xhr.setRequestHeader('pragma', 'no-cache');
             xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        }
-    })
-    .done(function(data, textStatus, jqXHR)
-    {
-        var gameInstances = data.data.gameInstances;
-
-        localStorage.setItem('_gameList', JSON.stringify(gameInstances));
-
-        // app.report(localStorage.getItem('_gameList'));
-
-        var gamesListContent = '';
-        for(var i = 0; i<gameInstances.length; i++)
+        },
+        success: function(msg)
         {
-            gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'"><a href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
-        }
-        $('#gameList').append(gamesListContent);
-        $('#gameList').delegate('li', 'click', function()
-        {
-          var cgame = $(this).attr('id').split('-');
-          // setGameSelection(cgame[0], cgame[1]);
-          getLocationList(cgame[0], cgame[1]);
-        });
+          var gameInstances = msg.data.gameInstances;
+          storeGameList(localStorage.getItem('_userID'), gameInstances);
+          // localStorage.setItem('_gameList', JSON.stringify(gameInstances));
 
-        navigator.notification.activityStop();
-        $.mobile.changePage($('#games_page'));
+          var gamesListContent = '';
+          for(var i = 0; i<gameInstances.length; i++)
+          {
+              gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'"><a href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
+          }
+          $('#gameList').append(gamesListContent);
+          $('#gameList').delegate('li', 'click', function()
+          {
+            var cgame = $(this).attr('id').split('-');
+            // setGameSelection(cgame[0], cgame[1]);
+            getLocationList(cgame[0], cgame[1]);
+          });
+
+          navigator.notification.activityStop();
+          $.mobile.changePage($('#games_page'));
+        }
     })
     .fail(function(jqXHR, textStatus)
     {
@@ -187,13 +377,8 @@ function getGameList()
 
 function getLocationList(choosen_game_id, game_name)
 {
-    // app.report("locationlist for "+localStorage.getItem('_gameID'));
-    app.report("locationlist for "+choosen_game_id);
-    app.report(choosen_game_id+' '+game_name);
-
     $.ajax(
     {
-        // url: app.cons.SERVER_URL + app.cons.ALLMISSIONS_URL.replace("{GameID}", localStorage.getItem('_gameID')),
         url: app.cons.SERVER_URL + app.cons.ALLMISSIONS_URL.replace("{GameID}", choosen_game_id),
         dataType: 'json',
         xhrFields:
@@ -214,19 +399,13 @@ function getLocationList(choosen_game_id, game_name)
     .done(function(data, textStatus, jqXHR)
     {
         app.report("LocationList Loaded");
-        // app.report(textStatus);
-        // app.report(JSON.stringify(data.data.game, null, 4));
+
         var placeInstances = data.data.game;
-        localStorage.setItem('_places', JSON.stringify(placeInstances));
 
-        app.report(localStorage.getItem('_places'));
-        // app.report(JSON.stringify(placeInstances["Mission"]));
+        storeLocationList(localStorage.getItem('_userID'), placeInstances);
 
-        // $('#placesTitle').append(localStorage.getItem('_gameName'));
         $('#placesTitle').append(game_name);
         $('#placesText').append(placeInstances["Game"]["description"]);
-
-        // app.report(JSON.stringify(placeInstances["Mission"][0]["Question"]));
 
         var placesListContent = '';
         for(var i = 0; i<placeInstances["Mission"].length; i++)
@@ -238,7 +417,7 @@ function getLocationList(choosen_game_id, game_name)
         {
           var cplace = $(this).attr('id').split('-');
           app.report(cplace[0]+' '+cplace[1]);
-          $.mobile.changePage($('#questions_list_page'));
+          buildTaskPage(cplace[0]);
         });
 
         navigator.notification.activityStop();
@@ -252,14 +431,80 @@ function getLocationList(choosen_game_id, game_name)
     });
 }
 
-// function setGameSelection(game_id, name)
-// {
-//     app.report("Should set game selection with id="+game_id+' and name='+name);
-//     localStorage.setItem('_gameID', game_id);
-//     localStorage.setItem('_gameName', name);
-//
-//     getLocationList(game_id, name);
-// }
+function buildTaskPage(id)
+{
+  if(window.device.platform == "Android")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", androidLockWorkaround: 1});
+  }
+  else if(window.device.platform == "iOS")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", location: 1});
+  }
+  else
+  {
+    var db =  window.sqlitePlugin.openDatabase({name: "Moles.db"});
+  }
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT mission_id, name, description FROM moles_locations WHERE mission_id=?', [id], function(tx, res)
+    {
+      app.report("Results: "+res.rows.length);
+      $('#locationTitle').append(res.rows.item(0).name);
+      $('#locationText').append(res.rows.item(0).description);
+    });
+  });
+
+  var taskListContent = '';
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT task_id, name, description FROM moles_tasks WHERE mission_id=?', [id], function(tx, res)
+    {
+      app.report("AffectedRows: "+res.rows.length);
+      for(var i = 0; i<res.rows.length; i++)
+      {
+          taskListContent += '<li id="'+res.rows.item(i).task_id+'-'+res.rows.item(i).name+'"><a href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
+          // app.report("Task item: "+JSON.stringify(res.rows.item(i)));
+      }
+
+      $('#taskList').append(taskListContent);
+      $('#taskList').delegate('li', 'click', function()
+      {
+        var ctask = $(this).attr('id').split('-');
+        buildDetailPage(ctask[0]);
+      });
+      $.mobile.changePage($('#questions_list_page'));
+    });
+  });
+}
+
+function buildDetailPage(id)
+{
+  if(window.device.platform == "Android")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", androidLockWorkaround: 1});
+  }
+  else if(window.device.platform == "iOS")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", location: 1});
+  }
+  else
+  {
+    var db =  window.sqlitePlugin.openDatabase({name: "Moles.db"});
+  }
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_tasks WHERE task_id=?', [id], function(tx, res)
+    {
+      $('#taskTitle').append(res.rows.item(0).name);
+      $('#taskText').append(res.rows.item(0).description);
+
+      $.mobile.changePage($('#question_detail'));
+    });
+  });
+}
 
 function initializeMap()
 {

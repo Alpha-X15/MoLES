@@ -34,7 +34,5 @@
     </Applications>
     <Capabilities>
         <Capability Name="internetClientServer" />
-        <DeviceCapability Name="microphone" />
-        <DeviceCapability Name="webcam" />
     </Capabilities>
 </Package>
