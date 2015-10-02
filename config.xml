@@ -19,7 +19,7 @@
   <preference name="android-minSdkVersion" value="14"/>
   <preference name="android-installLocation" value="auto"/>
   <preference name="loadUrlTimeoutValue" value="50000" />
-  <preference name="AndroidPersistentFileLocation" value="External" />
+  <preference name="AndroidPersistentFileLocation" value="Compatibility" />
   <preference name="iosPersistentFileLocation" value="Library" />
   <gap:plugin name="org.apache.cordova.battery-status"/>
   <gap:plugin name="org.apache.cordova.camera"/>

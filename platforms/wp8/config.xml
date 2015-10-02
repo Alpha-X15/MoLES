@@ -85,4 +85,10 @@
     <feature name="SQLitePlugin">
         <param name="wp-package" value="SQLitePlugin" />
     </feature>
+    <feature name="FileTransfer">
+        <param name="wp-package" value="FileTransfer" />
+    </feature>
+    <feature name="Capture">
+        <param name="wp-package" value="Capture" />
+    </feature>
 </widget>

@@ -28,6 +28,10 @@ var app = {
       LOCATION_URL2: 'gameInstanceLocations/add.json',
       // ALLMISSIONS_URL: '/games/view/{GameID}.json',
       ALLMISSIONS_URL: '/games/view/{GameID}.json',
+      // GAMEIMAGE_URL: '/molesmedia/image/normal/rgb/640x640/{Filename}',
+      GAMEIMAGE_URL: 'molesmedia/image/thumb/cropped/320x320/{Filename}',
+      REGISTERANSWER_URL: 'gameInstanceAnswers/add.json',
+      UPLOADANSWER_URL: 'Media/upload.json',
     },
 
     // Application Constructor
@@ -64,10 +68,13 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         app.report('Received Event: ' + id);
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemFail);
+
 
         // Test for getting OS and version
         app.report(window.device.platform);
         app.report(window.device.version);
+        app.report(JSON.stringify(cordova.file, null, 4));
 
         $(document).on("pageshow","#maps_page",function(){
             initializeMap();
@@ -83,6 +90,28 @@ var app = {
         console.log("Report: "+ id);
     }
 };
+
+function onFileSystemSuccess(fileSystem)
+{
+  var directoryEntry = fileSystem.root;
+  window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function(entry)
+  {
+    var natiurl = entry.fullPath;
+    directoryEntry.getDirectory(natiurl+"answers", {create: true, exclusive: false}, function(parent)
+    {
+      app.report(parent.name);
+    },
+    function(error)
+    {
+      app.report("Error while making directory "+JSON.stringify(error, null, 4));
+    });
+  });
+}
+
+function onFileSystemFail(evt)
+{
+          console.log(evt.target.error.code);
+}
 
 function setUpDatabase()
 {
@@ -104,10 +133,59 @@ function setUpDatabase()
     tx.executeSql('DROP TABLE IF EXISTS moles_games');
     tx.executeSql('DROP TABLE IF EXISTS moles_locations');
     tx.executeSql('DROP TABLE IF EXISTS moles_tasks');
+    tx.executeSql('DROP TABLE IF EXISTS moles_images');
+    tx.executeSql('DROP TABLE IF EXISTS moles_answers');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_users (id integer primary key, moles_uid integer, username text, authToken text, validUser text)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_games (id integer primary key, moles_uid integer, game_inst_id integer, game_id integer, group_id integer, game_name text, game_description text)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_locations (id integer primary key, moles_uid integer, mission_id integer, game_id integer, name text, description text, location text, lat real, lng real)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_tasks (id integer primary key, moles_uid integer, task_id integer, mission_id integer, name text, description text, location text, lat real, lng real)');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS moles_images (id integer primary key, moles_uid integer, image_id integer, task_id integer, mission_id integer, game_id integer, image_title text, filename text, imagepath text)');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS moles_answers (id integer primary key, moles_uid integer, task_id integer, answer_type text, answer_name text, answer_value text, uploaded integer)');
+  });
+}
+
+function storeImages(userid, imageList)
+{
+  if(window.device.platform == "Android")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", androidLockWorkaround: 1});
+  }
+  else if(window.device.platform == "iOS")
+  {
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", location: 1});
+  }
+  else
+  {
+    var db =  window.sqlitePlugin.openDatabase({name: "Moles.db"});
+  }
+
+  db.transaction(function(tx){
+    for(var media in imageList)
+    {
+        tx.executeSql('INSERT INTO moles_images (moles_uid, image_id, task_id, mission_id, game_id, image_title, filename, imagepath) VALUES (?,?,?,?,?,?,?,?)',
+        [
+          userid,
+          imageList[media]["id"],
+          imageList[media]["question_id"],
+          imageList[media]["mission_id"],
+          imageList[media]["game_id"],
+          imageList[media]["title"],
+          imageList[media]["file"],
+          imageList[media]["filepath"]
+        ],
+        function(tx, res)
+        {
+          app.report("Inserted Image "+res.insertId);
+        });
+    }
+  });
+
+  db.transaction(function(tx){
+    tx.executeSql("SELECT * FROM moles_images", [], function(tx, res){
+      app.report("Images length "+res.rows.length);
+      app.report("image 0: " + JSON.stringify(res.rows.item(0)));
+      app.report(JSON.stringify(res.rows));
+    });
   });
 }
 
@@ -175,12 +253,6 @@ function storeGameList(user, gameList)
     }
   });
 
-  // db.transaction(function(tx) {
-  //     tx.executeSql("SELECT * FROM moles_games", [], function(tx, res) {
-  //       app.report(" game res.rows.length: " + res.rows.length);
-  //       app.report(" game res.rows.item(0): " + JSON.stringify(res.rows.item(0)));
-  //     });
-  //   });
 }
 
 function storeLocationList(user, locationList)
@@ -220,11 +292,35 @@ function storeLocationList(user, locationList)
   });
 
   var questions = [];
-  for(var j = 0; j<locationList["Mission"].length; j++)
+  var mediaImages = [];
+  if($.isEmptyObject(locationList["Media"]) == false)
   {
-    for(var k = 0; k<locationList["Mission"][j]["Question"].length; k++)
+      for(var image in locationList["Media"])
+      {
+        mediaImages.push(locationList["Media"][image]);
+      }
+  }
+
+  for(var mission in locationList["Mission"])
+  {
+    if($.isEmptyObject(locationList["Mission"][mission]["Media"]) == false)
     {
-        questions.push(locationList["Mission"][j]["Question"][k]);
+      for(var missionimage in locationList["Mission"][mission]["Media"])
+      {
+        mediaImages.push(locationList["Mission"][mission]["Media"][missionimage]);
+      }
+    }
+
+    for(var question in locationList["Mission"][mission]["Question"])
+    {
+      questions.push(locationList["Mission"][mission]["Question"][question]);
+      if($.isEmptyObject(locationList["Mission"][mission]["Question"][question]["Media"]) == false)
+      {
+        for(var image in locationList["Mission"][mission]["Question"][question]["Media"])
+        {
+          mediaImages.push(locationList["Mission"][mission]["Question"][question]["Media"][image]);
+        }
+      }
     }
   }
 
@@ -249,19 +345,7 @@ function storeLocationList(user, locationList)
     }
   });
 
-  // db.transaction(function(tx){
-  //   tx.executeSql('SELECT * FROM moles_locations', [], function(tx, res){
-  //     app.report("location rows length "+res.rows.length);
-  //     app.report("location item 0 "+JSON.stringify(res.rows.item(0)));
-  //   });
-  // });
-  //
-  // db.transaction(function(tx){
-  //   tx.executeSql('SELECT * FROM moles_tasks', [], function(tx, res){
-  //     app.report("tasks rows length "+res.rows.length);
-  //     app.report("tasks item 0 "+JSON.stringify(res.rows.item(0)));
-  //   });
-  // });
+  getRESTImages(mediaImages);
 }
 
 /*
@@ -309,7 +393,6 @@ function loginWebservice(user, passw)
           localStorage.setItem('_authToken', getAuth(user, passw));
 
           storeUserLogin(msg.data.id, user, getAuth(user, passw), "true");
-
           getGameList();
         }
       }
@@ -359,6 +442,7 @@ function getGameList()
           {
             var cgame = $(this).attr('id').split('-');
             // setGameSelection(cgame[0], cgame[1]);
+            localStorage.setItem('_ActiveInstanceID', cgame[0]);
             getLocationList(cgame[0], cgame[1]);
           });
 
@@ -450,9 +534,18 @@ function buildTaskPage(id)
   {
     tx.executeSql('SELECT mission_id, name, description FROM moles_locations WHERE mission_id=?', [id], function(tx, res)
     {
-      app.report("Results: "+res.rows.length);
+      // app.report("Results: "+res.rows.length);
+      // app.report("Result 0: "+JSON.stringify(res.rows.item(0), null, 4));
       $('#locationTitle').append(res.rows.item(0).name);
       $('#locationText').append(res.rows.item(0).description);
+
+    });
+  });
+
+  db.transaction(function(tx) {
+    tx.executeSql("SELECT imagepath FROM moles_images WHERE mission_id=?", [id], function(tx, res)
+    {
+      $('#locationImage').attr("src", res.rows.item(0).imagepath);
     });
   });
 
@@ -465,7 +558,6 @@ function buildTaskPage(id)
       for(var i = 0; i<res.rows.length; i++)
       {
           taskListContent += '<li id="'+res.rows.item(i).task_id+'-'+res.rows.item(i).name+'"><a href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
-          // app.report("Task item: "+JSON.stringify(res.rows.item(i)));
       }
 
       $('#taskList').append(taskListContent);
@@ -473,6 +565,7 @@ function buildTaskPage(id)
       {
         var ctask = $(this).attr('id').split('-');
         buildDetailPage(ctask[0]);
+        localStorage.setItem('_choosenTaskId', ctask[0]);
       });
       $.mobile.changePage($('#questions_list_page'));
     });
@@ -498,10 +591,27 @@ function buildDetailPage(id)
   {
     tx.executeSql('SELECT * FROM moles_tasks WHERE task_id=?', [id], function(tx, res)
     {
+      // app.report("Results: "+res.rows.length);
+      // app.report("Result 0: "+JSON.stringify(res.rows.item(0), null, 4));
       $('#taskTitle').append(res.rows.item(0).name);
       $('#taskText').append(res.rows.item(0).description);
+    });
+  });
 
-      $.mobile.changePage($('#question_detail'));
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT imagepath FROM moles_images WHERE task_id=?', [id], function(tx, res)
+    {
+      if(res.rows.length > 0)
+      {
+        $('#taskImage').attr("src", res.rows.item(0).imagepath);
+        $.mobile.changePage($('#question_detail'));
+      }
+      else
+      {
+        $.mobile.changePage($('#question_detail'));
+      }
+
     });
   });
 }

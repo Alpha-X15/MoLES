@@ -96,7 +96,6 @@
         <!-- Page with Login here -->
           <div data-role="page" id="login_page">
                 <header data-role="header" data-position="fixed">
-                    <!--<a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a> -->
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Login</h1>
                     <a href="#positionWindow" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow" data-overlay-theme="a">
@@ -105,7 +104,6 @@
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="#help_page">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
-                                    <!-- <li><a href="#login_page">Logout</a></li> -->
                                 </ul>
                             </div>
                         </div>
@@ -130,12 +128,10 @@
                             <button id="submitButton">Login</button>
                       </div>
 
-                        <!-- <div data-position-to="window" data-rel="popup" data-overlay-theme="a"> -->
                             <div data-position-to="window" data-role="popup" id="positionWindowError" data-overlay-theme="a">
                                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                                 <h1>Login Faild!</h1>
                             </div>
-                        <!-- </div> -->
 
                         <button value="GoToGames" onclick="changePage()">Go to Games</button>
                         <button value="Klick mich!" onclick="checklanguage()">Klick mich!</button>
@@ -180,7 +176,6 @@
                         <ul id="gameList" data-role="listview">
 
                         </ul>
-                        <!-- <a href="#places_page">---Spiel_XYZ---</a> -->
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
@@ -218,7 +213,6 @@
                         <ul id="placesList" data-role="listview">
 
                         </ul>
-                        <a href="#questions_list_page">---Fragen---</a>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
@@ -252,11 +246,11 @@
                     <div class="app">
                         <h1 id="locationTitle"></h1>
                         <p id="locationText"></p>
-                        <h3>Fragen auswählen:</h3>
+                        <img id="locationImage" src=""></img>
+                        <h3>Frage auswählen:</h3>
                         <ul id="taskList" data-role="listview">
 
                         </ul>
-                        <a href="#question_detail">---Frage---</a>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
@@ -290,53 +284,16 @@
                     <div class="app">
                         <h1 id="taskTitle"></h1>
                         <p id="taskText"></p>
+                        <img id="taskImage" src=""></img>
                         <h3>Antwortengeben:</h3>
                             <div id="answers" data-role="controlgroup" data-type="horizontal" data-mini="true">
-                                <a title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-inline="true" onclick="getPicture()">Picture</a>
-                                <a title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-inline="true" onclick="getVideo()">Video</a>
-                                <a title=" sound " data-role="button" data-icon="myapp-sound" data-iconpos="top" data-inline="true" onclick="getSound()">Sound</a>
-                                <a title=" text " data-role="button" data-icon="myapp-text" data-iconpos="top" data-inline="true" onclick="getText()">Text</a>
+                                <a id="pictureAnswerBTN" href="javaScript:void(0)" title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-inline="true" onclick="getAnswerPicture()">Picture</a>
+                                <a id="videoAnswerBTN" href="javaScript:void(0)" title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-inline="true" onclick="getAnswerVideo()">Video</a>
+                                <a id="audioAnswerBTN" href="javaScript:void(0)" title=" sound " data-role="button" data-icon="myapp-sound" data-iconpos="top" data-inline="true" onclick="getAnswerAudio()">Sound</a>
+                                <a id="textAnswerBTN" title=" text " data-role="button" data-icon="myapp-text" data-iconpos="top" data-inline="true" onclick="getText()">Text</a>
                             </div>
                             <button value="Klick mich!" onclick="changePage2()">Antworten</button>
 
-                            <script>
-                                function changePage2()
-                                {
-                                    window.location = "#answers_page";
-                                }
-
-                                function getPicture()
-                                {
-                                    navigator.camera.getPicture(onSuccess, onFail, { quality: 75,
-                                        destinationType: Camera.DestinationType.DATA_URL
-                                    });
-
-                                    function onSuccess(imageData) {
-                                        var image = document.getElementById('myImage');
-                                        image.src = "data:image/jpeg;base64," + imageData;
-                                    }
-
-                                    function onFail(message) {
-                                        alert('Failed because: ' + message);
-                                    }
-                                }
-
-                                function getVideo()
-                                {
-                                    navigator.camera.getVideo(onSuccess2, onFail2, { quality: 75,
-                                        destinationType: Camera.DestinationType.DATA_URL
-                                    });
-
-                                    function onSuccess2(imageData) {
-                                        var image = document.getElementById('myImage');
-                                        image.src = "data:image/jpeg;base64," + imageData;
-                                    }
-
-                                    function onFail2(message) {
-                                        alert('Failed because: ' + message);
-                                    }
-                                }
-                            </script>
                             <a href="#answers_page">---Antworten---</a>
                     </div>
                 </div>
@@ -515,6 +472,9 @@
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/crypto-min.js"></script>
+        <script src="js/webserviceController.js"></script>
+        <script src="js/answersController.js"></script>
+        <script src="js/databaseController.js"></script>
         <script type="text/javascript" src="js/leaflet.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>

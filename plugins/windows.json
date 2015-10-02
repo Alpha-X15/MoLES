@@ -19,6 +19,20 @@
                 "parents": {
                     "/Package/Capabilities": []
                 }
+            },
+            "package.appxmanifest": {
+                "parents": {
+                    "/Package/Capabilities": [
+                        {
+                            "xml": "<DeviceCapability Name=\"microphone\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<DeviceCapability Name=\"webcam\" />",
+                            "count": 1
+                        }
+                    ]
+                }
             }
         }
     },
@@ -40,7 +54,17 @@
         },
         "com.brodysoft.sqlitePlugin": {
             "PACKAGE_NAME": "MoLES-Player"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "MoLES-Player"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "MoLES-Player"
+        }
+    }
 }

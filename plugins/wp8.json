@@ -27,6 +27,14 @@
                         {
                             "xml": "<feature name=\"SQLitePlugin\"><param name=\"wp-package\" value=\"SQLitePlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"wp-package\" value=\"FileTransfer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Capture\"><param name=\"wp-package\" value=\"Capture\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -40,6 +48,26 @@
                         },
                         {
                             "xml": "<Capability Name=\"ID_CAP_NETWORKING\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_AUDIO\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_PHOTO\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_PLAYBACK\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MICROPHONE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_ISV_CAMERA\" />",
                             "count": 1
                         }
                     ]
@@ -65,7 +93,17 @@
         },
         "com.brodysoft.sqlitePlugin": {
             "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
+        }
+    }
 }
