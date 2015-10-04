@@ -263,6 +263,27 @@ module.exports = [
         "clobbers": [
             "navigator.device.capture"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-media/www/MediaError.js",
+        "id": "cordova-plugin-media.MediaError",
+        "clobbers": [
+            "window.MediaError"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-media/www/Media.js",
+        "id": "cordova-plugin-media.Media",
+        "clobbers": [
+            "window.Media"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -276,7 +297,9 @@ module.exports.metadata =
     "org.apache.cordova.dialogs": "0.3.0",
     "org.apache.cordova.network-information": "0.2.15",
     "org.apache.cordova.splashscreen": "1.0.0",
-    "cordova-plugin-media-capture": "1.0.1"
+    "cordova-plugin-media-capture": "1.0.1",
+    "cordova-plugin-media": "1.0.1",
+    "cordova-plugin-statusbar": "1.0.1"
 }
 // BOTTOM OF METADATA
 });

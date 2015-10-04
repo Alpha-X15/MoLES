@@ -1,3 +1,15 @@
+function getAnswerText()
+{
+  var textanswer = $('#textAnswerArea').val();
+  app.report(textanswer);
+  var date = new Date();
+  var time = date.getTime();
+  var name = 'textanswer_'+time;
+  app.report(name);
+
+  storeAnswer('Text', name, textanswer);
+}
+
 function getAnswerAudio()
 {
   app.report("should start audio");
@@ -9,11 +21,12 @@ function getAnswerAudio()
         path = mediaFiles[i].fullPath;
         oldname = mediaFiles[i].name;
         app.report(oldname);
+
         window.resolveLocalFileSystemURL(
           path,
           function(fileEntry)
           {
-            newFileUri = cordova.file.externalApplicationStorageDirectory+"answers";
+            newFileUri = app.devinfo.directory+"files/answers";
             oldFilrUri = path;
             newname = oldname;
             window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
@@ -42,17 +55,19 @@ function getAnswerPicture()
         path = mediaFiles[i].fullPath;
 
         oldname = mediaFiles[i].name;
-        app.report(oldname);
         window.resolveLocalFileSystemURL(
           path,
           function(fileEntry)
           {
-            newFileUri = cordova.file.externalApplicationStorageDirectory+"answers";
+            // app.report(JSON.stringify(fileEntry, null, 4));
+            newFileUri = app.devinfo.directory+"files/answers";
+            app.report(newFileUri);
             oldFilrUri = path;
             newname = oldname;
 
             window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
             {
+              // app.report(JSON.stringify(dirEntry, null, 4));
               fileEntry.moveTo(dirEntry, newname, successPictureCallback, errorCallback);
             }, errorCallback);
           },errorCallback);
@@ -81,11 +96,12 @@ function getAnswerVideo()
 
         oldname = mediaFiles[i].name;
         app.report(oldname);
+
         window.resolveLocalFileSystemURL(
           path,
           function(fileEntry)
           {
-            newFileUri = cordova.file.externalApplicationStorageDirectory+"answers";
+            newFileUri = app.devinfo.directory+"files/answers";
             oldFilrUri = path;
             newname = oldname;
 
@@ -110,6 +126,7 @@ function getAnswerVideo()
 function errorCallback(error)
 {
   app.report("Error "+ error.code);
+  app.report(JSON.stringify(error, null, 4));
 }
 
 function successAudioCallback(entry)

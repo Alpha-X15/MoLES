@@ -251,6 +251,27 @@ module.exports = [
         "clobbers": [
             "navigator.device.capture"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-media/www/MediaError.js",
+        "id": "cordova-plugin-media.MediaError",
+        "clobbers": [
+            "window.MediaError"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-media/www/Media.js",
+        "id": "cordova-plugin-media.Media",
+        "clobbers": [
+            "window.Media"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -264,7 +285,9 @@ module.exports.metadata =
     "com.brodysoft.sqlitePlugin": "1.0.6",
     "cordova-plugin-file-transfer": "1.3.0",
     "cordova-plugin-file": "3.0.0",
-    "cordova-plugin-media-capture": "1.0.1"
+    "cordova-plugin-media-capture": "1.0.1",
+    "cordova-plugin-media": "1.0.1",
+    "cordova-plugin-statusbar": "1.0.1"
 }
 // BOTTOM OF METADATA
 });

@@ -531,4 +531,7 @@
             <DependentUpon>VideoRecorder.xaml</DependentUpon>
         </Compile>
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-statusbar\StatusBar.cs" />
+    </ItemGroup>
 </Project>

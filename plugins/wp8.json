@@ -35,6 +35,10 @@
                         {
                             "xml": "<feature name=\"Capture\"><param name=\"wp-package\" value=\"Capture\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"wp-package\" value=\"StatusBar\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -98,6 +102,9 @@
             "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
         },
         "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
+        },
+        "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "{c2141710-18b2-11e5-b7d1-35ad676f402c}"
         }
     },

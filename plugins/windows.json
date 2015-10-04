@@ -24,11 +24,11 @@
                 "parents": {
                     "/Package/Capabilities": [
                         {
-                            "xml": "<DeviceCapability Name=\"microphone\" />",
+                            "xml": "<DeviceCapability Name=\"webcam\" />",
                             "count": 1
                         },
                         {
-                            "xml": "<DeviceCapability Name=\"webcam\" />",
+                            "xml": "<DeviceCapability Name=\"microphone\" />",
                             "count": 1
                         }
                     ]
@@ -59,6 +59,12 @@
             "PACKAGE_NAME": "MoLES-Player"
         },
         "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "MoLES-Player"
         }
     },

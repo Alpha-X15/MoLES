@@ -91,4 +91,7 @@
     <feature name="Capture">
         <param name="wp-package" value="Capture" />
     </feature>
+    <feature name="StatusBar">
+        <param name="wp-package" value="StatusBar" />
+    </feature>
 </widget>
