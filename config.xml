@@ -86,9 +86,9 @@
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
   </platform>
-  <feature name="debug-server" required="true">
+  <!-- <feature name="debug-server" required="true">
   <param name="domain" value="http://192.168.178.31:8080"/>
   <param name="key" value="MoLes123"/>
-</feature>
+</feature> -->
 
 </widget>
