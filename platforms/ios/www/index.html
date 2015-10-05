@@ -96,7 +96,6 @@
         <!-- Page with Login here -->
           <div data-role="page" id="login_page">
                 <header data-role="header" data-position="fixed">
-                    <!--<a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a> -->
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Login</h1>
                     <a href="#positionWindow" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow" data-overlay-theme="a">
@@ -105,7 +104,6 @@
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="#help_page">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
-                                    <!-- <li><a href="#login_page">Logout</a></li> -->
                                 </ul>
                             </div>
                         </div>
@@ -128,27 +126,18 @@
                                 <input type="password" name="password" id="password" value="" placeholder="Password" autocorrect="off" autocapitalize="off"/>
                             </div>
                             <button id="submitButton">Login</button>
-                      </div>
+                          </div>
+                          <button id="OfflineTestButton">Login Offline</button>
 
-                        <!-- <div data-position-to="window" data-rel="popup" data-overlay-theme="a"> -->
                             <div data-position-to="window" data-role="popup" id="positionWindowError" data-overlay-theme="a">
                                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                                 <h1>Login Faild!</h1>
                             </div>
-                        <!-- </div> -->
-
-                        <button value="GoToGames" onclick="changePage()">Go to Games</button>
-                        <button value="Klick mich!" onclick="checklanguage()">Klick mich!</button>
                     </div>
                     <script type="text/javascript">
-                                    // app.initialize();
                                     function changeTitle(){
                                         document.getElementById('headerTitle').innerHTML = title;
                                     }
-
-                                    // function changePage(){
-                                    //     window.location = "#games_page";
-                                    // }
                     </script>
                 </div>
                 <footer data-role="footer" data-position="fixed">
@@ -180,14 +169,13 @@
                         <ul id="gameList" data-role="listview">
 
                         </ul>
-                        <!-- <a href="#places_page">---Spiel_XYZ---</a> -->
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -218,14 +206,13 @@
                         <ul id="placesList" data-role="listview">
 
                         </ul>
-                        <a href="#questions_list_page">---Fragen---</a>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -233,7 +220,7 @@
             <!-- page with list of questions here -->
             <div data-role="page" id="questions_list_page">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="places.html"> Back </a>
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#places_page"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Fragen</h1>
                     <a href="#positionWindow4" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow4" data-overlay-theme="a">
@@ -250,15 +237,20 @@
                 </header>
                 <div data-role="main" id="main">
                     <div class="app">
-                        <h1>Fragen auswählen:</h1>
-                            <a href="#question_detail">---Frage---</a>
+                        <h1 id="locationTitle"></h1>
+                        <p id="locationText"></p>
+                        <img id="locationImage" src=""></img>
+                        <h3>Frage auswählen:</h3>
+                        <ul id="taskList" data-role="listview">
+
+                        </ul>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -266,7 +258,7 @@
             <!-- detail question page here -->
             <div data-role="page" id="question_detail">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="questions.html"> Back </a>
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#questions_list_page"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Frage</h1>
                     <a href="#positionWindow5" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow5" data-overlay-theme="a">
@@ -283,70 +275,33 @@
                 </header>
                 <div data-role="main" id="main">
                     <div class="app">
-                        <h1>Antwortengeben:</h1>
+                        <h1 id="taskTitle"></h1>
+                        <p id="taskText"></p>
+                        <img id="taskImage" src=""></img>
+                        <h3>Antwortengeben:</h3>
                             <div id="answers" data-role="controlgroup" data-type="horizontal" data-mini="true">
-                                <a title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-inline="true" onclick="getPicture()">Picture</a>
-                                <a title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-inline="true" onclick="getVideo()">Video</a>
-                                <a title=" sound " data-role="button" data-icon="myapp-sound" data-iconpos="top" data-inline="true" onclick="getSound()">Sound</a>
-                                <a title=" text " data-role="button" data-icon="myapp-text" data-iconpos="top" data-inline="true" onclick="getText()">Text</a>
+                                <a id="pictureAnswerBTN" href="javaScript:void(0)" title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-inline="true" onclick="getAnswerPicture()">Picture</a>
+                                <a id="videoAnswerBTN" href="javaScript:void(0)" title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-inline="true" onclick="getAnswerVideo()">Video</a>
+                                <a id="audioAnswerBTN" href="javaScript:void(0)" title=" sound " data-role="button" data-icon="myapp-sound" data-iconpos="top" data-inline="true" onclick="getAnswerAudio()">Sound</a>
+                                <a id="textAnswerBTN"  href="#textanswer_page" title=" text " data-role="button" data-icon="myapp-text" data-iconpos="top" data-inline="true">Text</a>
                             </div>
-                            <button value="Klick mich!" onclick="changePage2()">Antworten</button>
-
-                            <script>
-                                function changePage2()
-                                {
-                                    window.location = "#answers_page";
-                                }
-
-                                function getPicture()
-                                {
-                                    navigator.camera.getPicture(onSuccess, onFail, { quality: 75,
-                                        destinationType: Camera.DestinationType.DATA_URL
-                                    });
-
-                                    function onSuccess(imageData) {
-                                        var image = document.getElementById('myImage');
-                                        image.src = "data:image/jpeg;base64," + imageData;
-                                    }
-
-                                    function onFail(message) {
-                                        alert('Failed because: ' + message);
-                                    }
-                                }
-
-                                function getVideo()
-                                {
-                                    navigator.camera.getVideo(onSuccess2, onFail2, { quality: 75,
-                                        destinationType: Camera.DestinationType.DATA_URL
-                                    });
-
-                                    function onSuccess2(imageData) {
-                                        var image = document.getElementById('myImage');
-                                        image.src = "data:image/jpeg;base64," + imageData;
-                                    }
-
-                                    function onFail2(message) {
-                                        alert('Failed because: ' + message);
-                                    }
-                                }
-                            </script>
-                            <a href="#answers_page">---Antworten---</a>
+                            <button onclick="buildAnswersPage()">Antworten</button>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
                     </div>
                 </footer>
             </div>
 
-            <!-- answers page here -->
-            <div data-role="page" id="answers_page">
+            <!-- textanswer page here -->
+            <div data-role="page" id="textanswer_page">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="question.html"> Back </a>
-                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Antworten</h1>
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#question_detail"> Back </a>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Textantwort</h1>
                     <a href="#positionWindow6" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow6" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -362,15 +317,50 @@
                 </header>
                 <div data-role="main" id="main">
                     <div class="app">
-
-                            <h1>Eigene Antworten:</h1>
-                        </div>
+                      <label for="textAnswerArea">Bitte geben sie eine Textantwort ein:</label>
+                      <textarea id="textAnswerArea" name="text"></textarea>
+                      <a data-role="button" href="javaScript:void(0)" onclick="getAnswerText()">Speichern</a>
+                    </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
                    <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- answers page here -->
+            <div data-role="page" id="answers_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#question_detail"> Back </a>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Antworten</h1>
+                    <a href="#positionWindow7" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow6" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                      <h1>Eigene Antworten:</h1>
+                      <div id="answersContainer">
+                      </div>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                   <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -380,7 +370,7 @@
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Map</h1>
-                    <a href="#positionWindow7" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                    <a href="#positionWindow8" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow7" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
@@ -395,7 +385,6 @@
                 </header>
                 <div data-role="main" id="main">
                     <div class="app">
-                        <h1>Map:</h1>
                         <div id="map" >
 
                         </div>
@@ -405,7 +394,7 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -415,7 +404,7 @@
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Optionen</h1>
-                    <a href="#positionWindow8" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                    <a href="#positionWindow9" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow8" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
@@ -437,7 +426,7 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -447,7 +436,7 @@
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Upload</h1>
-                    <a href="#positionWindow9" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                    <a href="#positionWindow10" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow9" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
@@ -463,13 +452,15 @@
                 <div data-role="main" id="main">
                     <div class="app">
                         <h1>Upload:</h1>
+                        <p id="uploadText"></p>
+                        <a data-role="button" href="javaScript:void(0)" onclick="getAnswersForUpload()">Antworten hochladen</a>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -479,7 +470,7 @@
                 <header data-role="header" data-position="fixed">
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Hilfe</h1>
-                    <a href="#positionWindow10" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                    <a href="#positionWindow11" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow10" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
@@ -501,13 +492,16 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="upload()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
                     </div>
                 </footer>
             </div>
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/crypto-min.js"></script>
+        <script src="js/webserviceController.js"></script>
+        <script src="js/answersController.js"></script>
+        <script src="js/databaseController.js"></script>
         <script type="text/javascript" src="js/leaflet.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
@@ -515,7 +509,7 @@
         <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script>
         <!-- <script src="http://192.168.0.18:8080/target/target-script-min.js#anonymous"></script> -->
         <script>
-          $(document).ready(app.initialize());
+          app.initialize();
         </script>
     </body>
 </html>

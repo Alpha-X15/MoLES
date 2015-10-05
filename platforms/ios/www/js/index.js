@@ -28,8 +28,17 @@ var app = {
       LOCATION_URL2: 'gameInstanceLocations/add.json',
       // ALLMISSIONS_URL: '/games/view/{GameID}.json',
       ALLMISSIONS_URL: '/games/view/{GameID}.json',
+      // GAMEIMAGE_URL: '/molesmedia/image/normal/rgb/640x640/{Filename}',
+      GAMEIMAGE_URL: 'molesmedia/image/thumb/cropped/320x320/{Filename}',
+      REGISTERANSWER_URL: 'gameInstanceAnswers/add.json',
+      UPLOADANSWER_URL: 'Media/upload.json',
     },
-
+    devinfo:
+    {
+      platform: '',
+      directory: '',
+      connection: '',
+    },
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -49,9 +58,12 @@ var app = {
     onDeviceReady: function() {
         // navigator.splashscreen.show();
         app.receivedEvent('deviceready');
+        app.devinfo.platform = window.device.platform;
         app.report(JSON.stringify(navigator.connection));
-
-        var db = openDatabase({name: "Moles.db", location: 1});
+        checkConnection();
+        localStorage.clear();
+        StatusBar.hide();
+        setUpDatabase();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -63,18 +75,47 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         app.report('Received Event: ' + id);
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemFail);
+
 
         // Test for getting OS and version
         app.report(window.device.platform);
         app.report(window.device.version);
+        app.report(JSON.stringify(cordova.file, null, 4));
 
-        $(document).on("pageshow","#maps_page",function(){
+        $(document).on("pageshow","#maps_page",function()
+        {
             initializeMap();
         });
 
-        $(document).on('click', '#submitButton', function()
+        $(document).on('click', '#submitButton', function(e)
         {
           loginWebservice($('input[name=username]').val(), $('input[name=password]').val());
+        });
+
+        $(document).on('click', '#OfflineTestButton', function(e)
+        {
+          offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+        });
+
+        $(document).on("pagebeforeshow", "#games_page", function()
+        {
+          $('#gameList').listview("refresh");
+        });
+
+        $(document).on("pagebeforeshow", "#places_page", function()
+        {
+          $('#placesList').listview("refresh");
+        });
+
+        $(document).on("pagebeforeshow", "#questions_list_page", function()
+        {
+          $('#taskList').listview("refresh");
+        });
+
+        $(document).on("pagebeforeshow", "#textanswer_page", function()
+        {
+          $('#textAnswerArea').val('');
         });
     },
     report: function(id)
@@ -83,6 +124,79 @@ var app = {
     }
 };
 
+function onFileSystemSuccess(fileSystem)
+{
+  // app.report("FileSystemSuccess");
+  // app.report(app.devinfo.platform);
+  var directoryEntry = fileSystem.root;
+
+  if(app.devinfo.platform == "iOS")
+  {
+    app.devinfo.directory = cordova.file.documentsDirectory;
+    window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(entry)
+    {
+      var natiurl = entry.fullPath;
+      directoryEntry.getDirectory(natiurl+"answers", {create: true, exclusive: false}, function(parent)
+      {
+        alert(parent.name);
+        app.report(parent.name);
+      },
+      function(error)
+      {
+        alert("Error while making directory "+JSON.stringify(error, null, 4));
+        app.report("Error while making directory "+JSON.stringify(error, null, 4));
+      });
+    });
+  }
+  else
+  {
+    if(cordova.file.externalDataDirectory != null)
+    {
+      // app.report("externalDataDirectory");
+      app.devinfo.directory = cordova.file.externalApplicationStorageDirectory;
+      window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function(entry)
+      {
+        // app.report(JSON.stringify(entry, null, 4));
+        var natiurl = entry.fullPath;
+        // app.report(natiurl);
+        directoryEntry.getDirectory(natiurl+"files/answers", {create: true, exclusive: false}, function(parent)
+        {
+          app.report(parent.name);
+        },
+        function(error)
+        {
+          app.report("Error while making directory "+JSON.stringify(error, null, 4));
+        });
+      });
+    }
+    else
+    {
+      app.report("dataDirectory");
+      app.devinfo.directory = cordova.file.dataDirectory;
+      window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(entry)
+      {
+        var natiurl = entry.fullPath;
+        directoryEntry.getDirectory(natiurl+"answers", {create: true, exclusive: false}, function(parent)
+        {
+          app.report(parent.name);
+        },
+        function(error)
+        {
+          app.report("Error while making directory "+JSON.stringify(error, null, 4));
+        });
+      });
+    }
+  }
+}
+
+function onFileSystemFail(evt)
+{
+    app.report(evt.target.error.code);
+}
+
+/*
+* function for building an authtoken for authentification
+*/
 function getAuth(name, pwd)
 {
     var bytes = Crypto.charenc.Binary.stringToBytes(name+':'+pwd);
@@ -91,177 +205,38 @@ function getAuth(name, pwd)
     return "Basic " + base64;
 }
 
-function loginWebservice(user, passw)
+function checkConnection()
 {
-  localStorage.setItem('_userID', '0');
-  app.report("User: "+user);
-  app.report("User: "+passw);
+    var networkState = navigator.connection.type;
 
-  $.ajax({
-      url: app.cons.SERVER_URL + app.cons.LOGIN_URL,
-      dataType: 'json',
-      xhrFields:
-      {
-          withCredentials: true
-      },
-      crossDomain: true,
-      beforeSend: function(xhr)
-      {
-          navigator.notification.activityStart('Login..', 'loading');
-          xhr.setRequestHeader('Authorization', getAuth(user, passw));
-          xhr.setRequestHeader('pragma', 'no-cache');
-          xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
-          xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-      },
-      success: function(msg)
-      {
-        // app.report(JSON.stringify(msg, null, 4));
-        if(msg.data.valid == true)
-        {
-          localStorage.setItem('_userID', msg.data.id);
-          localStorage.setItem('_loggedIn', "true");
-          localStorage.setItem('_authToken', getAuth(user, passw));
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.CELL]     = 'Cell generic connection';
+    states[Connection.NONE]     = 'No network connection';
 
-          getGameList();
-        }
-      }
-  })
-  .fail(function(jqXHR, textStatus)
-  {
-      app.report("Status: " + jqXHR.status);
-      app.report("Login request failed: " + textStatus);
-      navigator.notification.activityStop();
-      alert("Der Login ist fehlgeschlagen.");
-  });
+    // alert('Connection type: '+ states[networkState]);
 }
-
-function getGameList()
-{
-    $.ajax(
-    {
-        url: app.cons.SERVER_URL + app.cons.GAMELIST_URL,
-        dataType: 'json',
-        xhrFields:
-        {
-            withCredentials: true
-        },
-        crossDomain: true,
-        type: 'GET',
-        beforeSend: function(xhr)
-        {
-            xhr.setRequestHeader('Authorization', localStorage.getItem('_authToken'));
-            xhr.setRequestHeader('pragma', 'no-cache');
-            xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        }
-    })
-    .done(function(data, textStatus, jqXHR)
-    {
-        var gameInstances = data.data.gameInstances;
-
-        localStorage.setItem('_gameList', JSON.stringify(gameInstances));
-
-        // app.report(localStorage.getItem('_gameList'));
-
-        var gamesListContent = '';
-        for(var i = 0; i<gameInstances.length; i++)
-        {
-            gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'"><a href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
-        }
-        $('#gameList').append(gamesListContent);
-        $('#gameList').delegate('li', 'click', function()
-        {
-          var cgame = $(this).attr('id').split('-');
-          // setGameSelection(cgame[0], cgame[1]);
-          getLocationList(cgame[0], cgame[1]);
-        });
-
-        navigator.notification.activityStop();
-        $.mobile.changePage($('#games_page'));
-    })
-    .fail(function(jqXHR, textStatus)
-    {
-        app.report("StatusCode: "+jqXHR.status);
-        app.report("Status: "+textStatus);
-        app.report("Failed loading the GameList");
-        navigator.notification.activityStop();
-    });
-}
-
-function getLocationList(choosen_game_id, game_name)
-{
-    // app.report("locationlist for "+localStorage.getItem('_gameID'));
-    app.report("locationlist for "+choosen_game_id);
-    app.report(choosen_game_id+' '+game_name);
-
-    $.ajax(
-    {
-        // url: app.cons.SERVER_URL + app.cons.ALLMISSIONS_URL.replace("{GameID}", localStorage.getItem('_gameID')),
-        url: app.cons.SERVER_URL + app.cons.ALLMISSIONS_URL.replace("{GameID}", choosen_game_id),
-        dataType: 'json',
-        xhrFields:
-        {
-            withCredentials: true
-        },
-        crossDomain: true,
-        type: 'GET',
-        beforeSend: function(xhr)
-        {
-            navigator.notification.activityStart('LoadLocationList..', 'loading');
-            xhr.setRequestHeader('Authorization', localStorage.getItem('_authToken'));
-            xhr.setRequestHeader('pragma', 'no-cache');
-            xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        }
-    })
-    .done(function(data, textStatus, jqXHR)
-    {
-        app.report("LocationList Loaded");
-        // app.report(textStatus);
-        // app.report(JSON.stringify(data.data.game, null, 4));
-        var placeInstances = data.data.game;
-        localStorage.setItem('_places', JSON.stringify(placeInstances));
-
-        app.report(localStorage.getItem('_places'));
-        // app.report(JSON.stringify(placeInstances["Mission"]));
-
-        // $('#placesTitle').append(localStorage.getItem('_gameName'));
-        $('#placesTitle').append(game_name);
-        $('#placesText').append(placeInstances["Game"]["description"]);
-
-        // app.report(JSON.stringify(placeInstances["Mission"][0]["Question"]));
-
-        var placesListContent = '';
-        for(var i = 0; i<placeInstances["Mission"].length; i++)
-        {
-            placesListContent += '<li id="'+placeInstances["Mission"][i]["id"]+'-'+placeInstances["Mission"][i]["name"]+'"><a href="javaScript:void(0)">'+placeInstances["Mission"][i]["name"]+'</a></li>';
-        }
-        $('#placesList').append(placesListContent);
-        $('#placesList').delegate('li', 'click', function()
-        {
-          var cplace = $(this).attr('id').split('-');
-          app.report(cplace[0]+' '+cplace[1]);
-          $.mobile.changePage($('#questions_list_page'));
-        });
-
-        navigator.notification.activityStop();
-        $.mobile.changePage($('#places_page'));
-    })
-    .fail(function(jqXHR, textStatus)
-    {
-        app.report("StatusCode: "+jqXHR.status);
-        app.report("Status: "+textStatus);
-        app.report("Failed loading the LocationList");
-    });
-}
-
-// function setGameSelection(game_id, name)
+// function playAudio(url)
 // {
-//     app.report("Should set game selection with id="+game_id+' and name='+name);
-//     localStorage.setItem('_gameID', game_id);
-//     localStorage.setItem('_gameName', name);
-//
-//     getLocationList(game_id, name);
+//     // Play the audio file at url
+//     app.report("Should play audio");
+//     var my_media = new Media(url,
+//         // success callback
+//         function () {
+//             app.report("playAudio():Audio Success");
+//         },
+//         // error callback
+//         function (err) {
+//             app.report("playAudio():Audio Error: " + err);
+//         }
+//     );
+//     // Play audio
+//     my_media.play();
 // }
 
 function initializeMap()
