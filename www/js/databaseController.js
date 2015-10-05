@@ -168,6 +168,50 @@ function storeLocationList(user, locationList)
 {
   var db = openDatabase();
 
+  // db.transaction(function(tx)
+  // {
+  //   for(var i = 0; i<locationList["Mission"].length; i++)
+  //   {
+  //     tx.executeSql('SELECT * FROM moles_locations WHERE mission_id=?', [locationList["Mission"][i]["id"]], function(tx, res)
+  //     {
+  //       app.report("Found locations "+res.rows.length);
+  //       if(res.rows.length == 0)
+  //       {
+  //         app.report("Try to insert a location");
+  //         tx.executeSql('INSERT INTO moles_locations (moles_uid, mission_id, game_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
+  //         [
+  //           user,
+  //           locationList["Mission"][i]["id"],
+  //           locationList["Mission"][i]["game_id"],
+  //           locationList["Mission"][i]["name"],
+  //           locationList["Mission"][i]["description"],
+  //           locationList["Mission"][i]["location"],
+  //           locationList["Mission"][i]["lat"],
+  //           locationList["Mission"][i]["lng"]
+  //         ], function(tx, res)
+  //         {
+  //           app.report("InsertedLocationId: "+res.insertId);
+  //         });
+  //       }
+  //       // else if(res.rows.length == 1)
+  //       // {
+  //       //   tx.executeSql('UPDATE moles_locations SET name=?, description=?, location=?, lat=?, lng=? WHERE mission_id=?',
+  //       //   [
+  //       //     locationList["Mission"][i]["name"],
+  //       //     locationList["Mission"][i]["description"],
+  //       //     locationList["Mission"][i]["location"],
+  //       //     locationList["Mission"][i]["lat"],
+  //       //     locationList["Mission"][i]["lng"],
+  //       //     locationList["Mission"][i]["id"],
+  //       //   ], function(tx, res)
+  //       //   {
+  //       //     app.report("Updated Locations "+res.rowsAffected);
+  //       //   });
+  //       // }
+  //     });
+  //   }
+  // });
+
   db.transaction(function(tx)
   {
     for(var i = 0; i<locationList["Mission"].length; i++)
