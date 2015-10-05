@@ -42,6 +42,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        fastclick.attach(document.body);
     },
     // Bind Event Listeners
     //
@@ -67,13 +68,12 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
+        // var parentElement = document.getElementById(id);
+        // var listeningElement = parentElement.querySelector('.listening');
+        // var receivedElement = parentElement.querySelector('.received');
+        //
+        // listeningElement.setAttribute('style', 'display:none;');
+        // receivedElement.setAttribute('style', 'display:block;');
         app.report('Received Event: ' + id);
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemFail);
 
@@ -82,6 +82,10 @@ var app = {
         app.report(window.device.platform);
         app.report(window.device.version);
         app.report(JSON.stringify(cordova.file, null, 4));
+
+        // $(function() {
+        //   FastClick.attach(document.body);
+        // });
 
         $(document).on("pageshow","#maps_page",function()
         {
@@ -120,6 +124,11 @@ var app = {
         $(document).on("pagebeforeshow", "#textanswer_page", function()
         {
           $('#textAnswerArea').val('');
+        });
+
+        $(document).on("pagebeforeshow", "#answers_page", function()
+        {
+          $('#answersList').listview("refresh");
         });
 
         $(document).on("pageshow", "#upload_page", function()

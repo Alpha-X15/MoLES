@@ -42,6 +42,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        fastclick.attach(document.body);
     },
     // Bind Event Listeners
     //
@@ -67,13 +68,12 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
+        // var parentElement = document.getElementById(id);
+        // var listeningElement = parentElement.querySelector('.listening');
+        // var receivedElement = parentElement.querySelector('.received');
+        //
+        // listeningElement.setAttribute('style', 'display:none;');
+        // receivedElement.setAttribute('style', 'display:block;');
         app.report('Received Event: ' + id);
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemFail);
 
@@ -83,6 +83,10 @@ var app = {
         app.report(window.device.version);
         app.report(JSON.stringify(cordova.file, null, 4));
 
+        // $(function() {
+        //   FastClick.attach(document.body);
+        // });
+
         $(document).on("pageshow","#maps_page",function()
         {
             initializeMap();
@@ -90,13 +94,17 @@ var app = {
 
         $(document).on('click', '#submitButton', function(e)
         {
+          if(checkConnection() == "None")
+          {
+            offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+          }
           loginWebservice($('input[name=username]').val(), $('input[name=password]').val());
         });
 
-        $(document).on('click', '#OfflineTestButton', function(e)
-        {
-          offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
-        });
+        // $(document).on('click', '#OfflineTestButton', function(e)
+        // {
+        //   offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+        // });
 
         $(document).on("pagebeforeshow", "#games_page", function()
         {
@@ -118,9 +126,21 @@ var app = {
           $('#textAnswerArea').val('');
         });
 
+        $(document).on("pagebeforeshow", "#answers_page", function()
+        {
+          $('#answersList').listview("refresh");
+        });
+
         $(document).on("pageshow", "#upload_page", function()
         {
-          app.report(checkConnection());
+          if(checkConnection() == "Bad")
+          {
+            alert("Deine Internetverbindung ist sehr schlecht. Da viele Daten übertragen werden müssen solltest du dich besser in ein WLAN begeben. Es können Kosten für die Datenübertragung anfallen.");
+          }
+          else if (checkConnection() == "None")
+          {
+            alert("Es scheint als hättest du keine Internetverbindung. Ohne stabile Internetverbindung ist der Upload nicht möglich.");
+          }
         });
     },
     report: function(id)

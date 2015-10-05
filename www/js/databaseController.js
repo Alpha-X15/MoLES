@@ -306,22 +306,9 @@ function storeAnswer(answerType, answerName, answerValue)
     tx.executeSql('INSERT INTO moles_answers (moles_uid, task_id, answer_type, answer_name, answer_value, uploaded) VALUES (?,?,?,?,?,?)', [userId, taskId, answerType, answerName, answerValue, 0], function(tx, res)
     {
       app.report("Inserted answer"+res.insertId);
-    });
-  });
-
-  db.transaction(function(tx)
-  {
-    tx.executeSql('SELECT * FROM moles_answers',[], function(tx, res)
-    {
-      app.report("Moles_answers "+JSON.stringify(res.rows, null, 4));
-      app.report("Answer 0 "+JSON.stringify(res.rows.item(0), null, 4));
-    });
-  });
-
-  if(answerType == "Text")
-  {
       $.mobile.changePage($('#question_detail'));
-  }
+    });
+  });
 }
 
 function getAnswersForUpload()
@@ -512,7 +499,8 @@ function buildTaskPage(id)
     });
   });
 
-  db.transaction(function(tx) {
+  db.transaction(function(tx)
+  {
     tx.executeSql("SELECT imagepath FROM moles_images WHERE mission_id=?", [id], function(tx, res)
     {
       $('#locationImage').attr("src", res.rows.item(0).imagepath);
@@ -584,38 +572,116 @@ function buildAnswersPage()
   var task_id = localStorage.getItem('_choosenTaskId');
   var db = openDatabase();
 
+  $('#answersList').empty();
+  var answersContent = '';
   db.transaction(function(tx)
   {
     tx.executeSql('SELECT * FROM moles_answers WHERE task_id=?', [task_id], function(tx, res)
     {
-      app.report(JSON.stringify(res.rows.item(0), null, 4));
+      // app.report(JSON.stringify(res.rows.item(0), null, 4));
       if(res.rows.length > 0)
       {
-        var answersContent = '<ul data-role="listview">';
         for(var i = 0; i<res.rows.length; i++)
         {
           if(res.rows.item(i).answer_type == "Text")
           {
-            answersContent += '<li><img src="img/icon_pencil43.png"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
           else if (res.rows.item(i).answer_type == "Picture")
           {
-            answersContent += '<li><img src="'+res.rows.item(i).answer_value+'"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_slr2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
-          else if (res.rows.item(i).answer_type == 'Video')
+          else if (res.rows.item(i).answer_type == "Video")
           {
-            answersContent += '<li><video controls><source src="'+res.rows.item(0).answers_value+'"></video></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_slate2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
-          else if (res.rows.item(i).answer_type == 'Audio')
+          else if (res.rows.item(i).answer_type == "Audio")
           {
-            answersContent += '<li><img src="img/icon_microphone9.png" /></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_microphone9.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
         }
-        answersContent += '</ul>';
-        $('#answersContainer').append(answersContent);
-
+        $('#answersList').append(answersContent);
       }
       $.mobile.changePage($('#answers_page'));
+    });
+  });
+}
+
+function deleteAnswer(task_id, answer_id)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT answer_type, answer_value FROM moles_answers WHERE id=?', [answer_id], function(tx, res)
+    {
+      if(res.rows.item(0).answer_type == "Text")
+      {
+        tx.executeSql('DELETE FROM moles_answers WHERE id=?', [answer_id], function(tx, res)
+        {
+          app.report("Delete Answer "+res.rowsAffected);
+          $('#answer_'+answer_id).remove();
+        });
+      }
+      else if (res.rows.item(0).answer_type == "Picture")
+      {
+        window.resolveLocalFileSystemURL(res.rows.item(0).answer_value, function(dirEntry)
+        {
+          dirEntry.remove(function success(entry)
+          {
+            app.report(JSON.stringify(entry, null, 4));
+            deleteAnswerFromDB(answer_id);
+          },
+          function fail(error)
+          {
+            alert("Das Bild konnte leider nicht gelöscht werden. "+error.code);
+          });
+        });
+      }
+      else if (res.rows.item(0).answer_type == "Video")
+      {
+        window.resolveLocalFileSystemURL(res.rows.item(0).answer_value, function(dirEntry)
+        {
+          dirEntry.remove(function success(entry)
+          {
+            app.report(JSON.stringify(entry, null, 4));
+            deleteAnswerFromDB(answer_id);
+          },
+          function fail(error)
+          {
+            alert("Das Video konnte leider nicht gelöscht werden. "+error.code);
+          });
+        });
+      }
+      else if (res.rows.item(0).answer_type == "Audio")
+      {
+        window.resolveLocalFileSystemURL(res.rows.item(0).answer_value, function(dirEntry)
+        {
+          dirEntry.remove(function success(entry)
+          {
+            app.report(JSON.stringify(entry, null, 4));
+            deleteAnswerFromDB(answer_id);
+          },
+          function fail(error)
+          {
+            alert("Die Audiodatei konnte leider nicht gelöscht werden. "+error.code);
+          });
+        });
+      }
+    });
+  });
+}
+
+function deleteAnswerFromDB(answer_id)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('DELETE FROM moles_answers WHERE id=?', [answer_id], function(tx, res)
+    {
+      app.report("Delete Answer "+res.rowsAffected);
+      $('#answer_'+answer_id).remove();
     });
   });
 }
