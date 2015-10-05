@@ -22,12 +22,12 @@ function setUpDatabase()
 
   db.transaction(function(tx)
   {
-    tx.executeSql('DROP TABLE IF EXISTS moles_users');
-    tx.executeSql('DROP TABLE IF EXISTS moles_games');
-    tx.executeSql('DROP TABLE IF EXISTS moles_locations');
-    tx.executeSql('DROP TABLE IF EXISTS moles_tasks');
-    tx.executeSql('DROP TABLE IF EXISTS moles_images');
-    tx.executeSql('DROP TABLE IF EXISTS moles_answers');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_users');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_games');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_locations');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_tasks');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_images');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_answers');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_users (id integer primary key, moles_uid integer, username text, authToken text, validUser text)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_games (id integer primary key, moles_uid integer, game_inst_id integer, game_id integer, group_id integer, game_name text, game_description text, has_data integer)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_locations (id integer primary key, moles_uid integer, mission_id integer, game_id integer, name text, description text, location text, lat real, lng real)');
