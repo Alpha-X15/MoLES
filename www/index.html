@@ -102,7 +102,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
-                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#login_page')">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
                                 </ul>
                             </div>
@@ -127,7 +127,7 @@
                             </div>
                             <button id="submitButton">Login</button>
                           </div>
-                          <button id="OfflineTestButton">Login Offline</button>
+                          <!-- <button id="OfflineTestButton">Login Offline</button> -->
 
                             <div data-position-to="window" data-role="popup" id="positionWindowError" data-overlay-theme="a">
                                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -155,7 +155,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
-                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#games_page')">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
@@ -175,7 +175,7 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#games_page')">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -190,7 +190,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
-                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#places_page')">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
@@ -212,7 +212,7 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#places_page')">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -227,7 +227,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
-                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#questions_list_page')">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
@@ -250,7 +250,7 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#questions_list_page')">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -265,7 +265,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
-                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#question_detail')">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
@@ -292,7 +292,7 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#question_detail')">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -307,7 +307,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
-                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#textanswer_page')">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
@@ -326,7 +326,7 @@
                    <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#textanswer_page')">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -341,7 +341,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
-                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#answers_page')">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
@@ -360,7 +360,7 @@
                    <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#answers_page')">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -375,7 +375,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
-                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#maps_page')">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
@@ -394,7 +394,7 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#maps_page')">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -409,8 +409,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                             <ul data-role="listview" id="subnav">
-                                <li><a href="#help_page">Hilfe</a></li>
-                                <li><a href="#options_page">Options</a></li>
+                                <li><a href="javaScript:void(0)" onclick="showHelpPage('#options_page')">Hilfe</a></li>
                                 <li><a href="#login_page">Logout</a></li>
                             </ul>
                             </div>
@@ -426,7 +425,7 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#options_page')">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -434,14 +433,14 @@
             <!-- upload page here -->
             <div data-role="page" id="upload_page">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="javaScript:void(0)" onclick="backTo('#upload_page')"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Upload</h1>
                     <a href="#positionWindow10" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow9" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
-                                    <li><a href="#help_page">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#upload_page')">Hilfe</a></li>
                                     <li><a href="#options_page">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
@@ -460,7 +459,7 @@
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
                         <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#upload_page')">Upload</a>
                     </div>
                 </footer>
             </div>
@@ -468,14 +467,13 @@
             <!-- help page here -->
             <div data-role="page" id="help_page">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="javaScript:void(0)" onclick="backTo('#help_page')"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Hilfe</h1>
                     <a href="#positionWindow11" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow10" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                             <ul data-role="listview" id="subnav">
-                                <li><a href="#">Hilfe</a></li>
                                 <li><a href="#options_page">Options</a></li>
                                 <li><a href="#login_page">Logout</a></li>
                             </ul>
@@ -486,14 +484,12 @@
                 <div data-role="main" id="main">
                     <div class="app">
                         <h1>Hilfe:</h1>
+                        <p id="helpText">
+                        </p>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <div data-type="horizontal">
-                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount()">Upload</a>
-                    </div>
+                    <img id="login_footer_img" src="img/uni_imis.png" />
                 </footer>
             </div>
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>

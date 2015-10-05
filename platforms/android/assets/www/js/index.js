@@ -59,7 +59,7 @@ var app = {
         // navigator.splashscreen.show();
         app.receivedEvent('deviceready');
         app.devinfo.platform = window.device.platform;
-        app.report(JSON.stringify(navigator.connection));
+
         checkConnection();
         localStorage.clear();
         StatusBar.hide();
@@ -116,6 +116,11 @@ var app = {
         $(document).on("pagebeforeshow", "#textanswer_page", function()
         {
           $('#textAnswerArea').val('');
+        });
+
+        $(document).on("pageshow", "#upload_page", function()
+        {
+          app.report(checkConnection());
         });
     },
     report: function(id)
@@ -209,18 +214,43 @@ function checkConnection()
 {
     var networkState = navigator.connection.type;
 
+    app.report(networkState);
     var states = {};
-    states[Connection.UNKNOWN]  = 'Unknown connection';
-    states[Connection.ETHERNET] = 'Ethernet connection';
-    states[Connection.WIFI]     = 'WiFi connection';
-    states[Connection.CELL_2G]  = 'Cell 2G connection';
-    states[Connection.CELL_3G]  = 'Cell 3G connection';
-    states[Connection.CELL_4G]  = 'Cell 4G connection';
-    states[Connection.CELL]     = 'Cell generic connection';
-    states[Connection.NONE]     = 'No network connection';
+    states[Connection.UNKNOWN]  = 'Bad';
+    states[Connection.ETHERNET] = 'Best';
+    states[Connection.WIFI]     = 'Best';
+    states[Connection.CELL_2G]  = 'Bad';
+    states[Connection.CELL_3G]  = 'Great';
+    states[Connection.CELL_4G]  = 'Great';
+    states[Connection.CELL]     = 'Bad';
+    states[Connection.NONE]     = 'None';
 
+    app.report(JSON.stringify(states, null, 4));
+    return states[networkState];
     // alert('Connection type: '+ states[networkState]);
 }
+
+function showHelpPage(sourceID)
+{
+  localStorage.setItem('_helpFor', sourceID);
+  $('#helpText').empty();
+  $('#helpText').append("Hier sollte die Hilfe für die "+sourceID+" stehen ");
+  $.mobile.changePage($('#help_page'));
+}
+
+function backTo(sourceID)
+{
+  app.report("backTo");
+  if(sourceID == "#help_page")
+  {
+    $.mobile.changePage($(localStorage.getItem('_helpFor')));
+  }
+  else if (sourceID == "#upload_page")
+  {
+    $.mobile.changePage($(localStorage.getItem('_uploadFrom')));
+  }
+}
+
 // function playAudio(url)
 // {
 //     // Play the audio file at url
