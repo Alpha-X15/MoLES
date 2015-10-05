@@ -6,7 +6,14 @@ function openDatabase()
   }
   else if(window.device.platform == "iOS")
   {
-    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", location: 1});
+    var db = window.sqlitePlugin.openDatabase({name: "Moles.db", location: 1}, function()
+    {
+      alert("Datenbank geöffnet");
+    },
+    function(error)
+    {
+      alert(JSON.stringify(error, null, 4));
+    });
   }
   else
   {
@@ -164,74 +171,123 @@ function storeGame(user, gameObj)
   // });
 }
 
+function storeLocation(user, location)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_locations WHERE mission_id=?', [location.id], function(tx, res)
+    {
+      if(res.rows.length == 0)
+      {
+        tx.executeSql('INSERT INTO moles_locations (moles_uid, mission_id, game_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
+        [
+          user,
+          location.id,
+          location.game_id,
+          location.name,
+          location.description,
+          location.location,
+          location.lat,
+          location.lng
+        ], function(tx, res)
+        {
+          app.report("InsertedLocationId: "+res.insertId);
+        });
+      }
+      else if(res.rows.length == 1)
+      {
+        tx.executeSql('UPDATE moles_locations SET name=?, description=?, location=?, lat=?, lng=? WHERE mission_id=?',
+        [
+          location.name,
+          location.description,
+          location.location,
+          location.lat,
+          location.lng,
+          location.id,
+        ], function(tx, res)
+        {
+          app.report("Updated Locations "+res.rowsAffected);
+        });
+      }
+    });
+  });
+}
+
+function storeTask(user, task)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_tasks WHERE task_id=?', [task.id], function(tx, res)
+    {
+      if(res.rows.length == 0)
+      {
+        tx.executeSql('INSERT INTO moles_tasks (moles_uid, task_id, mission_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
+        [
+          user,
+          task.id,
+          task.mission_id,
+          task.name,
+          task.description,
+          task.location,
+          task.lat,
+          task.lng
+        ], function(tx, res)
+        {
+          app.report("inserted task: "+res.insertId);
+        });
+      }
+      else if (res.rows.length == 1)
+      {
+        tx.executeSql('UPDATE moles_tasks SET mission_id=?, name=?, description=?, location=?, lat=?, lng=? WHERE task_id=?',
+        [
+          task.mission_id,
+          task.name,
+          task.description,
+          task.location,
+          task.lat,
+          task.lng,
+          task.id,
+        ], function(tx, res)
+        {
+          app.report("Task updates "+res.rowsAffected);
+        });
+      }
+    });
+  });
+}
+
 function storeLocationList(user, locationList)
 {
   var db = openDatabase();
 
+  for(var i = 0; i<locationList["Mission"].length; i++)
+  {
+    storeLocation(user, locationList["Mission"][i]);
+  }
   // db.transaction(function(tx)
   // {
   //   for(var i = 0; i<locationList["Mission"].length; i++)
   //   {
-  //     tx.executeSql('SELECT * FROM moles_locations WHERE mission_id=?', [locationList["Mission"][i]["id"]], function(tx, res)
+  //     tx.executeSql('INSERT INTO moles_locations (moles_uid, mission_id, game_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
+  //     [
+  //       user,
+  //       locationList["Mission"][i]["id"],
+  //       locationList["Mission"][i]["game_id"],
+  //       locationList["Mission"][i]["name"],
+  //       locationList["Mission"][i]["description"],
+  //       locationList["Mission"][i]["location"],
+  //       locationList["Mission"][i]["lat"],
+  //       locationList["Mission"][i]["lng"]
+  //     ], function(tx, res)
   //     {
-  //       app.report("Found locations "+res.rows.length);
-  //       if(res.rows.length == 0)
-  //       {
-  //         app.report("Try to insert a location");
-  //         tx.executeSql('INSERT INTO moles_locations (moles_uid, mission_id, game_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
-  //         [
-  //           user,
-  //           locationList["Mission"][i]["id"],
-  //           locationList["Mission"][i]["game_id"],
-  //           locationList["Mission"][i]["name"],
-  //           locationList["Mission"][i]["description"],
-  //           locationList["Mission"][i]["location"],
-  //           locationList["Mission"][i]["lat"],
-  //           locationList["Mission"][i]["lng"]
-  //         ], function(tx, res)
-  //         {
-  //           app.report("InsertedLocationId: "+res.insertId);
-  //         });
-  //       }
-  //       // else if(res.rows.length == 1)
-  //       // {
-  //       //   tx.executeSql('UPDATE moles_locations SET name=?, description=?, location=?, lat=?, lng=? WHERE mission_id=?',
-  //       //   [
-  //       //     locationList["Mission"][i]["name"],
-  //       //     locationList["Mission"][i]["description"],
-  //       //     locationList["Mission"][i]["location"],
-  //       //     locationList["Mission"][i]["lat"],
-  //       //     locationList["Mission"][i]["lng"],
-  //       //     locationList["Mission"][i]["id"],
-  //       //   ], function(tx, res)
-  //       //   {
-  //       //     app.report("Updated Locations "+res.rowsAffected);
-  //       //   });
-  //       // }
+  //       app.report("InsertedLocationId: "+res.insertId);
   //     });
   //   }
   // });
-
-  db.transaction(function(tx)
-  {
-    for(var i = 0; i<locationList["Mission"].length; i++)
-    {
-      tx.executeSql('INSERT INTO moles_locations (moles_uid, mission_id, game_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
-      [
-        user,
-        locationList["Mission"][i]["id"],
-        locationList["Mission"][i]["game_id"],
-        locationList["Mission"][i]["name"],
-        locationList["Mission"][i]["description"],
-        locationList["Mission"][i]["location"],
-        locationList["Mission"][i]["lat"],
-        locationList["Mission"][i]["lng"]
-      ], function(tx, res)
-      {
-        app.report("InsertedLocationId: "+res.insertId);
-      });
-    }
-  });
 
   var questions = [];
   var mediaImages = [];
@@ -266,26 +322,31 @@ function storeLocationList(user, locationList)
     }
   }
 
-  db.transaction(function(tx)
+  for(var l = 0; l<questions.length; l++)
   {
-    for(var l = 0; l<questions.length; l++)
-    {
-      tx.executeSql('INSERT INTO moles_tasks (moles_uid, task_id, mission_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
-      [
-        user,
-        questions[l]["id"],
-        questions[l]["mission_id"],
-        questions[l]["name"],
-        questions[l]["description"],
-        questions[l]["location"],
-        questions[l]["lat"],
-        questions[l]["lng"]
-      ], function(tx, res)
-      {
-        app.report("inserted task: "+res.insertId);
-      });
-    }
-  });
+    storeTask(user, questions[l]);
+  }
+
+  // db.transaction(function(tx)
+  // {
+  //   for(var l = 0; l<questions.length; l++)
+  //   {
+  //     tx.executeSql('INSERT INTO moles_tasks (moles_uid, task_id, mission_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
+  //     [
+  //       user,
+  //       questions[l]["id"],
+  //       questions[l]["mission_id"],
+  //       questions[l]["name"],
+  //       questions[l]["description"],
+  //       questions[l]["location"],
+  //       questions[l]["lat"],
+  //       questions[l]["lng"]
+  //     ], function(tx, res)
+  //     {
+  //       app.report("inserted task: "+res.insertId);
+  //     });
+  //   }
+  // });
 
   // db.transaction(function(tx)
   // {
@@ -298,39 +359,84 @@ function storeLocationList(user, locationList)
   getRESTImages(mediaImages);
 }
 
-function storeImages(userid, imageList)
+// function storeImages(userid, imageList)
+function storeImages(userid, media)
 {
   var db = openDatabase();
 
+  // db.transaction(function(tx)
+  // {
+  //   for(var media in imageList)
+  //   {
+  //       tx.executeSql('INSERT INTO moles_images (moles_uid, image_id, task_id, mission_id, game_id, image_title, filename, imagepath) VALUES (?,?,?,?,?,?,?,?)',
+  //       [
+  //         userid,
+  //         imageList[media]["id"],
+  //         imageList[media]["question_id"],
+  //         imageList[media]["mission_id"],
+  //         imageList[media]["game_id"],
+  //         imageList[media]["title"],
+  //         imageList[media]["file"],
+  //         imageList[media]["filepath"]
+  //       ],
+  //       function(tx, res)
+  //       {
+  //         app.report("Inserted Image "+res.insertId);
+  //       });
+  //   }
+  // });
+
   db.transaction(function(tx)
   {
-    for(var media in imageList)
+    tx.executeSql('SELECT * FROM moles_images WHERE image_id=?', [media.id], function(tx, res)
     {
+      if(res.rows.length == 0)
+      {
         tx.executeSql('INSERT INTO moles_images (moles_uid, image_id, task_id, mission_id, game_id, image_title, filename, imagepath) VALUES (?,?,?,?,?,?,?,?)',
         [
           userid,
-          imageList[media]["id"],
-          imageList[media]["question_id"],
-          imageList[media]["mission_id"],
-          imageList[media]["game_id"],
-          imageList[media]["title"],
-          imageList[media]["file"],
-          imageList[media]["filepath"]
+          media.id,
+          media.question_id,
+          media.mission_id,
+          media.game_id,
+          media.title,
+          media.file,
+          media.filepath
         ],
         function(tx, res)
         {
           app.report("Inserted Image "+res.insertId);
         });
-    }
+      }
+      else if (res.rows.length == 1)
+      {
+        tx.executeSql('UPDATE moles_images SET task_id=?, mission_id=?, game_id=?, image_title=?, filename=?, imagepath=? WHERE image_id=?',
+        [
+          media.question_id,
+          media.mission_id,
+          media.game_id,
+          media.title,
+          media.file,
+          media.filepath,
+          media.id,
+        ], function(tx, res)
+        {
+          app.report("Image update "+res.rowsAffected);
+        });
+      }
+    });
+
+
   });
 
-  db.transaction(function(tx){
-    tx.executeSql("SELECT * FROM moles_images", [], function(tx, res){
-      app.report("Images length "+res.rows.length);
-      app.report("image 0: " + JSON.stringify(res.rows.item(0)));
-      app.report(JSON.stringify(res.rows));
-    });
-  });
+  // db.transaction(function(tx)
+  // {
+  //   tx.executeSql("SELECT * FROM moles_images", [], function(tx, res){
+  //     app.report("Images length "+res.rows.length);
+  //     app.report("image 0: " + JSON.stringify(res.rows.item(0)));
+  //     app.report(JSON.stringify(res.rows));
+  //   });
+  // });
 }
 
 function storeAnswer(answerType, answerName, answerValue)
@@ -468,7 +574,7 @@ function buildOfflineGamesPage(userid)
       {
           gamesListContent += '<li id="'+res.rows.item(i).game_inst_id+'-'+res.rows.item(i).game_id+'-'+res.rows.item(i).game_name+'"><a href="javaScript:void(0)">'+res.rows.item(i).game_name+'</a></li>';
       }
-      app.report(gamesListContent);
+      // app.report(gamesListContent);
       $('#gameList').append(gamesListContent);
 
       $('#gameList').off('click', 'li');

@@ -225,7 +225,11 @@ function getRESTImages(imageList)
 				count++;
 				if(count == imageList.length)
 				{
-					storeImages(localStorage.getItem('_userID'), imageList);
+          for(var media in imageList)
+          {
+            storeImages(localStorage.getItem('_userID'), imageList[media]);
+          }
+					// storeImages(localStorage.getItem('_userID'), imageList);
 				}
 			},
 			function(error)
