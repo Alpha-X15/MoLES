@@ -429,7 +429,7 @@ function buildOfflineLocationPage(game_id, game_name)
 
         for(var i = 0; i<res.rows.length; i++)
         {
-            placesListContent += '<li id="'+res.rows.item(i).mission_id+'-'+res.rows.item(i).name+'"><a href="javaScript:void(0)">'+res.rows.item(0).name+'</a></li>';
+            placesListContent += '<li id="'+res.rows.item(i).mission_id+'-'+res.rows.item(i).name+'"><a href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
         }
         $('#placesList').append(placesListContent);
 
