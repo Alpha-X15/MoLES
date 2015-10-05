@@ -138,10 +138,12 @@ function onFileSystemSuccess(fileSystem)
       var natiurl = entry.fullPath;
       directoryEntry.getDirectory(natiurl+"answers", {create: true, exclusive: false}, function(parent)
       {
+        alert(parent.name);
         app.report(parent.name);
       },
       function(error)
       {
+        alert("Error while making directory "+JSON.stringify(error, null, 4));
         app.report("Error while making directory "+JSON.stringify(error, null, 4));
       });
     });
