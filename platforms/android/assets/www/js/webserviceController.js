@@ -4,8 +4,6 @@
 function loginWebservice(user, passw)
 {
   localStorage.setItem('_userID', '0');
-  app.report("User: "+user);
-  app.report("User: "+passw);
 
   $.ajax({
       url: app.cons.SERVER_URL + app.cons.LOGIN_URL,
@@ -17,7 +15,13 @@ function loginWebservice(user, passw)
       crossDomain: true,
       beforeSend: function(xhr)
       {
-          navigator.notification.activityStart('Login..', 'loading');
+					$.mobile.loading('show',
+	        {
+	          text: "Login läuft...",
+	          textVisible: true,
+	          theme: 'a',
+	          html: ""
+	        });
           xhr.setRequestHeader('Authorization', getAuth(user, passw));
           xhr.setRequestHeader('pragma', 'no-cache');
           xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
@@ -33,12 +37,13 @@ function loginWebservice(user, passw)
           localStorage.setItem('_authToken', getAuth(user, passw));
 
           storeUserLogin(msg.data.id, user, getAuth(user, passw), "true");
+					$.mobile.loading('hide');
           getGameList();
         }
         else if (msg.data.valid == false)
         {
-            navigator.notification.activityStop();
-            alert("Ihre Zugangsdaten sind Falsch.");
+						$.mobile.loading('hide');
+            alert("Es scheint sich ein Fehler in deinen Zugangsdaten eingeschlichen zu haben. Probiere es bitte erneut.");
         }
       }
   })
@@ -46,12 +51,16 @@ function loginWebservice(user, passw)
   {
       app.report("Status: " + jqXHR.status);
       app.report("Login request failed: " + textStatus);
-      navigator.notification.activityStop();
-      alert("Der Login ist fehlgeschlagen.");
+			$.mobile.loading('hide');
+      alert("Der Login ist fehlgeschlagen. Probiere es bitte erneut.");
 
   });
 }
 
+/*
+* Ajax call for loading the gamelist for the actual user from a webservice.
+* Builds the gamelist and changes to gamespage.
+*/
 function getGameList()
 {
     app.report("getGameList");
@@ -67,6 +76,13 @@ function getGameList()
         type: 'GET',
         beforeSend: function(xhr)
         {
+						$.mobile.loading('show',
+	        	{
+	          	text: "Es werden Spiele für dich heruntergeladen...",
+	          	textVisible: true,
+	          	theme: 'a',
+	          	html: ""
+	        	});
             xhr.setRequestHeader('Authorization', localStorage.getItem('_authToken'));
             xhr.setRequestHeader('pragma', 'no-cache');
             xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
@@ -75,24 +91,29 @@ function getGameList()
         success: function(msg)
         {
           var gameInstances = msg.data.gameInstances;
-          // app.report(JSON.stringify(gameInstances, null, 4));
-          storeGameList(localStorage.getItem('_userID'), gameInstances);
+          // storeGameList(localStorage.getItem('_userID'), gameInstances);
 
+          $('#gameList').empty();
           var gamesListContent = '';
           for(var i = 0; i<gameInstances.length; i++)
           {
-              gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["id"]+'-'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'"><a href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
+              gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["id"]+'-'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'"><input type="hidden" id="game_'+gameInstances[i]["GameInstance"]["id"]+'" value="'+encodeURIComponent(JSON.stringify(gameInstances[i]))+'"><a href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
           }
           $('#gameList').append(gamesListContent);
-          $('#gameList').delegate('li', 'click', function()
+
+          $('#gameList').off('click', 'li');
+
+          $('#gameList').on('click', 'li', function()
           {
             var cgame = $(this).attr('id').split('-');
+            var gameObj = JSON.parse(decodeURIComponent($('#game_'+cgame[0]).val()));
+
             localStorage.setItem('_choosendGameID', cgame[1]);
             localStorage.setItem('_ActiveInstanceID', cgame[0]);
-            getLocationList(cgame[1], cgame[2]);
+            getLocationList(cgame[1], cgame[2], gameObj);
           });
 
-          navigator.notification.activityStop();
+					$.mobile.loading('hide');
           $.mobile.changePage($('#games_page'));
         }
     })
@@ -101,11 +122,13 @@ function getGameList()
         app.report("StatusCode: "+jqXHR.status);
         app.report("Status: "+textStatus);
         app.report("Failed loading the GameList");
-        navigator.notification.activityStop();
+				$.mobile.loading('hide');
+				alert("Es konnten leider keine Spiele für dich heruntergeladen werden.");
+				$.mobile.changePage($('#games_page'));
     });
 }
 
-function getLocationList(choosen_game_id, game_name)
+function getLocationList(choosen_game_id, game_name, gameObj)
 {
     $.ajax(
     {
@@ -119,7 +142,13 @@ function getLocationList(choosen_game_id, game_name)
         type: 'GET',
         beforeSend: function(xhr)
         {
-            navigator.notification.activityStart('LoadLocationList..', 'loading');
+						$.mobile.loading('show',
+		        {
+		          text: "Es werden die Daten für das gewählte Spiel "+game_name+" heruntergeladen.",
+		          textVisible: true,
+		          theme: 'a',
+		          html: ""
+		        });
             xhr.setRequestHeader('Authorization', localStorage.getItem('_authToken'));
             xhr.setRequestHeader('pragma', 'no-cache');
             xhr.setRequestHeader('Cache-Control', 'no-cache,max-age=0');
@@ -132,6 +161,7 @@ function getLocationList(choosen_game_id, game_name)
 
         var placeInstances = data.data.game;
 
+        storeGame(localStorage.getItem('_userID'), gameObj);
         storeLocationList(localStorage.getItem('_userID'), placeInstances);
 
         $('#placesTitle').empty();
@@ -146,14 +176,18 @@ function getLocationList(choosen_game_id, game_name)
             placesListContent += '<li id="'+placeInstances["Mission"][i]["id"]+'-'+placeInstances["Mission"][i]["name"]+'"><a href="javaScript:void(0)">'+placeInstances["Mission"][i]["name"]+'</a></li>';
         }
         $('#placesList').append(placesListContent);
-        $('#placesList').delegate('li', 'click', function()
+
+        $('#placesList').off('click', 'li');
+
+        // $('#placesList').delegate('li', 'click', function()
+        $('#placesList').on('click', 'li', function()
         {
           var cplace = $(this).attr('id').split('-');
           app.report(cplace[0]+' '+cplace[1]);
           buildTaskPage(cplace[0]);
         });
 
-        navigator.notification.activityStop();
+				$.mobile.loading('hide');
         $.mobile.changePage($('#places_page'));
     })
     .fail(function(jqXHR, textStatus)
@@ -161,6 +195,8 @@ function getLocationList(choosen_game_id, game_name)
         app.report("StatusCode: "+jqXHR.status);
         app.report("Status: "+textStatus);
         app.report("Failed loading the LocationList");
+				$.mobile.loading('hide');
+				alert("Es konnten leider keine Daten zu dem gewünschten Spiel runtergeladen werden.");
     });
 }
 
@@ -214,15 +250,15 @@ function prepareAnswerUpload(answer)
 	app.report("Prepare Answer Upload");
 	if (answer.answer_type == 'Picture')
 	{
-				uploadAnswer(answer.task_id, answer.answer_value, answer.answer_name, 'image/*');
+				uploadAnswer(answer.id, answer.task_id, answer.answer_value, answer.answer_name, 'image/*');
 	}
 	else if (answer.answer_type == 'Video')
 	{
-				uploadAnswer(answer.task_id, answer.answer_value, answer.answer_name, 'video/*');
+				uploadAnswer(answer.id, answer.task_id, answer.answer_value, answer.answer_name, 'video/*');
 	}
 	else if (answer.answer_type == 'Audio')
 	{
-				uploadAnswer(answer.task_id, answer.answer_value, answer.answer_name, 'audio/*');
+				uploadAnswer(answer.id, answer.task_id, answer.answer_value, answer.answer_name, 'audio/*');
 	}
 	else if (answer.answer_type == 'Text')
 	{
@@ -232,12 +268,19 @@ function prepareAnswerUpload(answer)
 					var uploads = localStorage.getItem('_uploadQueue');
 					uploads -= 1;
 					localStorage.setItem('_uploadQueue', uploads);
+					updateAnswersList(answer.id);
 					if(uploads == 0)
 					{
 						$.mobile.loading('hide');
 						if(localStorage.getItem('_uploadFailure') == true)
 						{
 							alert('Während des Uploads ist ein Fehler aufgetreten. Möglicherweise wurden nicht alle Antworten hochgeladen. Bitte versuche es mit stabiler Internetverbindung erneut.');
+							getAnswersUploadCount();
+						}
+						else
+						{
+							alert("Es sind alle antworten erfolgreich hochgeladen worden.");
+							$.mobile.changePage($('#games_page'));
 						}
 					}
 				},
@@ -254,13 +297,14 @@ function prepareAnswerUpload(answer)
 						if(localStorage.getItem('_uploadFailure') == true)
 						{
 							alert('Während des Uploads ist ein Fehler aufgetreten. Möglicherweise wurden nicht alle Antworten hochgeladen. Bitte versuche es mit stabiler Internetverbindung erneut.');
+							getAnswersUploadCount();
 						}
 					}
 				}, answer.task_id, answer.answer_value);
 		}
 }
 
-function uploadAnswer(taskId, answerURI, answerName, mimetype)
+function uploadAnswer(internalID, taskId, answerURI, answerName, mimetype)
 {
 		app.report("Upload answer");
 		registerAnswer(function success(data)
@@ -268,7 +312,7 @@ function uploadAnswer(taskId, answerURI, answerName, mimetype)
 			app.report("Answer registered.");
 			app.report(JSON.stringify(data.data.gameInstanceAnswer, null, 4));
 			var answerID = data.data.gameInstanceAnswer.substr(data.data.gameInstanceAnswer.lastIndexOf('/')+1);
-			uploadMedia(answerID, answerName, answerURI, mimetype);
+			uploadMedia(internalID, answerID, answerName, answerURI, mimetype);
 		},
 		function error(error)
 		{
@@ -281,6 +325,7 @@ function uploadAnswer(taskId, answerURI, answerName, mimetype)
 			{
 				$.mobile.loading('hide');
 				alert('Während des Uploads ist ein Fehler aufgetreten. Möglicherweise wurden nicht alle Antworten hochgeladen. Bitte versuche es mit stabiler Internetverbindung erneut.');
+				getAnswersUploadCount();
 			}
 		},
 		taskId,
@@ -330,7 +375,7 @@ function registerAnswer(success, error, taskId, text)
 	});
 }
 
-function uploadMedia(answerID, answerName, fileURI, mimeType)
+function uploadMedia(internalID, answerID, answerName, fileURI, mimeType)
 {
 	var uploadSuccess = function(response)
 	{
@@ -342,12 +387,19 @@ function uploadMedia(answerID, answerName, fileURI, mimeType)
 		app.report(uploads);
 		uploads -= 1;
 		localStorage.setItem('_uploadQueue', uploads);
+		updateAnswersList(internalID);
 		if(uploads == 0)
 		{
 			$.mobile.loading('hide');
 			if(localStorage.getItem('_uploadFailure') == true)
 			{
 				alert('Während des Uploads ist ein Fehler aufgetreten. Möglicherweise wurden nicht alle Antworten hochgeladen. Bitte versuche es mit stabiler Internetverbindung erneut.');
+				getAnswersUploadCount();
+			}
+			else
+			{
+				alert("Es sind alle Antworten erfolgreich hochgeladen worden.");
+				$.mobile.changePage($('#games_page'));
 			}
 		}
 	}

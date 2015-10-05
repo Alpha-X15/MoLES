@@ -29,7 +29,7 @@ function setUpDatabase()
     tx.executeSql('DROP TABLE IF EXISTS moles_images');
     tx.executeSql('DROP TABLE IF EXISTS moles_answers');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_users (id integer primary key, moles_uid integer, username text, authToken text, validUser text)');
-    tx.executeSql('CREATE TABLE IF NOT EXISTS moles_games (id integer primary key, moles_uid integer, game_inst_id integer, game_id integer, group_id integer, game_name text, game_description text)');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS moles_games (id integer primary key, moles_uid integer, game_inst_id integer, game_id integer, group_id integer, game_name text, game_description text, has_data integer)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_locations (id integer primary key, moles_uid integer, mission_id integer, game_id integer, name text, description text, location text, lat real, lng real)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_tasks (id integer primary key, moles_uid integer, task_id integer, mission_id integer, name text, description text, location text, lat real, lng real)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_images (id integer primary key, moles_uid integer, image_id integer, task_id integer, mission_id integer, game_id integer, image_title text, filename text, imagepath text)');
@@ -42,12 +42,34 @@ function storeUserLogin(userid, username, authToken, validUser)
   app.report("store userlogin");
   var db = openDatabase();
 
-  db.transaction(function(tx) {
-    tx.executeSql('INSERT INTO moles_users (moles_uid, username, authToken, validUser) VALUES (?,?,?,?)', [userid, username, authToken, validUser], function(tx, res) {
-      app.report("InsertedId: "+res.insertId);
-      app.report("AffectedRows: "+res.rowsAffected);
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_users WHERE moles_uid=?', [userid], function(tx, res)
+    {
+      if(res.rows.length == 0)
+      {
+        tx.executeSql('INSERT INTO moles_users (moles_uid, username, authToken, validUser) VALUES (?,?,?,?)', [userid, username, authToken, validUser], function(tx, res) {
+          app.report("InsertedId: "+res.insertId);
+          app.report("AffectedRows: "+res.rowsAffected);
+        });
+      }
+      else
+      {
+        tx.executeSql('UPDATE moles_users SET username=?, authToken=?, validUser=? WHERE moles_uid=?', [username, authToken, validUser, userid], function(tx, res)
+        {
+          app.report('USER Update '+res.rowsAffected);
+        });
+      }
     });
   });
+
+  // db.transaction(function(tx)
+  // {
+  //   tx.executeSql('INSERT INTO moles_users (moles_uid, username, authToken, validUser) VALUES (?,?,?,?)', [userid, username, authToken, validUser], function(tx, res) {
+  //     app.report("InsertedId: "+res.insertId);
+  //     app.report("AffectedRows: "+res.rowsAffected);
+  //   });
+  // });
 
   db.transaction(function(tx) {
       tx.executeSql("SELECT * FROM moles_users", [], function(tx, res) {
@@ -58,26 +80,50 @@ function storeUserLogin(userid, username, authToken, validUser)
     });
 }
 
-function storeGameList(user, gameList)
+// function storeGameList(user, gameList)
+// {
+//   var db = openDatabase();
+//
+//   db.transaction(function(tx)
+//   {
+//     for(var i = 0; i<gameList.length; i++)
+//     {
+//       tx.executeSql('INSERT INTO moles_games (moles_uid, game_inst_id, game_id, group_id, game_name, game_description, has_data) VALUES (?,?,?,?,?,?,?)',
+//       [
+//         user,
+//         gameList[i]["GameInstance"]["id"],
+//         gameList[i]["GameInstance"]["game_id"],
+//         gameList[i]["GameInstance"]["group_id"],
+//         gameList[i]["GameInstance"]["name"],
+//         gameList[i]["Game"]["description"],
+//         0
+//       ], function(tx, res)
+//       {
+//         app.report("InsertedGameId: "+res.insertId);
+//       });
+//     }
+//   });
+// }
+
+function storeGame(user, gameObj)
 {
   var db = openDatabase();
 
-  db.transaction(function(tx){
-    for(var i = 0; i<gameList.length; i++)
+  db.transaction(function(tx)
+  {
+    tx.executeSql('INSERT INTO moles_games (moles_uid, game_inst_id, game_id, group_id, game_name, game_description, has_data) VALUES (?,?,?,?,?,?,?)',
+    [
+      user,
+      gameObj.GameInstance.id,
+      gameObj.GameInstance.game_id,
+      gameObj.GameInstance.group_id,
+      gameObj.Game.name,
+      gameObj.Game.description,
+      1
+    ], function(tx, res)
     {
-      tx.executeSql('INSERT INTO moles_games (moles_uid, game_inst_id, game_id, group_id, game_name, game_description) VALUES (?,?,?,?,?,?)',
-      [
-        user,
-        gameList[i]["GameInstance"]["id"],
-        gameList[i]["GameInstance"]["game_id"],
-        gameList[i]["GameInstance"]["group_id"],
-        gameList[i]["GameInstance"]["name"],
-        gameList[i]["Game"]["description"]
-      ], function(tx, res)
-      {
-        app.report("InsertedGameId: "+res.insertId);
-      });
-    }
+      app.report("InsertedGameId: "+res.insertId);
+    });
   });
 }
 
@@ -159,6 +205,14 @@ function storeLocationList(user, locationList)
       });
     }
   });
+
+  // db.transaction(function(tx)
+  // {
+  //   tx.executeSql('UPDATE moles_games SET has_data=1 WHERE game_id=?',[locationList["Mission"][0]["game_id"]], function(tx, res)
+  //   {
+  //     app.report("Updated games "+res.rowsAffected);
+  //   });
+  // });
 
   getRESTImages(mediaImages);
 }
@@ -265,6 +319,7 @@ function getAnswersUploadCount()
     tx.executeSql('SELECT COUNT(*) AS anumber FROM moles_answers WHERE uploaded=?', [0], function(tx, res)
     {
       app.report(JSON.stringify(res.rows.item(0), null, 4));
+      $('#uploadText').empty();
       var uploadTextContent = '';
       if(res.rows.item(0).anumber == 1)
       {
@@ -276,8 +331,120 @@ function getAnswersUploadCount()
       }
 
       $('#uploadText').append(uploadTextContent);
-      $.mobile.changePage($('#upload_page'));
+      if(res.rows.item(0).anumber > 0)
+      {
+        $.mobile.changePage($('#upload_page'));
+      }
+      else
+      {
+        alert("Es sind keine Antworten für den Upload vorhanden.");
+      }
     });
+  });
+}
+
+function offlineLogin(username, authToken)
+{
+    var db = openDatabase();
+
+    db.transaction(function(tx)
+    {
+      tx.executeSql('SELECT * FROM moles_users WHERE username=?', [username], function(tx, res)
+      {
+        if(res.rows.length == 0)
+        {
+          alert('Der Login ist Fehlgeschlagen. Überprüfe bitte deinen Usernamen und dein Passwort. Handelt es sich um deinen aller ersten Login, solltest eine sichere und schnelle Internetverbindung haben um deine Daten zu referenzieren und Spiele zu downloaden.');
+        }
+        else if(res.rows.length == 1)
+        {
+            if(username == res.rows.item(0).username && authToken == res.rows.item(0).authToken && res.rows.item(0).validUser == "true")
+            {
+              app.report('hier und so');
+              buildOfflineGamesPage(res.rows.item(0).moles_uid);
+            }
+            else
+            {
+              alert('Der Login ist Fehlgeschlagen. Überprüfe bitte deinen Usernamen und dein Passwort. Handelt es sich um deinen aller ersten Login, solltest eine sichere und schnelle Internetverbindung haben um deine Daten zu referenzieren und Spiele zu downloaden.');
+            }
+        }
+      });
+    });
+}
+
+function buildOfflineGamesPage(userid)
+{
+  var db = openDatabase();
+
+  var gamesListContent = '';
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_games WHERE moles_uid=?', [userid], function(tx, res)
+    {
+      app.report(res.rows.length);
+      $('#gameList').empty();
+      for(var i = 0; i<res.rows.length; i++)
+      {
+          gamesListContent += '<li id="'+res.rows.item(i).game_inst_id+'-'+res.rows.item(i).game_id+'-'+res.rows.item(i).game_name+'"><a href="javaScript:void(0)">'+res.rows.item(i).game_name+'</a></li>';
+      }
+      app.report(gamesListContent);
+      $('#gameList').append(gamesListContent);
+
+      $('#gameList').off('click', 'li');
+
+      $('#gameList').on('click', 'li', function()
+      {
+        var cgame = $(this).attr('id').split('-');
+        localStorage.setItem('_choosendGameID', cgame[1]);
+        localStorage.setItem('_ActiveInstanceID', cgame[0]);
+        buildOfflineLocationPage(cgame[1], cgame[2]);
+      });
+      $.mobile.changePage($('#games_page'));
+    });
+  });
+}
+
+function buildOfflineLocationPage(game_id, game_name)
+{
+  var db = openDatabase();
+
+  $('#placesTitle').empty();
+  $('#placesText').empty();
+  $('#placesTitle').append(game_name);
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT game_description FROM moles_games WHERE game_id=?', [game_id], function(tx, res)
+    {
+      $('#placesText').append(res.rows.item(0).game_description);
+    });
+  });
+
+  $('#placesList').empty();
+  var placesListContent = '';
+  db.transaction(function(tx)
+  {
+      tx.executeSql('SELECT * FROM moles_locations WHERE game_id=?', [game_id], function(tx, res)
+      {
+        app.report(res.rows.length);
+
+        for(var i = 0; i<res.rows.length; i++)
+        {
+            placesListContent += '<li id="'+res.rows.item(i).mission_id+'-'+res.rows.item(i).name+'"><a href="javaScript:void(0)">'+res.rows.item(0).name+'</a></li>';
+        }
+        $('#placesList').append(placesListContent);
+
+        $('#placesList').off('click', 'li');
+
+        // $('#placesList').delegate('li', 'click', function()
+        $('#placesList').on('click', 'li', function()
+        {
+          var cplace = $(this).attr('id').split('-');
+          app.report(cplace[0]+' '+cplace[1]);
+          buildTaskPage(cplace[0]);
+        });
+
+        $.mobile.changePage($('#places_page'));
+      });
   });
 }
 
@@ -319,7 +486,11 @@ function buildTaskPage(id)
       }
 
       $('#taskList').append(taskListContent);
-      $('#taskList').delegate('li', 'click', function()
+
+      $('#taskList').off('click', 'li');
+
+      // $('#taskList').delegate('li', 'click', function()
+      $('#taskList').on('click', 'li', function()
       {
         var ctask = $(this).attr('id').split('-');
         buildDetailPage(ctask[0]);
@@ -402,6 +573,27 @@ function buildAnswersPage()
 
       }
       $.mobile.changePage($('#answers_page'));
+    });
+  });
+}
+
+function updateAnswersList(internalID)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('UPDATE moles_answers SET uploaded=1 WHERE id=?', [internalID], function(tx, res)
+    {
+      app.report("Update affected "+res.rowsAffected);
+    });
+  });
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_answers WHERE uploaded=1', [], function(tx, res)
+    {
+      app.report("Uploaded answers "+res.rows.length);
     });
   });
 }

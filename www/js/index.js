@@ -37,6 +37,7 @@ var app = {
     {
       platform: '',
       directory: '',
+      connection: '',
     },
     // Application Constructor
     initialize: function() {
@@ -59,6 +60,7 @@ var app = {
         app.receivedEvent('deviceready');
         app.devinfo.platform = window.device.platform;
         app.report(JSON.stringify(navigator.connection));
+        checkConnection();
         localStorage.clear();
         StatusBar.hide();
         setUpDatabase();
@@ -68,8 +70,6 @@ var app = {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
-
-
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
@@ -93,17 +93,27 @@ var app = {
           loginWebservice($('input[name=username]').val(), $('input[name=password]').val());
         });
 
-        $(document).on("pageshow", "#places_page", function()
+        $(document).on('click', '#OfflineTestButton', function(e)
+        {
+          offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+        });
+
+        $(document).on("pagebeforeshow", "#games_page", function()
+        {
+          $('#gameList').listview("refresh");
+        });
+
+        $(document).on("pagebeforeshow", "#places_page", function()
         {
           $('#placesList').listview("refresh");
         });
 
-        $(document).on("pageshow", "#questions_list_page", function()
+        $(document).on("pagebeforeshow", "#questions_list_page", function()
         {
           $('#taskList').listview("refresh");
         });
 
-        $(document).on("pageshow", "#textanswer_page", function()
+        $(document).on("pagebeforeshow", "#textanswer_page", function()
         {
           $('#textAnswerArea').val('');
         });
@@ -193,6 +203,22 @@ function getAuth(name, pwd)
     return "Basic " + base64;
 }
 
+function checkConnection()
+{
+    var networkState = navigator.connection.type;
+
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.CELL]     = 'Cell generic connection';
+    states[Connection.NONE]     = 'No network connection';
+
+    // alert('Connection type: '+ states[networkState]);
+}
 // function playAudio(url)
 // {
 //     // Play the audio file at url
