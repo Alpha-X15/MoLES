@@ -585,19 +585,21 @@ function buildAnswersPage()
         {
           if(res.rows.item(i).answer_type == "Text")
           {
-            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            // answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+
           }
           else if (res.rows.item(i).answer_type == "Picture")
           {
-            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_slr2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_slr2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
           else if (res.rows.item(i).answer_type == "Video")
           {
-            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_slate2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_slate2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
           else if (res.rows.item(i).answer_type == "Audio")
           {
-            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_microphone9.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_microphone9.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
         }
         $('#answersList').append(answersContent);
@@ -607,8 +609,11 @@ function buildAnswersPage()
   });
 }
 
-function deleteAnswer(task_id, answer_id)
+// function deleteAnswer(task_id, answer_id)
+function deleteAnswer()
 {
+  var answer_id = localStorage.getItem('_answerOption');
+  app.report(answer_id)
   var db = openDatabase();
 
   db.transaction(function(tx)
@@ -621,6 +626,7 @@ function deleteAnswer(task_id, answer_id)
         {
           app.report("Delete Answer "+res.rowsAffected);
           $('#answer_'+answer_id).remove();
+          $('#answerOptions').popup("close");
         });
       }
       else if (res.rows.item(0).answer_type == "Picture")

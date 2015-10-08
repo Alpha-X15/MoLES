@@ -30,7 +30,8 @@
 
         <link rel="stylesheet" href="css/themes/jqueryTheme.min.css" />
         <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+        <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" /> -->
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/leaflet.css" />
 
@@ -174,7 +175,7 @@
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#games_page')">Karte</a>
                         <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#games_page')">Upload</a>
                     </div>
                 </footer>
@@ -211,7 +212,7 @@
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#places_page')">Karte</a>
                         <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#places_page')">Upload</a>
                     </div>
                 </footer>
@@ -251,7 +252,7 @@
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#questions_list_page')">Karte</a>
                         <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#questions_list_page')">Upload</a>
                     </div>
                 </footer>
@@ -295,7 +296,7 @@
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#question_detail')">Karte</a>
                         <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#question_detail')">Upload</a>
                     </div>
                 </footer>
@@ -329,7 +330,7 @@
                 <footer data-role="footer" data-position="fixed">
                    <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#textanswer_page')">Karte</a>
                         <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#textanswer_page')">Upload</a>
                     </div>
                 </footer>
@@ -341,7 +342,7 @@
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#question_detail"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Antworten</h1>
                     <a href="#positionWindow7" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
-                        <div data-role="popup" id="positionWindow6" data-overlay-theme="a">
+                        <div data-role="popup" id="positionWindow7" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
@@ -356,15 +357,25 @@
                 <div data-role="main" id="main">
                     <div class="app">
                       <h1>Eigene Antworten:</h1>
-                      <ul id="answersList" data-role="listview" data-split-icon="delete" data-split-theme="a" data-inset="true">
+                      <ul id="answersList" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">
 
                       </ul>
+                      <div data-role="popup" id="answerOptions" data-overlay-theme="a">
+                        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                        <div data-role="navbar">
+                          <ul data-role="listview" id="subnav">
+                            <li><a href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a></li>
+                            <li><a href="#">Upload</a></li>
+                            <li><a href="#">Bearbeiten</a></li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
                    <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#answers_page')">Karte</a>
                         <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#answers_page')">Upload</a>
                     </div>
                 </footer>
@@ -373,7 +384,7 @@
             <!-- maps page here -->
             <div data-role="page" id="maps_page">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"  href="javaScript:void(0)" onclick="backTo('#maps_page')"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Map</h1>
                     <a href="#positionWindow8" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow7" data-overlay-theme="a">
@@ -390,15 +401,15 @@
                 </header>
                 <div data-role="main" id="main">
                     <div class="app">
-                        <div id="map" >
-
+                        <!-- <div id="map" style="width:100%; height:70%; position:absolute"> -->
+                          <div id="map" class="map">
                         </div>
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#maps_page')">Karte</a>
                         <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#maps_page')">Upload</a>
                     </div>
                 </footer>
@@ -429,7 +440,7 @@
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#options_page')">Karte</a>
                         <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#options_page')">Upload</a>
                     </div>
                 </footer>
@@ -463,7 +474,7 @@
                 <footer data-role="footer" data-position="fixed">
                     <div data-type="horizontal">
                         <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="#maps_page">Karte</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#upload_page')">Karte</a>
                         <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#upload_page')">Upload</a>
                     </div>
                 </footer>
@@ -497,18 +508,21 @@
                     <img id="login_footer_img" src="img/uni_imis.png" />
                 </footer>
             </div>
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <!-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/crypto-min.js"></script>
         <script src="js/webserviceController.js"></script>
         <script src="js/answersController.js"></script>
         <script src="js/databaseController.js"></script>
         <script type="text/javascript" src="js/leaflet.js"></script>
+        <script type="text/javascript" src="js/jqm.leaflet.min.js"></script>
         <script type="text/javascript" src="js/fastclick.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <!-- <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script> -->
+        <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script>
         <!-- <script src="http://192.168.0.18:8080/target/target-script-min.js#anonymous"></script> -->
         <script>
           app.initialize();

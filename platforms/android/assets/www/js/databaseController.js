@@ -22,12 +22,12 @@ function setUpDatabase()
 
   db.transaction(function(tx)
   {
-    tx.executeSql('DROP TABLE IF EXISTS moles_users');
-    tx.executeSql('DROP TABLE IF EXISTS moles_games');
-    tx.executeSql('DROP TABLE IF EXISTS moles_locations');
-    tx.executeSql('DROP TABLE IF EXISTS moles_tasks');
-    tx.executeSql('DROP TABLE IF EXISTS moles_images');
-    tx.executeSql('DROP TABLE IF EXISTS moles_answers');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_users');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_games');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_locations');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_tasks');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_images');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_answers');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_users (id integer primary key, moles_uid integer, username text, authToken text, validUser text)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_games (id integer primary key, moles_uid integer, game_inst_id integer, game_id integer, group_id integer, game_name text, game_description text, has_data integer)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_locations (id integer primary key, moles_uid integer, mission_id integer, game_id integer, name text, description text, location text, lat real, lng real)');
@@ -585,7 +585,9 @@ function buildAnswersPage()
         {
           if(res.rows.item(i).answer_type == "Text")
           {
-            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            // answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+
           }
           else if (res.rows.item(i).answer_type == "Picture")
           {
@@ -607,8 +609,11 @@ function buildAnswersPage()
   });
 }
 
-function deleteAnswer(task_id, answer_id)
+// function deleteAnswer(task_id, answer_id)
+function deleteAnswer()
 {
+  var answer_id = localStorage.getItem('_answerOption');
+  app.report(answer_id)
   var db = openDatabase();
 
   db.transaction(function(tx)
@@ -621,6 +626,7 @@ function deleteAnswer(task_id, answer_id)
         {
           app.report("Delete Answer "+res.rowsAffected);
           $('#answer_'+answer_id).remove();
+          $('#answerOptions').popup("close");
         });
       }
       else if (res.rows.item(0).answer_type == "Picture")

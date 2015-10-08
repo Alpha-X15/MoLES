@@ -213,8 +213,15 @@ footer .ui-btn {
   margin: auto;
 }
 
-#map {
-  height: 500px;
+/*#map {
+  height: 400px;
+}*/
+
+.map {
+  height: 400px;
+  width: 100%;
+  margin:0 auto;
+  margin-left: -10px;
 }
 
 /*

@@ -83,13 +83,16 @@ var app = {
         app.report(window.device.version);
         app.report(JSON.stringify(cordova.file, null, 4));
 
-        // $(function() {
-        //   FastClick.attach(document.body);
-        // });
-
         $(document).on("pageshow","#maps_page",function()
         {
-            initializeMap();
+          $.mobile.activePage.find('.map').leaflet();
+          // var map = new initializeMap();
+          var map = $('#map');
+          app.report(JSON.stringify(map.offset(), null, 4));
+          map.height($(window).height() - map.offset().top);
+          map.width($(window).width() - map.offset().left);
+          // map.invalidateSize();
+            // initializeMap();
         });
 
         $(document).on('click', '#submitButton', function(e)
@@ -245,7 +248,7 @@ function checkConnection()
     states[Connection.CELL]     = 'Bad';
     states[Connection.NONE]     = 'None';
 
-    app.report(JSON.stringify(states, null, 4));
+    // app.report(JSON.stringify(states, null, 4));
     return states[networkState];
     // alert('Connection type: '+ states[networkState]);
 }
@@ -258,9 +261,15 @@ function showHelpPage(sourceID)
   $.mobile.changePage($('#help_page'));
 }
 
+function showMapsPage(sourceID)
+{
+  localStorage.setItem('_MapsFrom', sourceID);
+  $.mobile.changePage($('#maps_page'));
+}
+
 function backTo(sourceID)
 {
-  app.report("backTo");
+  app.report("backFrom "+sourceID);
   if(sourceID == "#help_page")
   {
     $.mobile.changePage($(localStorage.getItem('_helpFor')));
@@ -269,8 +278,16 @@ function backTo(sourceID)
   {
     $.mobile.changePage($(localStorage.getItem('_uploadFrom')));
   }
+  else if (sourceID == "#maps_page")
+  {
+    $.mobile.changePage($(localStorage.getItem('_MapsFrom')));
+  }
 }
 
+function setIdForAnswerOptions(task_id, answer_id)
+{
+  localStorage.setItem('_answerOption', answer_id);
+}
 // function playAudio(url)
 // {
 //     // Play the audio file at url
@@ -289,14 +306,19 @@ function backTo(sourceID)
 //     my_media.play();
 // }
 
-function initializeMap()
-{
-    var map = L.map('map',{
-      center: [51.505, -0.09],
-      zoom: 13
-    });
-
-    L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',{
-      maxZoom: 18
-    }).addTo(map);
-}
+// function initializeMap()
+// {
+//     var map = L.map('map',{
+//       center: [51.505, -0.09],
+//       zoom: 13
+//     });
+//
+//     // L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',{
+//     //   maxZoom: 18
+//     // }).addTo(map);
+//     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
+//       maxZoom: 18
+//     }).addTo(map);
+//
+//     // map.invalidateSize();
+// }
