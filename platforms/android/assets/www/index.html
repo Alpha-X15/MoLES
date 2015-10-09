@@ -30,7 +30,6 @@
 
         <link rel="stylesheet" href="css/themes/jqueryTheme.min.css" />
         <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
-        <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" /> -->
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/leaflet.css" />
@@ -357,7 +356,7 @@
                 <div data-role="main" id="main">
                     <div class="app">
                       <h1>Eigene Antworten:</h1>
-                      <ul id="answersList" data-role="listview" data-split-icon="delete" data-split-theme="a" data-inset="true">
+                      <ul id="answersList" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">
 
                       </ul>
                       <div data-role="popup" id="answerOptions" data-overlay-theme="a">
@@ -365,8 +364,7 @@
                         <div data-role="navbar">
                           <ul data-role="listview" id="subnav">
                             <li><a href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a></li>
-                            <li><a href="#">Upload</a></li>
-                            <li><a href="#">Bearbeiten</a></li>
+                            <li><a href="javaScript:void(0)" onclick="getSingleAnswerForUpload()">Upload</a></li>
                           </ul>
                         </div>
                       </div>
@@ -421,7 +419,7 @@
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Optionen</h1>
                     <a href="#positionWindow9" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
-                        <div data-role="popup" id="positionWindow8" data-overlay-theme="a">
+                        <div data-role="popup" id="positionWindow9" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                             <ul data-role="listview" id="subnav">
@@ -452,7 +450,7 @@
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="javaScript:void(0)" onclick="backTo('#upload_page')"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Upload</h1>
                     <a href="#positionWindow10" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
-                        <div data-role="popup" id="positionWindow9" data-overlay-theme="a">
+                        <div data-role="popup" id="positionWindow10" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
@@ -486,7 +484,7 @@
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="javaScript:void(0)" onclick="backTo('#help_page')"> Back </a>
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Hilfe</h1>
                     <a href="#positionWindow11" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
-                        <div data-role="popup" id="positionWindow10" data-overlay-theme="a">
+                        <div data-role="popup" id="positionWindow11" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                             <ul data-role="listview" id="subnav">
@@ -508,8 +506,39 @@
                     <img id="login_footer_img" src="img/uni_imis.png" />
                 </footer>
             </div>
-        <!-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
+
+            <!-- answerdetail page here -->
+            <div data-role="page" id="answer_detail_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#answers_page"> Back </a>
+                    <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Antworten</h1>
+                    <a href="#positionWindow12" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow12" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#answer_detail_page')">Hilfe</a></li>
+                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div id="answerDetailContentDiv" class="app">
+
+
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                   <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#answer_detail_page')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#answers_page')">Upload</a>
+                    </div>
+                </footer>
+            </div>
         <script src="js/jquery-2.1.4.min.js"></script>
         <script src="js/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/crypto-min.js"></script>

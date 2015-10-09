@@ -128,6 +128,10 @@ function getGameList()
     });
 }
 
+/**
+* Get list of locations from webservice
+*
+*/
 function getLocationList(choosen_game_id, game_name, gameObj)
 {
     $.ajax(
@@ -200,6 +204,9 @@ function getLocationList(choosen_game_id, game_name, gameObj)
     });
 }
 
+/**
+* Pull images from molesserver for each loaction and question
+*/
 function getRESTImages(imageList)
 {
 	var count = 0;

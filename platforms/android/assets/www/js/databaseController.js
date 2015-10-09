@@ -346,6 +346,38 @@ function getAnswersForUpload()
   }
 }
 
+function getSingleAnswerForUpload()
+{
+  var id = localStorage.getItem('_answerOption');
+  if(checkConnection() == "None")
+  {
+    alert("Du hast keine Internetverbindung. Sorge für eine stabile Internetverbindung um einen Upload tätigen zu können.");
+  }
+  else
+  {
+    var db = openDatabase();
+
+    db.transaction(function(tx)
+    {
+      tx.executeSql('SELECT * FROM moles_answers WHERE id=? AND uploaded=?',[id, 0], function(tx, res)
+      {
+        if(res.rows.length > 0)
+        {
+          localStorage.setItem('_uploadQueue', res.rows.length);
+          $.mobile.loading('show',
+          {
+            text: "Dateiupload läuft für "+res.rows.length+" Antworten. Bitte habe einen Moment Geduld",
+            textVisible: true,
+            theme: 'a',
+            html: ""
+          });
+        }
+        prepareAnswerUpload(res.rows.item(0));
+      });
+    });
+  }
+}
+
 function getAnswersUploadCount(sourceID)
 {
   var db = openDatabase();
@@ -585,21 +617,19 @@ function buildAnswersPage()
         {
           if(res.rows.item(i).answer_type == "Text")
           {
-            // answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
-            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
-
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="javaScript:void(0)" onclick="buildAnswerDetailPage('+res.rows.item(i).id+')"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
           else if (res.rows.item(i).answer_type == "Picture")
           {
-            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_slr2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="javaScript:void(0)" onclick="buildAnswerDetailPage('+res.rows.item(i).id+')"><img src="img/icon_slr2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
           else if (res.rows.item(i).answer_type == "Video")
           {
-            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_slate2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="javaScript:void(0)" onclick="buildAnswerDetailPage('+res.rows.item(i).id+')"><img src="img/icon_slate2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
           else if (res.rows.item(i).answer_type == "Audio")
           {
-            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="#"><img src="img/icon_microphone9.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="javaScript:void(0)" onclick="deleteAnswer('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="javaScript:void(0)" onclick="buildAnswerDetailPage('+res.rows.item(i).id+')"><img src="img/icon_microphone9.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
         }
         $('#answersList').append(answersContent);
@@ -709,6 +739,54 @@ function updateAnswersList(internalID)
     tx.executeSql('SELECT * FROM moles_answers WHERE uploaded=1', [], function(tx, res)
     {
       app.report("Uploaded answers "+res.rows.length);
+    });
+  });
+}
+
+function buildAnswerDetailPage(id)
+{
+  app.report("BUILD FOR "+id);
+  var db = openDatabase();
+
+  $('#answerDetailContentDiv').empty();
+  var answerDetailContent = '';
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_answers WHERE id=?', [id], function(tx, res)
+    {
+      app.report("EXECUTETED SQL");
+      app.report(JSON.stringify(res.rows, null, 4));
+      if(res.rows.length === 1)
+      {
+        switch(res.rows.item(0).answer_type)
+        {
+          case "Text":
+            answerDetailContent += '<textarea name="text">'+res.rows.item(0).answer_value+'</textarea>';
+            break;
+          case "Picture":
+            answerDetailContent += '<img class="answerDetailImage" src="'+res.rows.item(0).answer_value+'"></img>';
+            break;
+          case "Audio":
+            answerDetailContent += '<button onclick="playAudio("'+res.rows.item(0).answer_value+'")">Play</button>';
+            break;
+          case "Video":
+           answerDetailContent +=  '<video id="answer_video" width="320"><source src="'+res.rows.item(0).answer_value+'" type="video/mp4">Your browser does not support HTML5 video.</video>';
+           answerDetailContent +=  '<button onclick="playPauseVideo()">Play/Pause</button>';
+            break;
+          default:
+            break;
+        }
+        // app.report("SPIELE GEFUNDEN: "+res.rows.length);
+        // if(res.rows.item(0).answer_type === "Text")
+        // {
+        //   app.report("ANTWORT TYP: "+res.rows.item(0).answer_type);
+        //   answerDetailContent += '<textarea name="text">'+res.rows.item(0).answer_value+'</textarea>';
+        // }
+        // else if()
+      }
+      app.report(answerDetailContent);
+      $('#answerDetailContentDiv').append(answerDetailContent);
+      $.mobile.changePage($('#answer_detail_page'));
     });
   });
 }

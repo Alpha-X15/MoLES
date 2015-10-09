@@ -213,6 +213,12 @@ footer .ui-btn {
   margin: auto;
 }
 
+.answerDetailImage {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+}
+
 /*#map {
   height: 400px;
 }*/

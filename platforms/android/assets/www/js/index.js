@@ -37,7 +37,7 @@ var app = {
     {
       platform: '',
       directory: '',
-      connection: '',
+      // connection: '',
     },
     // Application Constructor
     initialize: function() {
@@ -288,23 +288,35 @@ function setIdForAnswerOptions(task_id, answer_id)
 {
   localStorage.setItem('_answerOption', answer_id);
 }
-// function playAudio(url)
-// {
-//     // Play the audio file at url
-//     app.report("Should play audio");
-//     var my_media = new Media(url,
-//         // success callback
-//         function () {
-//             app.report("playAudio():Audio Success");
-//         },
-//         // error callback
-//         function (err) {
-//             app.report("playAudio():Audio Error: " + err);
-//         }
-//     );
-//     // Play audio
-//     my_media.play();
-// }
+
+function playPauseVideo()
+{
+    app.report("play/pause");
+    var myVideo = $("#answer_video").get(0);
+
+    if (myVideo.paused)
+        myVideo.play();
+    else
+        myVideo.pause();
+}
+
+function playAudio(url)
+{
+    // Play the audio file at url
+    app.report("Should play audio");
+    var my_media = new Media(url,
+        // success callback
+        function () {
+            app.report("playAudio():Audio Success");
+        },
+        // error callback
+        function (err) {
+            app.report("playAudio():Audio Error: " + err);
+        }
+    );
+    // Play audio
+    my_media.play();
+}
 
 // function initializeMap()
 // {
