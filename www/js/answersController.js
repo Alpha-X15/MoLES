@@ -15,26 +15,27 @@ function getAnswerAudio()
   app.report("should start audio");
   var captureSuccess = function(mediaFiles)
   {
-    var i, path, len, name;
-    for (i = 0, len = mediaFiles.length; i < len; i += 1)
-    {
-        path = mediaFiles[i].fullPath;
-        oldname = mediaFiles[i].name;
-        app.report(oldname);
+    var path, name;
+    app.report(JSON.stringify(mediaFiles, null, 4));
 
-        window.resolveLocalFileSystemURL(
-          path,
-          function(fileEntry)
-          {
-            newFileUri = app.devinfo.directory+"files/answers";
-            oldFilrUri = path;
-            newname = oldname;
-            window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
-            {
-              fileEntry.moveTo(dirEntry, newname, successAudioCallback, errorCallback);
-            }, errorCallback);
-          },errorCallback);
-      }
+    path = mediaFiles[0].fullPath;
+    oldname = mediaFiles[0].name;
+    app.report(oldname);
+    var date = new Date();
+    var time = date.getTime();
+
+    window.resolveLocalFileSystemURL(
+      path,
+      function(fileEntry)
+      {
+        newFileUri = app.devinfo.directory+"files/answers";
+        oldFilrUri = path;
+        newname = 'audio_'+time;
+        window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
+        {
+          fileEntry.moveTo(dirEntry, newname, successAudioCallback, errorCallback);
+        }, errorCallback);
+      },errorCallback);
     };
 
     var captureError = function(error)
@@ -49,29 +50,30 @@ function getAnswerPicture()
 {
   var captureSuccess = function(mediaFiles)
   {
-    var i, path, len, name;
-    for (i = 0, len = mediaFiles.length; i < len; i += 1)
-    {
-        path = mediaFiles[i].fullPath;
+    var path, name;
 
-        oldname = mediaFiles[i].name;
-        window.resolveLocalFileSystemURL(
-          path,
-          function(fileEntry)
+    path = mediaFiles[0].fullPath;
+    oldname = mediaFiles[0].name;
+
+    var date = new Date();
+    var time = date.getTime();
+
+    window.resolveLocalFileSystemURL(
+        path,
+        function(fileEntry)
+        {
+          // app.report(JSON.stringify(fileEntry, null, 4));
+          newFileUri = app.devinfo.directory+"files/answers";
+          app.report(newFileUri);
+          oldFilrUri = path;
+          newname = 'picture_'+time;
+
+          window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
           {
-            // app.report(JSON.stringify(fileEntry, null, 4));
-            newFileUri = app.devinfo.directory+"files/answers";
-            app.report(newFileUri);
-            oldFilrUri = path;
-            newname = oldname;
-
-            window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
-            {
-              // app.report(JSON.stringify(dirEntry, null, 4));
-              fileEntry.moveTo(dirEntry, newname, successPictureCallback, errorCallback);
-            }, errorCallback);
-          },errorCallback);
-    }
+            // app.report(JSON.stringify(dirEntry, null, 4));
+            fileEntry.moveTo(dirEntry, newname, successPictureCallback, errorCallback);
+          }, errorCallback);
+        },errorCallback);
   };
 
   // capture error callback
@@ -89,28 +91,28 @@ function getAnswerVideo()
   // capture callback
   var captureSuccess = function(mediaFiles)
   {
-    var i, path, len, name;
-    for (i = 0, len = mediaFiles.length; i < len; i += 1)
-    {
-        path = mediaFiles[i].fullPath;
+    var path, name;
 
-        oldname = mediaFiles[i].name;
-        app.report(oldname);
+    path = mediaFiles[0].fullPath;
 
-        window.resolveLocalFileSystemURL(
-          path,
-          function(fileEntry)
-          {
-            newFileUri = app.devinfo.directory+"files/answers";
-            oldFilrUri = path;
-            newname = oldname;
+    oldname = mediaFiles[0].name;
+    app.report(oldname);
+    var date = new Date();
+    var time = date.getTime();
 
-            window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
-            {
-              fileEntry.moveTo(dirEntry, newname, successVideoCallback, errorCallback);
-            }, errorCallback);
-          },errorCallback);
-    }
+    window.resolveLocalFileSystemURL(
+      path,
+      function(fileEntry)
+      {
+        newFileUri = app.devinfo.directory+"files/answers";
+        oldFilrUri = path;
+        newname = 'video_'+time;
+
+        window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
+        {
+          fileEntry.moveTo(dirEntry, newname, successVideoCallback, errorCallback);
+        }, errorCallback);
+      },errorCallback);
   };
 
   // capture error callback

@@ -754,8 +754,7 @@ function buildAnswerDetailPage(id)
   {
     tx.executeSql('SELECT * FROM moles_answers WHERE id=?', [id], function(tx, res)
     {
-      app.report("EXECUTETED SQL");
-      app.report(JSON.stringify(res.rows, null, 4));
+      app.report(JSON.stringify(res.rows.item(0), null, 4));
       if(res.rows.length === 1)
       {
         switch(res.rows.item(0).answer_type)
@@ -767,22 +766,17 @@ function buildAnswerDetailPage(id)
             answerDetailContent += '<img class="answerDetailImage" src="'+res.rows.item(0).answer_value+'"></img>';
             break;
           case "Audio":
-            answerDetailContent += '<button onclick="playAudio("'+res.rows.item(0).answer_value+'")">Play</button>';
+            answerDetailContent += '<h2 id="audioTime">00:00/00:00</h2>';
+            answerDetailContent += '<a class="audioPlayBtn" data-role="button" href="javaScript:void(0)" onclick="playAudio()">Play</a>';
             break;
           case "Video":
-           answerDetailContent +=  '<video id="answer_video" width="320"><source src="'+res.rows.item(0).answer_value+'" type="video/mp4">Your browser does not support HTML5 video.</video>';
-           answerDetailContent +=  '<button onclick="playPauseVideo()">Play/Pause</button>';
+            answerDetailContent +=  '<video id="answer_video" width="320"><source src="'+res.rows.item(0).answer_value+'" type="video/mp4">Your browser does not support HTML5 video.</video>';
+            answerDetailContent +=  '<button onclick="playPauseVideo()">Play/Pause</button>';
             break;
           default:
             break;
         }
-        // app.report("SPIELE GEFUNDEN: "+res.rows.length);
-        // if(res.rows.item(0).answer_type === "Text")
-        // {
-        //   app.report("ANTWORT TYP: "+res.rows.item(0).answer_type);
-        //   answerDetailContent += '<textarea name="text">'+res.rows.item(0).answer_value+'</textarea>';
-        // }
-        // else if()
+        localStorage.setItem('_answerDetail', JSON.stringify(res.rows.item(0)));
       }
       app.report(answerDetailContent);
       $('#answerDetailContentDiv').append(answerDetailContent);

@@ -134,6 +134,11 @@ var app = {
           $('#answersList').listview("refresh");
         });
 
+        // $(document).on("pagebeforeshow", "#answer_detail_page", function()
+        // {
+        //   $('.audioPlayBtn').button("refresh");
+        // });
+
         $(document).on("pageshow", "#upload_page", function()
         {
           if(checkConnection() == "Bad")
@@ -300,22 +305,85 @@ function playPauseVideo()
         myVideo.pause();
 }
 
-function playAudio(url)
+function playAudio()
 {
+    var audio = JSON.parse(localStorage.getItem('_answerDetail'));
+    var path = audio.answer_value;
+    var durDisplay='';
     // Play the audio file at url
-    app.report("Should play audio");
-    var my_media = new Media(url,
+    app.report("Should play audio "+audio.answer_value);
+    var my_media = new Media(path,
         // success callback
-        function () {
+        function ()
+        {
             app.report("playAudio():Audio Success");
         },
         // error callback
-        function (err) {
+        function (err)
+        {
             app.report("playAudio():Audio Error: " + err);
+        },
+        function (status)
+        {
+          app.report(status);
         }
     );
     // Play audio
     my_media.play();
+
+    var counter = 0;
+    var timerDur = setInterval(function()
+    {
+      counter = counter + 100;
+      if (counter > 2000)
+      {
+        clearInterval(timerDur);
+      }
+
+      var dur = my_media.getDuration();
+      if (dur > 0)
+      {
+        clearInterval(timerDur);
+
+        var duration = Math.ceil(dur);
+        var durMinutes = Math.floor(duration/60);
+        // var durSeconds = duration-(durMinutes*60);
+        var durSeconds = (duration % 60)-1;
+
+        durDisplay = str_pad_left(durMinutes, '0', 2)+':'+str_pad_left(durSeconds, '0', 2);
+      }
+    }, 100);
+
+    var mediaTimer = setInterval(function ()
+    {
+      // get media position
+      my_media.getCurrentPosition(
+        // success callback
+        function (position)
+        {
+            if (position >= 0)
+            {
+                var actPos = Math.ceil(position);
+                var actMinutes = Math.floor(actPos/60);
+                var actSeconds = actPos % 60;
+                var actDisplay = str_pad_left(actMinutes, '0', 2)+':'+str_pad_left(actSeconds, '0', 2);
+
+                $('#audioTime').empty();
+                $('#audioTime').append(actDisplay+"/"+durDisplay);
+                app.report(actDisplay + " / "+durDisplay);
+            }
+        },
+        // error callback
+        function (e)
+        {
+            app.report("Error getting pos=" + e);
+        });
+    }, 1000);
+}
+
+function str_pad_left(string,pad,length)
+{
+    return (new Array(length+1).join(pad)+string).slice(-length);
 }
 
 // function initializeMap()
