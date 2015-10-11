@@ -119,6 +119,11 @@ var app = {
           $('#placesList').listview("refresh");
         });
 
+        $(document).on("pageshow", "#places_page", function()
+        {
+          getMapMarkers(localStorage.getItem('_choosendGameID'));
+        });
+
         $(document).on("pagebeforeshow", "#questions_list_page", function()
         {
           $('#taskList').listview("refresh");
@@ -134,10 +139,12 @@ var app = {
           $('#answersList').listview("refresh");
         });
 
-        // $(document).on("pagebeforeshow", "#answer_detail_page", function()
-        // {
-        //   $('.audioPlayBtn').button("refresh");
-        // });
+        $(document).on("pagebeforeshow", "#answer_detail_page", function()
+        {
+          $('.playBtn').buttonMarkup();
+          $('.deleteBtn').buttonMarkup();
+          $('#textAnswerChangeArea').textinput();
+        });
 
         $(document).on("pageshow", "#upload_page", function()
         {

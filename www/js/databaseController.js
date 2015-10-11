@@ -718,6 +718,7 @@ function deleteAnswerFromDB(answer_id)
     {
       app.report("Delete Answer "+res.rowsAffected);
       $('#answer_'+answer_id).remove();
+      $.mobile.changePage('#answers_page');
     });
   });
 }
@@ -743,6 +744,21 @@ function updateAnswersList(internalID)
   });
 }
 
+function updateTextAnswer(answer_id)
+{
+  var newValue = $('#textAnswerChangeArea').val();
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql("UPDATE moles_answers SET answer_value=? WHERE id=?", [newValue, answer_id], function(tx, res)
+    {
+      app.report("Update rows "+res.rowsAffected);
+      $.mobile.changePage('#answers_page');
+    });
+  });
+}
+
 function buildAnswerDetailPage(id)
 {
   app.report("BUILD FOR "+id);
@@ -760,27 +776,60 @@ function buildAnswerDetailPage(id)
         switch(res.rows.item(0).answer_type)
         {
           case "Text":
-            answerDetailContent += '<textarea name="text">'+res.rows.item(0).answer_value+'</textarea>';
+            answerDetailContent += '<textarea id="textAnswerChangeArea" name="text">'+res.rows.item(0).answer_value+'</textarea>';
+            answerDetailContent += '<a class="playBtn" data-role="button" href="javaScript:void(0)" onclick="updateTextAnswer('+res.rows.item(0).id+')">Änderungen speichern</a>';
+            answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswerFromDB('+res.rows.item(0).id+')">Löschen</a>';
             break;
           case "Picture":
             answerDetailContent += '<img class="answerDetailImage" src="'+res.rows.item(0).answer_value+'"></img>';
+            answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a>';
             break;
           case "Audio":
             answerDetailContent += '<h2 id="audioTime">00:00/00:00</h2>';
-            answerDetailContent += '<a class="audioPlayBtn" data-role="button" href="javaScript:void(0)" onclick="playAudio()">Play</a>';
+            answerDetailContent += '<a class="playBtn" data-role="button" href="javaScript:void(0)" onclick="playAudio()">Play</a>';
+            answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a>';
             break;
           case "Video":
-            answerDetailContent +=  '<video id="answer_video" width="320"><source src="'+res.rows.item(0).answer_value+'" type="video/mp4">Your browser does not support HTML5 video.</video>';
-            answerDetailContent +=  '<button onclick="playPauseVideo()">Play/Pause</button>';
+            answerDetailContent += '<video id="answer_video" width="320"><source src="'+res.rows.item(0).answer_value+'" type="video/mp4">Your browser does not support HTML5 video.</video>';
+            answerDetailContent += '<a class="playBtn" data-role="button" href="javaScript:void(0)" onclick="playPauseVideo()">Play/Pause</a>';
+            answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a>';
             break;
           default:
             break;
         }
         localStorage.setItem('_answerDetail', JSON.stringify(res.rows.item(0)));
+        localStorage.setItem('_answerOption', res.rows.item(0).id);
       }
       app.report(answerDetailContent);
       $('#answerDetailContentDiv').append(answerDetailContent);
       $.mobile.changePage($('#answer_detail_page'));
+    });
+  });
+}
+
+function getMapMarkers(game_id)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT lat, lng FROM moles_locations WHERE game_id=?', [game_id], function(tx, res)
+    {
+      app.report("Locations latlng "+JSON.stringify(res.rows));
+      if(res.rows.length > 0)
+      {
+        // var map_markers = '<script>var map_marker=[';
+        // for(var i = 0; i<res.rows.length; i++)
+        // {
+        //   map_markers += res.rows.item(i);
+        // }
+        // map_markers += ']; </script>';
+        // $('#map').append(map_markers);
+        var lat = res.rows.item(0).lat;
+        var lng = res.rows.item(0).lng;
+        $('#map').attr("data-lat", lat.toFixed(2));
+        $('#map').attr("data-lng", lng.toFixed(2));
+      }
     });
   });
 }
