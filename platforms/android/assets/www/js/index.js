@@ -83,7 +83,7 @@ var app = {
         app.report(window.device.version);
         app.report(JSON.stringify(cordova.file, null, 4));
 
-        $(document).on("pageshow","#maps_page",function()
+        $(document).on("pagebeforeshow","#maps_page",function()
         {
           $.mobile.activePage.find('.map').leaflet();
           // var map = new initializeMap();
