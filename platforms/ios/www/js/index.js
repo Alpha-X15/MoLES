@@ -37,11 +37,12 @@ var app = {
     {
       platform: '',
       directory: '',
-      connection: '',
+      // connection: '',
     },
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        fastclick.attach(document.body);
     },
     // Bind Event Listeners
     //
@@ -59,7 +60,7 @@ var app = {
         // navigator.splashscreen.show();
         app.receivedEvent('deviceready');
         app.devinfo.platform = window.device.platform;
-        app.report(JSON.stringify(navigator.connection));
+
         checkConnection();
         localStorage.clear();
         StatusBar.hide();
@@ -67,13 +68,12 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
+        // var parentElement = document.getElementById(id);
+        // var listeningElement = parentElement.querySelector('.listening');
+        // var receivedElement = parentElement.querySelector('.received');
+        //
+        // listeningElement.setAttribute('style', 'display:none;');
+        // receivedElement.setAttribute('style', 'display:block;');
         app.report('Received Event: ' + id);
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemFail);
 
@@ -85,18 +85,29 @@ var app = {
 
         $(document).on("pageshow","#maps_page",function()
         {
-            initializeMap();
+          $.mobile.activePage.find('.map').leaflet();
+          // var map = new initializeMap();
+          var map = $('#map');
+          app.report(JSON.stringify(map.offset(), null, 4));
+          map.height($(window).height() - map.offset().top);
+          map.width($(window).width() - map.offset().left);
+          // map.invalidateSize();
+            // initializeMap();
         });
 
         $(document).on('click', '#submitButton', function(e)
         {
+          if(checkConnection() == "None")
+          {
+            offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+          }
           loginWebservice($('input[name=username]').val(), $('input[name=password]').val());
         });
 
-        $(document).on('click', '#OfflineTestButton', function(e)
-        {
-          offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
-        });
+        // $(document).on('click', '#OfflineTestButton', function(e)
+        // {
+        //   offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
+        // });
 
         $(document).on("pagebeforeshow", "#games_page", function()
         {
@@ -108,6 +119,11 @@ var app = {
           $('#placesList').listview("refresh");
         });
 
+        $(document).on("pageshow", "#places_page", function()
+        {
+          getMapMarkers(localStorage.getItem('_choosendGameID'));
+        });
+
         $(document).on("pagebeforeshow", "#questions_list_page", function()
         {
           $('#taskList').listview("refresh");
@@ -116,6 +132,30 @@ var app = {
         $(document).on("pagebeforeshow", "#textanswer_page", function()
         {
           $('#textAnswerArea').val('');
+        });
+
+        $(document).on("pagebeforeshow", "#answers_page", function()
+        {
+          $('#answersList').listview("refresh");
+        });
+
+        $(document).on("pagebeforeshow", "#answer_detail_page", function()
+        {
+          $('.playBtn').buttonMarkup();
+          $('.deleteBtn').buttonMarkup();
+          $('#textAnswerChangeArea').textinput();
+        });
+
+        $(document).on("pageshow", "#upload_page", function()
+        {
+          if(checkConnection() == "Bad")
+          {
+            alert("Deine Internetverbindung ist sehr schlecht. Da viele Daten übertragen werden müssen solltest du dich besser in ein WLAN begeben. Es können Kosten für die Datenübertragung anfallen.");
+          }
+          else if (checkConnection() == "None")
+          {
+            alert("Es scheint als hättest du keine Internetverbindung. Ohne stabile Internetverbindung ist der Upload nicht möglich.");
+          }
         });
     },
     report: function(id)
@@ -138,7 +178,7 @@ function onFileSystemSuccess(fileSystem)
       var natiurl = entry.fullPath;
       directoryEntry.getDirectory(natiurl+"answers", {create: true, exclusive: false}, function(parent)
       {
-        alert(parent.name);
+        //alert(parent.name);
         app.report(parent.name);
       },
       function(error)
@@ -209,44 +249,163 @@ function checkConnection()
 {
     var networkState = navigator.connection.type;
 
+    app.report(networkState);
     var states = {};
-    states[Connection.UNKNOWN]  = 'Unknown connection';
-    states[Connection.ETHERNET] = 'Ethernet connection';
-    states[Connection.WIFI]     = 'WiFi connection';
-    states[Connection.CELL_2G]  = 'Cell 2G connection';
-    states[Connection.CELL_3G]  = 'Cell 3G connection';
-    states[Connection.CELL_4G]  = 'Cell 4G connection';
-    states[Connection.CELL]     = 'Cell generic connection';
-    states[Connection.NONE]     = 'No network connection';
+    states[Connection.UNKNOWN]  = 'Bad';
+    states[Connection.ETHERNET] = 'Best';
+    states[Connection.WIFI]     = 'Best';
+    states[Connection.CELL_2G]  = 'Bad';
+    states[Connection.CELL_3G]  = 'Great';
+    states[Connection.CELL_4G]  = 'Great';
+    states[Connection.CELL]     = 'Bad';
+    states[Connection.NONE]     = 'None';
 
+    // app.report(JSON.stringify(states, null, 4));
+    return states[networkState];
     // alert('Connection type: '+ states[networkState]);
 }
-// function playAudio(url)
-// {
-//     // Play the audio file at url
-//     app.report("Should play audio");
-//     var my_media = new Media(url,
-//         // success callback
-//         function () {
-//             app.report("playAudio():Audio Success");
-//         },
-//         // error callback
-//         function (err) {
-//             app.report("playAudio():Audio Error: " + err);
-//         }
-//     );
-//     // Play audio
-//     my_media.play();
-// }
 
-function initializeMap()
+function showHelpPage(sourceID)
 {
-    var map = L.map('map',{
-      center: [51.505, -0.09],
-      zoom: 13
-    });
-
-    L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',{
-      maxZoom: 18
-    }).addTo(map);
+  localStorage.setItem('_helpFor', sourceID);
+  $('#helpText').empty();
+  $('#helpText').append("Hier sollte die Hilfe für die "+sourceID+" stehen ");
+  $.mobile.changePage($('#help_page'));
 }
+
+function showMapsPage(sourceID)
+{
+  localStorage.setItem('_MapsFrom', sourceID);
+  $.mobile.changePage($('#maps_page'));
+}
+
+function backTo(sourceID)
+{
+  app.report("backFrom "+sourceID);
+  if(sourceID == "#help_page")
+  {
+    $.mobile.changePage($(localStorage.getItem('_helpFor')));
+  }
+  else if (sourceID == "#upload_page")
+  {
+    $.mobile.changePage($(localStorage.getItem('_uploadFrom')));
+  }
+  else if (sourceID == "#maps_page")
+  {
+    $.mobile.changePage($(localStorage.getItem('_MapsFrom')));
+  }
+}
+
+function setIdForAnswerOptions(task_id, answer_id)
+{
+  localStorage.setItem('_answerOption', answer_id);
+}
+
+function playPauseVideo()
+{
+    app.report("play/pause");
+    var myVideo = $("#answer_video").get(0);
+
+    if (myVideo.paused)
+        myVideo.play();
+    else
+        myVideo.pause();
+}
+
+function playAudio()
+{
+    var audio = JSON.parse(localStorage.getItem('_answerDetail'));
+    var path = audio.answer_value;
+    var durDisplay='';
+    // Play the audio file at url
+    app.report("Should play audio "+audio.answer_value);
+    var my_media = new Media(path,
+        // success callback
+        function ()
+        {
+            app.report("playAudio():Audio Success");
+        },
+        // error callback
+        function (err)
+        {
+            app.report("playAudio():Audio Error: " + err);
+        },
+        function (status)
+        {
+          app.report(status);
+        }
+    );
+    // Play audio
+    my_media.play();
+
+    var counter = 0;
+    var timerDur = setInterval(function()
+    {
+      counter = counter + 100;
+      if (counter > 2000)
+      {
+        clearInterval(timerDur);
+      }
+
+      var dur = my_media.getDuration();
+      if (dur > 0)
+      {
+        clearInterval(timerDur);
+
+        var duration = Math.ceil(dur);
+        var durMinutes = Math.floor(duration/60);
+        // var durSeconds = duration-(durMinutes*60);
+        var durSeconds = (duration % 60)-1;
+
+        durDisplay = str_pad_left(durMinutes, '0', 2)+':'+str_pad_left(durSeconds, '0', 2);
+      }
+    }, 100);
+
+    var mediaTimer = setInterval(function ()
+    {
+      // get media position
+      my_media.getCurrentPosition(
+        // success callback
+        function (position)
+        {
+            if (position >= 0)
+            {
+                var actPos = Math.ceil(position);
+                var actMinutes = Math.floor(actPos/60);
+                var actSeconds = actPos % 60;
+                var actDisplay = str_pad_left(actMinutes, '0', 2)+':'+str_pad_left(actSeconds, '0', 2);
+
+                $('#audioTime').empty();
+                $('#audioTime').append(actDisplay+"/"+durDisplay);
+                app.report(actDisplay + " / "+durDisplay);
+            }
+        },
+        // error callback
+        function (e)
+        {
+            app.report("Error getting pos=" + e);
+        });
+    }, 1000);
+}
+
+function str_pad_left(string,pad,length)
+{
+    return (new Array(length+1).join(pad)+string).slice(-length);
+}
+
+// function initializeMap()
+// {
+//     var map = L.map('map',{
+//       center: [51.505, -0.09],
+//       zoom: 13
+//     });
+//
+//     // L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',{
+//     //   maxZoom: 18
+//     // }).addTo(map);
+//     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
+//       maxZoom: 18
+//     }).addTo(map);
+//
+//     // map.invalidateSize();
+// }

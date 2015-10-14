@@ -18,7 +18,15 @@ function getAnswerAudio()
     var path, name;
     app.report(JSON.stringify(mediaFiles, null, 4));
 
-    path = mediaFiles[0].fullPath;
+    if(app.devinfo.platform === "iOS")
+    {
+      path = "file://"+mediaFiles[0].fullPath;
+    }
+    else
+    {
+      path = mediaFiles[0].fullPath;
+    }
+
     oldname = mediaFiles[0].name;
     app.report(oldname);
     var date = new Date();
@@ -29,12 +37,18 @@ function getAnswerAudio()
       function(fileEntry)
       {
         newFileUri = app.devinfo.directory+"files/answers";
+
+        if(app.devinfo.platform === "iOS")
+        {
+          newFileUri = app.devinfo.directory+"answers";
+        }
+
         oldFilrUri = path;
         newname = 'audio_'+time;
         window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
         {
-          fileEntry.moveTo(dirEntry, newname, successAudioCallback, errorCallback);
-        }, errorCallback);
+          fileEntry.moveTo(dirEntry, newname, successAudioCallback, errorMoveCallback);
+        }, errorSecondCallback);
       },errorCallback);
     };
 
@@ -52,27 +66,41 @@ function getAnswerPicture()
   {
     var path, name;
 
-    path = mediaFiles[0].fullPath;
+    if(app.devinfo.platform === "iOS")
+    {
+      path = "file://"+mediaFiles[0].fullPath;
+    }
+    else
+    {
+      path = mediaFiles[0].fullPath;
+    }
+
     oldname = mediaFiles[0].name;
 
     var date = new Date();
     var time = date.getTime();
 
-    window.resolveLocalFileSystemURL(
+   window.resolveLocalFileSystemURL(
         path,
         function(fileEntry)
         {
           // app.report(JSON.stringify(fileEntry, null, 4));
           newFileUri = app.devinfo.directory+"files/answers";
+
+          if(app.devinfo.platform === "iOS")
+          {
+            newFileUri = app.devinfo.directory+"answers";
+          }
+
           app.report(newFileUri);
-          oldFilrUri = path;
+          oldFileUri = path;
           newname = 'picture_'+time;
 
           window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
           {
             // app.report(JSON.stringify(dirEntry, null, 4));
-            fileEntry.moveTo(dirEntry, newname, successPictureCallback, errorCallback);
-          }, errorCallback);
+            fileEntry.moveTo(dirEntry, newname, successPictureCallback, errorMoveCallback);
+          }, errorSecondCallback);
         },errorCallback);
   };
 
@@ -93,7 +121,14 @@ function getAnswerVideo()
   {
     var path, name;
 
-    path = mediaFiles[0].fullPath;
+    if(app.devinfo.platform === "iOS")
+    {
+      path = "file://"+mediaFiles[0].fullPath;
+    }
+    else
+    {
+      path = mediaFiles[0].fullPath;
+    }
 
     oldname = mediaFiles[0].name;
     app.report(oldname);
@@ -105,13 +140,19 @@ function getAnswerVideo()
       function(fileEntry)
       {
         newFileUri = app.devinfo.directory+"files/answers";
+
+        if(app.devinfo.platform === "iOS")
+        {
+          newFileUri = app.devinfo.directory+"answers";
+        }
+
         oldFilrUri = path;
         newname = 'video_'+time;
 
         window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
         {
-          fileEntry.moveTo(dirEntry, newname, successVideoCallback, errorCallback);
-        }, errorCallback);
+          fileEntry.moveTo(dirEntry, newname, successVideoCallback, errorMoveCallback);
+        }, errorSecondCallback);
       },errorCallback);
   };
 
@@ -126,6 +167,18 @@ function getAnswerVideo()
 }
 
 function errorCallback(error)
+{
+  app.report("Error "+ error.code);
+  app.report(JSON.stringify(error, null, 4));
+}
+
+function errorSecondCallback(error)
+{
+  app.report("Error "+ error.code);
+  app.report(JSON.stringify(error, null, 4));
+}
+
+function errorMoveCallback(error)
 {
   app.report("Error "+ error.code);
   app.report(JSON.stringify(error, null, 4));
@@ -148,6 +201,7 @@ function successVideoCallback(entry)
 function successPictureCallback(entry)
 {
   app.report("newpath "+entry.fullPath);
+  alert("newpath "+entry.fullPath);
   app.report(JSON.stringify(entry, null, 4));
   storeAnswer("Picture", entry.name, entry.nativeURL);
 }

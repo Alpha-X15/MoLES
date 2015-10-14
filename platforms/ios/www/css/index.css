@@ -164,6 +164,10 @@
     height: 35px;
 }
 
+#loginForm {
+  margin-top: 60px;
+}
+
 .input {
     width: 90%%;
     margin-left: 35px;
@@ -190,13 +194,40 @@ footer .ui-btn {
   border-radius: 10px !important;
 }
 
-/*#placesList > li{
-  border-radius: 10px !important;
+#taskTitle, #locationTitle, #placesTitle, #spieleTitle {
+  width: 100%;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  padding-left: auto;
+  padding-right: auto;
+  text-align: center;
+}
+
+.imageContainer {
+    width: 100%;
+}
+
+#taskImage, #locationImage {
+  display: block;
+  max-width: 60%;
+  margin: auto;
+}
+
+.answerDetailImage {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+}
+
+/*#map {
+  height: 400px;
 }*/
 
-#map {
-  /*width: 180px;*/
-  height: 300px;
+.map {
+  height: 400px;
+  width: 100%;
+  margin:0 auto;
+  margin-left: -10px;
 }
 
 /*

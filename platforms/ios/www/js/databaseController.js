@@ -22,12 +22,12 @@ function setUpDatabase()
 
   db.transaction(function(tx)
   {
-    tx.executeSql('DROP TABLE IF EXISTS moles_users');
-    tx.executeSql('DROP TABLE IF EXISTS moles_games');
-    tx.executeSql('DROP TABLE IF EXISTS moles_locations');
-    tx.executeSql('DROP TABLE IF EXISTS moles_tasks');
-    tx.executeSql('DROP TABLE IF EXISTS moles_images');
-    tx.executeSql('DROP TABLE IF EXISTS moles_answers');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_users');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_games');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_locations');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_tasks');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_images');
+    // tx.executeSql('DROP TABLE IF EXISTS moles_answers');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_users (id integer primary key, moles_uid integer, username text, authToken text, validUser text)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_games (id integer primary key, moles_uid integer, game_inst_id integer, game_id integer, group_id integer, game_name text, game_description text, has_data integer)');
     tx.executeSql('CREATE TABLE IF NOT EXISTS moles_locations (id integer primary key, moles_uid integer, mission_id integer, game_id integer, name text, description text, location text, lat real, lng real)');
@@ -62,48 +62,7 @@ function storeUserLogin(userid, username, authToken, validUser)
       }
     });
   });
-
-  // db.transaction(function(tx)
-  // {
-  //   tx.executeSql('INSERT INTO moles_users (moles_uid, username, authToken, validUser) VALUES (?,?,?,?)', [userid, username, authToken, validUser], function(tx, res) {
-  //     app.report("InsertedId: "+res.insertId);
-  //     app.report("AffectedRows: "+res.rowsAffected);
-  //   });
-  // });
-
-  db.transaction(function(tx) {
-      tx.executeSql("SELECT * FROM moles_users", [], function(tx, res) {
-        app.report("res.rows.length: " + res.rows.length);
-        app.report("res.rows.item(0): " + JSON.stringify(res.rows.item(0)));
-        app.report("res.rows: "+JSON.stringify(res.rows));
-      });
-    });
 }
-
-// function storeGameList(user, gameList)
-// {
-//   var db = openDatabase();
-//
-//   db.transaction(function(tx)
-//   {
-//     for(var i = 0; i<gameList.length; i++)
-//     {
-//       tx.executeSql('INSERT INTO moles_games (moles_uid, game_inst_id, game_id, group_id, game_name, game_description, has_data) VALUES (?,?,?,?,?,?,?)',
-//       [
-//         user,
-//         gameList[i]["GameInstance"]["id"],
-//         gameList[i]["GameInstance"]["game_id"],
-//         gameList[i]["GameInstance"]["group_id"],
-//         gameList[i]["GameInstance"]["name"],
-//         gameList[i]["Game"]["description"],
-//         0
-//       ], function(tx, res)
-//       {
-//         app.report("InsertedGameId: "+res.insertId);
-//       });
-//     }
-//   });
-// }
 
 function storeGame(user, gameObj)
 {
@@ -146,48 +105,105 @@ function storeGame(user, gameObj)
       }
     });
   });
-  // db.transaction(function(tx)
-  // {
-  //   tx.executeSql('INSERT INTO moles_games (moles_uid, game_inst_id, game_id, group_id, game_name, game_description, has_data) VALUES (?,?,?,?,?,?,?)',
-  //   [
-  //     user,
-  //     gameObj.GameInstance.id,
-  //     gameObj.GameInstance.game_id,
-  //     gameObj.GameInstance.group_id,
-  //     gameObj.Game.name,
-  //     gameObj.Game.description,
-  //     1
-  //   ], function(tx, res)
-  //   {
-  //     app.report("InsertedGameId: "+res.insertId);
-  //   });
-  // });
+}
+
+function storeLocation(user, location)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_locations WHERE mission_id=?', [location.id], function(tx, res)
+    {
+      if(res.rows.length == 0)
+      {
+        tx.executeSql('INSERT INTO moles_locations (moles_uid, mission_id, game_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
+        [
+          user,
+          location.id,
+          location.game_id,
+          location.name,
+          location.description,
+          location.location,
+          location.lat,
+          location.lng
+        ], function(tx, res)
+        {
+          app.report("InsertedLocationId: "+res.insertId);
+        });
+      }
+      else if(res.rows.length == 1)
+      {
+        tx.executeSql('UPDATE moles_locations SET name=?, description=?, location=?, lat=?, lng=? WHERE mission_id=?',
+        [
+          location.name,
+          location.description,
+          location.location,
+          location.lat,
+          location.lng,
+          location.id,
+        ], function(tx, res)
+        {
+          app.report("Updated Locations "+res.rowsAffected);
+        });
+      }
+    });
+  });
+}
+
+function storeTask(user, task)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_tasks WHERE task_id=?', [task.id], function(tx, res)
+    {
+      if(res.rows.length == 0)
+      {
+        tx.executeSql('INSERT INTO moles_tasks (moles_uid, task_id, mission_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
+        [
+          user,
+          task.id,
+          task.mission_id,
+          task.name,
+          task.description,
+          task.location,
+          task.lat,
+          task.lng
+        ], function(tx, res)
+        {
+          app.report("inserted task: "+res.insertId);
+        });
+      }
+      else if (res.rows.length == 1)
+      {
+        tx.executeSql('UPDATE moles_tasks SET mission_id=?, name=?, description=?, location=?, lat=?, lng=? WHERE task_id=?',
+        [
+          task.mission_id,
+          task.name,
+          task.description,
+          task.location,
+          task.lat,
+          task.lng,
+          task.id,
+        ], function(tx, res)
+        {
+          app.report("Task updates "+res.rowsAffected);
+        });
+      }
+    });
+  });
 }
 
 function storeLocationList(user, locationList)
 {
   var db = openDatabase();
 
-  db.transaction(function(tx)
+  for(var i = 0; i<locationList["Mission"].length; i++)
   {
-    for(var i = 0; i<locationList["Mission"].length; i++)
-    {
-      tx.executeSql('INSERT INTO moles_locations (moles_uid, mission_id, game_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
-      [
-        user,
-        locationList["Mission"][i]["id"],
-        locationList["Mission"][i]["game_id"],
-        locationList["Mission"][i]["name"],
-        locationList["Mission"][i]["description"],
-        locationList["Mission"][i]["location"],
-        locationList["Mission"][i]["lat"],
-        locationList["Mission"][i]["lng"]
-      ], function(tx, res)
-      {
-        app.report("InsertedLocationId: "+res.insertId);
-      });
-    }
-  });
+    storeLocation(user, locationList["Mission"][i]);
+  }
 
   var questions = [];
   var mediaImages = [];
@@ -222,70 +238,59 @@ function storeLocationList(user, locationList)
     }
   }
 
-  db.transaction(function(tx)
+  for(var l = 0; l<questions.length; l++)
   {
-    for(var l = 0; l<questions.length; l++)
-    {
-      tx.executeSql('INSERT INTO moles_tasks (moles_uid, task_id, mission_id, name, description, location, lat, lng) VALUES (?,?,?,?,?,?,?,?)',
-      [
-        user,
-        questions[l]["id"],
-        questions[l]["mission_id"],
-        questions[l]["name"],
-        questions[l]["description"],
-        questions[l]["location"],
-        questions[l]["lat"],
-        questions[l]["lng"]
-      ], function(tx, res)
-      {
-        app.report("inserted task: "+res.insertId);
-      });
-    }
-  });
-
-  // db.transaction(function(tx)
-  // {
-  //   tx.executeSql('UPDATE moles_games SET has_data=1 WHERE game_id=?',[locationList["Mission"][0]["game_id"]], function(tx, res)
-  //   {
-  //     app.report("Updated games "+res.rowsAffected);
-  //   });
-  // });
+    storeTask(user, questions[l]);
+  }
 
   getRESTImages(mediaImages);
 }
 
-function storeImages(userid, imageList)
+function storeImages(userid, media)
 {
   var db = openDatabase();
 
   db.transaction(function(tx)
   {
-    for(var media in imageList)
+    tx.executeSql('SELECT * FROM moles_images WHERE image_id=?', [media.id], function(tx, res)
     {
+      if(res.rows.length == 0)
+      {
         tx.executeSql('INSERT INTO moles_images (moles_uid, image_id, task_id, mission_id, game_id, image_title, filename, imagepath) VALUES (?,?,?,?,?,?,?,?)',
         [
           userid,
-          imageList[media]["id"],
-          imageList[media]["question_id"],
-          imageList[media]["mission_id"],
-          imageList[media]["game_id"],
-          imageList[media]["title"],
-          imageList[media]["file"],
-          imageList[media]["filepath"]
+          media.id,
+          media.question_id,
+          media.mission_id,
+          media.game_id,
+          media.title,
+          media.file,
+          media.filepath
         ],
         function(tx, res)
         {
           app.report("Inserted Image "+res.insertId);
         });
-    }
-  });
-
-  db.transaction(function(tx){
-    tx.executeSql("SELECT * FROM moles_images", [], function(tx, res){
-      app.report("Images length "+res.rows.length);
-      app.report("image 0: " + JSON.stringify(res.rows.item(0)));
-      app.report(JSON.stringify(res.rows));
+      }
+      else if (res.rows.length == 1)
+      {
+        tx.executeSql('UPDATE moles_images SET task_id=?, mission_id=?, game_id=?, image_title=?, filename=?, imagepath=? WHERE image_id=?',
+        [
+          media.question_id,
+          media.mission_id,
+          media.game_id,
+          media.title,
+          media.file,
+          media.filepath,
+          media.id,
+        ], function(tx, res)
+        {
+          app.report("Image update "+res.rowsAffected);
+        });
+      }
     });
+
+
   });
 }
 
@@ -301,54 +306,79 @@ function storeAnswer(answerType, answerName, answerValue)
     tx.executeSql('INSERT INTO moles_answers (moles_uid, task_id, answer_type, answer_name, answer_value, uploaded) VALUES (?,?,?,?,?,?)', [userId, taskId, answerType, answerName, answerValue, 0], function(tx, res)
     {
       app.report("Inserted answer"+res.insertId);
-    });
-  });
-
-  db.transaction(function(tx)
-  {
-    tx.executeSql('SELECT * FROM moles_answers',[], function(tx, res)
-    {
-      app.report("Moles_answers "+JSON.stringify(res.rows, null, 4));
-      app.report("Answer 0 "+JSON.stringify(res.rows.item(0), null, 4));
-    });
-  });
-
-  if(answerType == "Text")
-  {
       $.mobile.changePage($('#question_detail'));
-  }
+    });
+  });
 }
 
 function getAnswersForUpload()
 {
-  var db = openDatabase();
-
-  db.transaction(function(tx)
+  if(checkConnection() == "None")
   {
-    tx.executeSql('SELECT * FROM moles_answers WHERE uploaded=?',[0], function(tx, res)
-    {
-      if(res.rows.length > 0)
-      {
-        localStorage.setItem('_uploadQueue', res.rows.length);
-        $.mobile.loading('show',
-        {
-          text: "Dateiupload läuft für "+res.rows.length+" Antworten. Bitte habe einen Moment Geduld",
-          textVisible: true,
-          theme: 'a',
-          html: ""
-        });
-      }
+    alert("Du hast keine Internetverbindung. Sorge für eine stabile Internetverbindung um einen Upload tätigen zu können.");
+  }
+  else
+  {
+    var db = openDatabase();
 
-      for(var i = 0; i<res.rows.length; i++)
+    db.transaction(function(tx)
+    {
+      tx.executeSql('SELECT * FROM moles_answers WHERE uploaded=?',[0], function(tx, res)
       {
-          prepareAnswerUpload(res.rows.item(i));
-          // app.report(JSON.stringify(res.rows.item(i), null, 4));
-      }
+        if(res.rows.length > 0)
+        {
+          localStorage.setItem('_uploadQueue', res.rows.length);
+          $.mobile.loading('show',
+          {
+            text: "Dateiupload läuft für "+res.rows.length+" Antworten. Bitte habe einen Moment Geduld",
+            textVisible: true,
+            theme: 'a',
+            html: ""
+          });
+        }
+
+        for(var i = 0; i<res.rows.length; i++)
+        {
+            prepareAnswerUpload(res.rows.item(i));
+        }
+      });
     });
-  });
+  }
 }
 
-function getAnswersUploadCount()
+function getSingleAnswerForUpload()
+{
+  var id = localStorage.getItem('_answerOption');
+  if(checkConnection() == "None")
+  {
+    alert("Du hast keine Internetverbindung. Sorge für eine stabile Internetverbindung um einen Upload tätigen zu können.");
+  }
+  else
+  {
+    var db = openDatabase();
+
+    db.transaction(function(tx)
+    {
+      tx.executeSql('SELECT * FROM moles_answers WHERE id=? AND uploaded=?',[id, 0], function(tx, res)
+      {
+        if(res.rows.length > 0)
+        {
+          localStorage.setItem('_uploadQueue', res.rows.length);
+          $.mobile.loading('show',
+          {
+            text: "Dateiupload läuft für "+res.rows.length+" Antworten. Bitte habe einen Moment Geduld",
+            textVisible: true,
+            theme: 'a',
+            html: ""
+          });
+        }
+        prepareAnswerUpload(res.rows.item(0));
+      });
+    });
+  }
+}
+
+function getAnswersUploadCount(sourceID)
 {
   var db = openDatabase();
 
@@ -371,6 +401,7 @@ function getAnswersUploadCount()
       $('#uploadText').append(uploadTextContent);
       if(res.rows.item(0).anumber > 0)
       {
+        localStorage.setItem('_uploadFrom', sourceID);
         $.mobile.changePage($('#upload_page'));
       }
       else
@@ -424,7 +455,7 @@ function buildOfflineGamesPage(userid)
       {
           gamesListContent += '<li id="'+res.rows.item(i).game_inst_id+'-'+res.rows.item(i).game_id+'-'+res.rows.item(i).game_name+'"><a href="javaScript:void(0)">'+res.rows.item(i).game_name+'</a></li>';
       }
-      app.report(gamesListContent);
+
       $('#gameList').append(gamesListContent);
 
       $('#gameList').off('click', 'li');
@@ -473,7 +504,6 @@ function buildOfflineLocationPage(game_id, game_name)
 
         $('#placesList').off('click', 'li');
 
-        // $('#placesList').delegate('li', 'click', function()
         $('#placesList').on('click', 'li', function()
         {
           var cplace = $(this).attr('id').split('-');
@@ -494,17 +524,15 @@ function buildTaskPage(id)
   {
     tx.executeSql('SELECT mission_id, name, description FROM moles_locations WHERE mission_id=?', [id], function(tx, res)
     {
-      // app.report("Results: "+res.rows.length);
-      // app.report("Result 0: "+JSON.stringify(res.rows.item(0), null, 4));
       $('#locationTitle').empty();
       $('#locationText').empty();
       $('#locationTitle').append(res.rows.item(0).name);
       $('#locationText').append(res.rows.item(0).description);
-
     });
   });
 
-  db.transaction(function(tx) {
+  db.transaction(function(tx)
+  {
     tx.executeSql("SELECT imagepath FROM moles_images WHERE mission_id=?", [id], function(tx, res)
     {
       $('#locationImage').attr("src", res.rows.item(0).imagepath);
@@ -527,7 +555,6 @@ function buildTaskPage(id)
 
       $('#taskList').off('click', 'li');
 
-      // $('#taskList').delegate('li', 'click', function()
       $('#taskList').on('click', 'li', function()
       {
         var ctask = $(this).attr('id').split('-');
@@ -546,8 +573,6 @@ function buildDetailPage(id)
   {
     tx.executeSql('SELECT * FROM moles_tasks WHERE task_id=?', [id], function(tx, res)
     {
-      // app.report("Results: "+res.rows.length);
-      // app.report("Result 0: "+JSON.stringify(res.rows.item(0), null, 4));
       $('#taskTitle').empty();
       $('#taskText').empty();
       $('#taskTitle').append(res.rows.item(0).name);
@@ -579,38 +604,121 @@ function buildAnswersPage()
   var task_id = localStorage.getItem('_choosenTaskId');
   var db = openDatabase();
 
+  $('#answersList').empty();
+  var answersContent = '';
   db.transaction(function(tx)
   {
     tx.executeSql('SELECT * FROM moles_answers WHERE task_id=?', [task_id], function(tx, res)
     {
-      app.report(JSON.stringify(res.rows.item(0), null, 4));
+      // app.report(JSON.stringify(res.rows.item(0), null, 4));
       if(res.rows.length > 0)
       {
-        var answersContent = '<ul data-role="listview">';
         for(var i = 0; i<res.rows.length; i++)
         {
           if(res.rows.item(i).answer_type == "Text")
           {
-            answersContent += '<li><img src="img/icon_pencil43.png"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="javaScript:void(0)" onclick="buildAnswerDetailPage('+res.rows.item(i).id+')"><img src="img/icon_pencil43.png"><h2>'+res.rows.item(i).answer_name+'</h2></a><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
           else if (res.rows.item(i).answer_type == "Picture")
           {
-            answersContent += '<li><img src="'+res.rows.item(i).answer_value+'"/></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="javaScript:void(0)" onclick="buildAnswerDetailPage('+res.rows.item(i).id+')"><img src="img/icon_slr2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
-          else if (res.rows.item(i).answer_type == 'Video')
+          else if (res.rows.item(i).answer_type == "Video")
           {
-            answersContent += '<li><video controls><source src="'+res.rows.item(0).answers_value+'"></video></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="javaScript:void(0)" onclick="buildAnswerDetailPage('+res.rows.item(i).id+')"><img src="img/icon_slate2.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
-          else if (res.rows.item(i).answer_type == 'Audio')
+          else if (res.rows.item(i).answer_type == "Audio")
           {
-            answersContent += '<li><img src="img/icon_microphone9.png" /></li>';
+            answersContent += '<li id="answer_'+res.rows.item(i).id+'"><a href="javaScript:void(0)" onclick="buildAnswerDetailPage('+res.rows.item(i).id+')"><img src="img/icon_microphone9.png"><h2>'+res.rows.item(i).answer_name+'</h2><a href="#answerOptions" data-rel="popup" data-position-to="window" data-transition="pop" onclick="setIdForAnswerOptions('+res.rows.item(i).task_id+','+res.rows.item(i).id+')"/></li>';
           }
         }
-        answersContent += '</ul>';
-        $('#answersContainer').append(answersContent);
-
+        $('#answersList').append(answersContent);
       }
       $.mobile.changePage($('#answers_page'));
+    });
+  });
+}
+
+// function deleteAnswer(task_id, answer_id)
+function deleteAnswer()
+{
+  var answer_id = localStorage.getItem('_answerOption');
+  app.report(answer_id)
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT answer_type, answer_value FROM moles_answers WHERE id=?', [answer_id], function(tx, res)
+    {
+      if(res.rows.item(0).answer_type == "Text")
+      {
+        tx.executeSql('DELETE FROM moles_answers WHERE id=?', [answer_id], function(tx, res)
+        {
+          app.report("Delete Answer "+res.rowsAffected);
+          $('#answer_'+answer_id).remove();
+          $('#answerOptions').popup("close");
+        });
+      }
+      else if (res.rows.item(0).answer_type == "Picture")
+      {
+        window.resolveLocalFileSystemURL(res.rows.item(0).answer_value, function(dirEntry)
+        {
+          dirEntry.remove(function success(entry)
+          {
+            app.report(JSON.stringify(entry, null, 4));
+            deleteAnswerFromDB(answer_id);
+          },
+          function fail(error)
+          {
+            alert("Das Bild konnte leider nicht gelöscht werden. "+error.code);
+          });
+        });
+      }
+      else if (res.rows.item(0).answer_type == "Video")
+      {
+        window.resolveLocalFileSystemURL(res.rows.item(0).answer_value, function(dirEntry)
+        {
+          dirEntry.remove(function success(entry)
+          {
+            app.report(JSON.stringify(entry, null, 4));
+            deleteAnswerFromDB(answer_id);
+          },
+          function fail(error)
+          {
+            alert("Das Video konnte leider nicht gelöscht werden. "+error.code);
+          });
+        });
+      }
+      else if (res.rows.item(0).answer_type == "Audio")
+      {
+        window.resolveLocalFileSystemURL(res.rows.item(0).answer_value, function(dirEntry)
+        {
+          dirEntry.remove(function success(entry)
+          {
+            app.report(JSON.stringify(entry, null, 4));
+            deleteAnswerFromDB(answer_id);
+          },
+          function fail(error)
+          {
+            alert("Die Audiodatei konnte leider nicht gelöscht werden. "+error.code);
+          });
+        });
+      }
+    });
+  });
+}
+
+function deleteAnswerFromDB(answer_id)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('DELETE FROM moles_answers WHERE id=?', [answer_id], function(tx, res)
+    {
+      app.report("Delete Answer "+res.rowsAffected);
+      $('#answer_'+answer_id).remove();
+      $.mobile.changePage('#answers_page');
     });
   });
 }
@@ -632,6 +740,115 @@ function updateAnswersList(internalID)
     tx.executeSql('SELECT * FROM moles_answers WHERE uploaded=1', [], function(tx, res)
     {
       app.report("Uploaded answers "+res.rows.length);
+    });
+  });
+}
+
+function updateTextAnswer(answer_id)
+{
+  var newValue = $('#textAnswerChangeArea').val();
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql("UPDATE moles_answers SET answer_value=? WHERE id=?", [newValue, answer_id], function(tx, res)
+    {
+      app.report("Update rows "+res.rowsAffected);
+      $.mobile.changePage('#answers_page');
+    });
+  });
+}
+
+function buildAnswerDetailPage(id)
+{
+  app.report("BUILD FOR "+id);
+  var db = openDatabase();
+
+  $('#answerDetailContentDiv').empty();
+  var answerDetailContent = '';
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT * FROM moles_answers WHERE id=?', [id], function(tx, res)
+    {
+      app.report(JSON.stringify(res.rows.item(0), null, 4));
+      if(res.rows.length === 1)
+      {
+        switch(res.rows.item(0).answer_type)
+        {
+          case "Text":
+            answerDetailContent += '<textarea id="textAnswerChangeArea" name="text">'+res.rows.item(0).answer_value+'</textarea>';
+            answerDetailContent += '<a class="playBtn" data-role="button" href="javaScript:void(0)" onclick="updateTextAnswer('+res.rows.item(0).id+')">Änderungen speichern</a>';
+            answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswerFromDB('+res.rows.item(0).id+')">Löschen</a>';
+            break;
+          case "Picture":
+            answerDetailContent += '<img class="answerDetailImage" src="'+res.rows.item(0).answer_value+'"></img>';
+            answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a>';
+            break;
+          case "Audio":
+            answerDetailContent += '<h2 id="audioTime">00:00/00:00</h2>';
+            answerDetailContent += '<a class="playBtn" data-role="button" href="javaScript:void(0)" onclick="playAudio()">Play</a>';
+            answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a>';
+            break;
+          case "Video":
+            answerDetailContent += '<video id="answer_video" width="320"><source src="'+res.rows.item(0).answer_value+'" type="video/mp4">Your browser does not support HTML5 video.</video>';
+            answerDetailContent += '<a class="playBtn" data-role="button" href="javaScript:void(0)" onclick="playPauseVideo()">Play/Pause</a>';
+            answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a>';
+            break;
+          default:
+            break;
+        }
+        localStorage.setItem('_answerDetail', JSON.stringify(res.rows.item(0)));
+        localStorage.setItem('_answerOption', res.rows.item(0).id);
+      }
+      app.report(answerDetailContent);
+      $('#answerDetailContentDiv').append(answerDetailContent);
+      $.mobile.changePage($('#answer_detail_page'));
+    });
+  });
+}
+
+function getMapMarkers(game_id)
+{
+  var db = openDatabase();
+
+  db.transaction(function(tx)
+  {
+    tx.executeSql('SELECT lat, lng FROM moles_locations WHERE game_id=?', [game_id], function(tx, res)
+    {
+      app.report("Locations latlng "+JSON.stringify(res.rows));
+      if(res.rows.length > 0)
+      {
+        while (map_marker.length > 0)
+        {
+          map_marker.pop();
+        }
+        // var map_markers = '<script>var map_marker=[';
+        // var map = $('#map').html()
+        // app.report(JSON.stringify(map, null, 4));
+        // for(var i = 0; i<res.rows.length; i++)
+        // {
+        //   // map_markers +='{lat:'+res.rows.item(i).lat.toFixed(2)+',lng:'+res.rows.item(i).lng.toFixed(2)+', icon: new L.Icon()}';
+        //   // map_markers += res.rows.item(i);
+        //   L.marker([res.rows.item(i).lat.toFixed(2), res.rows.item(i).lng.toFixed(2)]).addTo(map);
+        // }
+        // map_markers += ']; </script>';
+        // $('#map').append(map_markers);
+        for(var i = 0; i<res.rows.length; i++)
+        {
+          var myicon = L.icon({
+            iconUrl: 'img/marker.png',
+            iconSize: [38, 68],
+            iconAnchor: [22, 94]
+          });
+          map_marker.push({lat: res.rows.item(i).lat, lng: res.rows.item(i).lng, icon: myicon});
+        }
+        app.report(JSON.stringify(map_marker[0], null, 4));
+        var lat = res.rows.item(0).lat;
+        var lng = res.rows.item(0).lng;
+        $('#map').attr("data-lat", lat.toFixed(2));
+        $('#map').attr("data-lng", lng.toFixed(2));
+        // $('#map').load("js/map-marker.js");
+      }
     });
   });
 }

@@ -178,7 +178,7 @@ function onFileSystemSuccess(fileSystem)
       var natiurl = entry.fullPath;
       directoryEntry.getDirectory(natiurl+"answers", {create: true, exclusive: false}, function(parent)
       {
-        alert(parent.name);
+        //alert(parent.name);
         app.report(parent.name);
       },
       function(error)
