@@ -38,6 +38,15 @@ var app = {
       platform: '',
       directory: '',
       // connection: '',
+      map_center:
+      {
+
+      },
+      map_marker:
+      {
+
+      },
+      marker_layer:[],
     },
     // Application Constructor
     initialize: function() {
@@ -77,22 +86,42 @@ var app = {
         app.report('Received Event: ' + id);
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemFail);
 
-
         // Test for getting OS and version
         app.report(window.device.platform);
         app.report(window.device.version);
         app.report(JSON.stringify(cordova.file, null, 4));
 
-        $(document).on("pagebeforeshow","#maps_page",function()
+        $(document).on("pageshow","#maps_page",function()
         {
           $.mobile.activePage.find('.map').leaflet();
-          // var map = new initializeMap();
-          var map = $('#map');
-          app.report(JSON.stringify(map.offset(), null, 4));
-          map.height($(window).height() - map.offset().top);
-          map.width($(window).width() - map.offset().left);
-          // map.invalidateSize();
-            // initializeMap();
+          var mapDiv = $('#map');
+          mapDiv.height($(window).height() - mapDiv.offset().top);
+          mapDiv.width($(window).width() - mapDiv.offset().left);
+
+          var map = $('#map').leaflet('getMap');
+          map.setView(app.devinfo.map_center);
+
+          app.report(app.devinfo.marker_layer.length);
+          if(app.devinfo.marker_layer.length > 0)
+          {
+            for(var layermarker in app.devinfo.marker_layer)
+            {
+              map.removeLayer(app.devinfo.marker_layer[layermarker]);
+            }
+          }
+
+          var mymarker;
+          for(var marker in app.devinfo.map_marker)
+          {
+            var myicon = L.icon({
+              iconUrl: 'img/marker.png',
+              iconSize: [38, 68],
+              iconAnchor: [22, 94]
+            });
+            mymarker = L.marker(app.devinfo.map_marker[marker], {icon: myicon});
+            map.addLayer(mymarker);
+            app.devinfo.marker_layer.push(mymarker);
+          }
         });
 
         $(document).on('click', '#submitButton', function(e)
@@ -178,7 +207,7 @@ function onFileSystemSuccess(fileSystem)
       var natiurl = entry.fullPath;
       directoryEntry.getDirectory(natiurl+"answers", {create: true, exclusive: false}, function(parent)
       {
-        alert(parent.name);
+        //alert(parent.name);
         app.report(parent.name);
       },
       function(error)
@@ -292,7 +321,8 @@ function backTo(sourceID)
   }
   else if (sourceID == "#maps_page")
   {
-    $.mobile.changePage($(localStorage.getItem('_MapsFrom')));
+    var pageTo = localStorage.getItem('_MapsFrom');
+    $.mobile.changePage($(pageTo));
   }
 }
 
@@ -392,20 +422,3 @@ function str_pad_left(string,pad,length)
 {
     return (new Array(length+1).join(pad)+string).slice(-length);
 }
-
-// function initializeMap()
-// {
-//     var map = L.map('map',{
-//       center: [51.505, -0.09],
-//       zoom: 13
-//     });
-//
-//     // L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',{
-//     //   maxZoom: 18
-//     // }).addTo(map);
-//     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
-//       maxZoom: 18
-//     }).addTo(map);
-//
-//     // map.invalidateSize();
-// }
