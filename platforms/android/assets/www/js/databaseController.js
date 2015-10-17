@@ -828,11 +828,11 @@ function getMapMarkers(game_id)
         {
           map_marker.push({lat: res.rows.item(i).lat, lng: res.rows.item(i).lng});
         }
-        // app.report(JSON.stringify(map_marker, null, 4));
         var lat = res.rows.item(0).lat.toFixed(2);
         var lng = res.rows.item(0).lng.toFixed(2);
 
-        app.devinfo.map_center = {lat, lng};
+        localStorage.setItem('_mapCenterLat', lat);
+        localStorage.setItem('_mapCenterLng', lng);
         app.devinfo.map_marker = map_marker;
       }
     });

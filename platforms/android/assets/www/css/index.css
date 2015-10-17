@@ -219,9 +219,9 @@ footer .ui-btn {
   max-width: 90%;
 }
 
-/*#map {
-  height: 400px;
-}*/
+.errorText {
+  color: red;
+}
 
 .map {
   height: 400px;

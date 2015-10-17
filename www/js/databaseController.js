@@ -610,7 +610,6 @@ function buildAnswersPage()
   {
     tx.executeSql('SELECT * FROM moles_answers WHERE task_id=?', [task_id], function(tx, res)
     {
-      // app.report(JSON.stringify(res.rows.item(0), null, 4));
       if(res.rows.length > 0)
       {
         for(var i = 0; i<res.rows.length; i++)
@@ -639,7 +638,6 @@ function buildAnswersPage()
   });
 }
 
-// function deleteAnswer(task_id, answer_id)
 function deleteAnswer()
 {
   var answer_id = localStorage.getItem('_answerOption');
@@ -831,7 +829,8 @@ function getMapMarkers(game_id)
         var lat = res.rows.item(0).lat.toFixed(2);
         var lng = res.rows.item(0).lng.toFixed(2);
 
-        app.devinfo.map_center = {lat, lng};
+        localStorage.setItem('_mapCenterLat', lat);
+        localStorage.setItem('_mapCenterLng', lng);
         app.devinfo.map_marker = map_marker;
       }
     });

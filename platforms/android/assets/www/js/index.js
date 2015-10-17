@@ -38,10 +38,6 @@ var app = {
       platform: '',
       directory: '',
       // connection: '',
-      map_center:
-      {
-
-      },
       map_marker:
       {
 
@@ -99,9 +95,13 @@ var app = {
           mapDiv.width($(window).width() - mapDiv.offset().left);
 
           var map = $('#map').leaflet('getMap');
-          map.setView(app.devinfo.map_center);
 
-          app.report(app.devinfo.marker_layer.length);
+          if(localStorage.getItem('_mapCenterLat') !== null && localStorage.getItem('_mapCenterLng') !== null)
+          {
+             var mapCenter = [localStorage.getItem('_mapCenterLat'), localStorage.getItem('_mapCenterLng')];
+              map.setView(mapCenter);
+          }
+
           if(app.devinfo.marker_layer.length > 0)
           {
             for(var layermarker in app.devinfo.marker_layer)

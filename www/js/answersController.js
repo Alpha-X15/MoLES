@@ -54,7 +54,7 @@ function getAnswerAudio()
 
     var captureError = function(error)
     {
-      navigator.notification.alert('Error code: '+error.code, null, 'Capture Error');
+          app.report('Error code: ' + error.code);
     }
 
     navigator.device.capture.captureAudio(captureSuccess, captureError, {limit: 1});
@@ -107,7 +107,7 @@ function getAnswerPicture()
   // capture error callback
   var captureError = function(error)
   {
-    navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+      app.report('Error code: ' + error.code);
   };
 
   // start image capture
@@ -159,7 +159,7 @@ function getAnswerVideo()
   // capture error callback
   var captureError = function(error)
   {
-    navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+    app.report('Error code: ' + error.code);
   };
 
   // start video capture

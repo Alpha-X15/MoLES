@@ -43,7 +43,7 @@ function loginWebservice(user, passw)
         else if (msg.data.valid == false)
         {
 						$.mobile.loading('hide');
-            alert("Es scheint sich ein Fehler in deinen Zugangsdaten eingeschlichen zu haben. Probiere es bitte erneut.");
+            $('#loginErrorText').append("Es scheint sich ein Fehler in deinen Zugangsdaten eingeschlichen zu haben. Probiere es bitte erneut.");
         }
       }
   })
@@ -52,7 +52,7 @@ function loginWebservice(user, passw)
       app.report("Status: " + jqXHR.status);
       app.report("Login request failed: " + textStatus);
 			$.mobile.loading('hide');
-      alert("Der Login ist fehlgeschlagen. Probiere es bitte erneut.");
+      $('#loginErrorText').append('Der Login ist fehlgeschlagen. Probiere es bitte erneut.');
 
   });
 }

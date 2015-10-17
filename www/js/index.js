@@ -26,9 +26,7 @@ var app = {
       GAMELIST_URL: 'gameInstances/index/index.json',
       LOCATION_URL: 'gameInstanceLocations/getUserLastLocations/instance:1.json',
       LOCATION_URL2: 'gameInstanceLocations/add.json',
-      // ALLMISSIONS_URL: '/games/view/{GameID}.json',
       ALLMISSIONS_URL: '/games/view/{GameID}.json',
-      // GAMEIMAGE_URL: '/molesmedia/image/normal/rgb/640x640/{Filename}',
       GAMEIMAGE_URL: 'molesmedia/image/thumb/cropped/320x320/{Filename}',
       REGISTERANSWER_URL: 'gameInstanceAnswers/add.json',
       UPLOADANSWER_URL: 'Media/upload.json',
@@ -37,11 +35,6 @@ var app = {
     {
       platform: '',
       directory: '',
-      // connection: '',
-      map_center:
-      {
-
-      },
       map_marker:
       {
 
@@ -99,7 +92,12 @@ var app = {
           mapDiv.width($(window).width() - mapDiv.offset().left);
 
           var map = $('#map').leaflet('getMap');
-          map.setView(app.devinfo.map_center);
+
+          if(localStorage.getItem('_mapCenterLat') !== null && localStorage.getItem('_mapCenterLng') !== null)
+          {
+             var mapCenter = [localStorage.getItem('_mapCenterLat'), localStorage.getItem('_mapCenterLng')];
+              map.setView(mapCenter);
+          }
 
           if(app.devinfo.marker_layer.length > 0)
           {
@@ -131,11 +129,6 @@ var app = {
           }
           loginWebservice($('input[name=username]').val(), $('input[name=password]').val());
         });
-
-        // $(document).on('click', '#OfflineTestButton', function(e)
-        // {
-        //   offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
-        // });
 
         $(document).on("pagebeforeshow", "#games_page", function()
         {
@@ -194,8 +187,6 @@ var app = {
 
 function onFileSystemSuccess(fileSystem)
 {
-  // app.report("FileSystemSuccess");
-  // app.report(app.devinfo.platform);
   var directoryEntry = fileSystem.root;
 
   if(app.devinfo.platform == "iOS")
@@ -320,8 +311,7 @@ function backTo(sourceID)
   }
   else if (sourceID == "#maps_page")
   {
-    var pageTo = localStorage.getItem('_MapsFrom');
-    $.mobile.changePage($(pageTo));
+    $.mobile.changePage($(localStorage.getItem('_MapsFrom')));
   }
 }
 
@@ -336,9 +326,13 @@ function playPauseVideo()
     var myVideo = $("#answer_video").get(0);
 
     if (myVideo.paused)
-        myVideo.play();
+    {
+      myVideo.play();
+    }
     else
+    {
         myVideo.pause();
+    }
 }
 
 function playAudio()
@@ -383,7 +377,6 @@ function playAudio()
 
         var duration = Math.ceil(dur);
         var durMinutes = Math.floor(duration/60);
-        // var durSeconds = duration-(durMinutes*60);
         var durSeconds = (duration % 60)-1;
 
         durDisplay = str_pad_left(durMinutes, '0', 2)+':'+str_pad_left(durSeconds, '0', 2);
