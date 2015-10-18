@@ -1,11 +1,11 @@
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
-    .ui-icon-myapp-logo {
+    /*.ui-icon-myapp-logo {
     background-image: url("../img/header.png");
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: left center;
-    }
+    }*/
 
     .ui-icon-myapp-video {
     background-image: url("../img/icon_slate2.png");
@@ -58,12 +58,12 @@
 }
 
 @media only screen {
-    .ui-icon-myapp-logo {
+    /*.ui-icon-myapp-logo {
     background-image: url("../img/header.png");
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: left center;
-  }
+  }*/
 
     .ui-controlgroup-horizontal .ui-controlgroup-controls {
         display: block;
@@ -130,6 +130,9 @@
     border: none !important;
     font-size: 1.2em !important;
 }
+
+h1#headerTitle::after { background:url(../img/header.png)no-repeat; content:" "; width:30px; height: 30px; margin-left: 5px; position: absolute;}
+
 .ui-page{
     background-color: #e6e9ed !important;
 }
@@ -137,10 +140,18 @@
     background-color: #313941 !important;
 }
 
-.gameList{
-    height: 65px;
-    display: block;
+#placesList li{
+    margin-bottom: 10px;
+} 
+#taskList li{
+    margin-bottom: 10px;
+} 
+#gameList li{
+    margin-bottom: 10px;
 }
+
+
+#answersList img {margin-left: 10px; margin-top: 20px;}
 
 .ui-btn-left, .ui-btn-right {
     margin-top: 5px !important;

@@ -288,8 +288,61 @@ function showHelpPage(sourceID)
 {
   localStorage.setItem('_helpFor', sourceID);
   $('#helpText').empty();
-  $('#helpText').append("Hier sollte die Hilfe für die "+sourceID+" stehen ");
-  $.mobile.changePage($('#help_page'));
+  if(sourceID == "#games_page")
+  {
+  	$('#helpText').append("In der Spieleliste findest Du alle verfügbaren Spiele. Wähle das Spiel aus, welches Du spielen möchtest und es wird für Dich heruntergeladen. Für diesen Vorgang benötigst Du eine Verbindung zum Internet. Wenn Du keine Internetverbindung hast, werden Dir nur die Spiele angezeigt, die Du bereits heruntergeladen hast.");	 
+  	$.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#places_page")
+  {
+  	$('#helpText').append("Jedes Spiel kann verschiedene Orte besitzen, an denen Du Fragen beantworten kannst. Begib Dich an einen Ort und wähle ihn aus um Dir die Fragen vor Ort anzusehen.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#questions_list_page")
+  {
+  	$('#helpText').append("Die Frageliste enthält alle Fragen zu dem von Dir ausgewählten Ort. Wähle eine Frage, indem Du sie auswählst. Anschließend kannst Du sie beantworten.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#question_detail")
+  {
+  	$('#helpText').append("Für jede Frage stehen Dir vier verschiedene Antwortmöglichkeiten zur Verfügung. Du kannst ein Foto machen, ein Video aufnehmen, eine Sound-Datei erstellen oder eine Textantwort geben. Du kannst mehr als eine Antwort pro Frage geben. Unter Antworten findest Du alle Antworten, die Du zu dieser Frage bereits gegeben hast. Dort kannst Du diese auch bearbeiten oder löschen.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#textanswer_page")
+  {
+  	$('#helpText').append("Gib hier eine Textantwort zu deiner ausgewählten Frage. Speicherst Du Deine Antwort kehrst Du zur Frage zurück. Um eine Antwort nachträglich zu bearbeiten wählst du Antworten und anschließend deine gegebene Textantwort aus. Jetzt kannst Du den Text bearbeiten.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#answer_detail_page")
+  {
+  	$('#helpText').append("Du kannst Dir Deine Antworten nachträglich anschauen. Wenn Du eine Textantwort ausgewählt hast, kannst Du sie hier verändern. Wähle Änderungen speichern und Du gelangst zurück zu Deinen gegebenen Antworten. Bilder, Audiodateien und Videos kannst Du Dir ebenfalls noch einmal anschauen. Wähle Löschen um eine noch nicht hochgeladene Antwort zu entfernen.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#answers_page")
+  {
+  	$('#helpText').append("Hier findest Du alle Antworten, die Du zur ausgewählten Frage gegeben hast. Wähle eine Antwort aus um sie anzusehen. Wähle das Zahnrad einer Antwort aus um diese zu löschen oder einzeln hochzuladen. Beim Löschen einer bereits hochgeladenen Antwort, wird diese nur von deinem Gerät entfernt.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#upload_page")
+  {
+  	$('#helpText').append("Alle von Dir gegebenen Antworten können gleichzeitig im Upload-Bereich hochgeladen werden. Wähle dafür einfach Antworten hochladen aus.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#options_page")
+  {
+  	$('#helpText').append("Einstellungen zur Sprache findest Du hier.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#login_page")
+  {
+  	$('#helpText').append("Melde Dich mit Deinem Benutzernamen und Deinem Passwort im MoLES-Player an. Für die erstmalige Anmeldung benötigst Du eine Internetverbindung.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else
+  {
+	  $('#helpText').append("Hier sollte die Hilfe für die "+sourceID+" stehen ");
+	  $.mobile.changePage($('#help_page'));
+  }
 }
 
 function showMapsPage(sourceID)
