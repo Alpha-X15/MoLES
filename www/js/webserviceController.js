@@ -43,7 +43,7 @@ function loginWebservice(user, passw)
         else if (msg.data.valid == false)
         {
 						$.mobile.loading('hide');
-            $('#loginErrorText').append("Es scheint sich ein Fehler in deinen Zugangsdaten eingeschlichen zu haben. Probiere es bitte erneut.");
+            alert("Es scheint sich ein Fehler in deinen Zugangsdaten eingeschlichen zu haben. Probiere es bitte erneut.");
         }
       }
   })
@@ -52,7 +52,7 @@ function loginWebservice(user, passw)
       app.report("Status: " + jqXHR.status);
       app.report("Login request failed: " + textStatus);
 			$.mobile.loading('hide');
-      $('#loginErrorText').append('Der Login ist fehlgeschlagen. Probiere es bitte erneut.');
+      alert("Der Login ist fehlgeschlagen. Probiere es bitte erneut.");
 
   });
 }
@@ -97,7 +97,7 @@ function getGameList()
           var gamesListContent = '';
           for(var i = 0; i<gameInstances.length; i++)
           {
-              gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["id"]+'-'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'"><input type="hidden" id="game_'+gameInstances[i]["GameInstance"]["id"]+'" value="'+encodeURIComponent(JSON.stringify(gameInstances[i]))+'"><a href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
+              gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["id"]+'-'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'" class="gameList"><input type="hidden" id="game_'+gameInstances[i]["GameInstance"]["id"]+'" value="'+encodeURIComponent(JSON.stringify(gameInstances[i]))+'"><a href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
           }
           $('#gameList').append(gamesListContent);
 

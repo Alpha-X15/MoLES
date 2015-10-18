@@ -31,8 +31,8 @@
         <link rel="stylesheet" href="css/themes/jqueryTheme.min.css" />
         <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
 
         <title>MoLES-Player</title>
         <script>
@@ -97,7 +97,7 @@
           <div data-role="page" id="login_page">
                 <header data-role="header" data-position="fixed">
                     <h1 id="headerTitle" class="ui-title ui-icon-myapp-logo" aria-level="1" role="heading" tabindex="0">Login</h1>
-                    <a href="#positionWindow" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                    <a href="#positionWindow" data-position-to="window" data-rel="popup" class="submenue ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
@@ -125,9 +125,9 @@
                             <div class="input">
                                 <input type="password" name="password" id="password" value="" placeholder="Password" autocorrect="off" autocapitalize="off"/>
                             </div>
-                            <p id="loginErrorText" class="errorText"></p>
                             <button id="submitButton">Login</button>
                           </div>
+                          <!-- <button id="OfflineTestButton">Login Offline</button> -->
 
                             <div data-position-to="window" data-role="popup" id="positionWindowError" data-overlay-theme="a">
                                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -552,7 +552,7 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-       <script src="http://192.168.178.31:8080/target/target-script-min.js#anonymous"></script>
+       <!-- <script src="http://141.83.32.125:8080/target/target-script-min.js#anonymous"></script> -->
         <!-- <script src="http://192.168.0.18:8080/target/target-script-min.js#anonymous"></script> -->
         <!-- <script src="http://141.83.80.160:8080/target/target-script-min.js#anonymous"></script> -->
         <script>

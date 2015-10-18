@@ -1,3 +1,4 @@
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
     .ui-icon-myapp-logo {
     background-image: url("../img/header.png");
@@ -34,23 +35,23 @@
     background-position: center 10px;
     }
 
-    .ui-icon-myapp-home {
+.ui-icon-myapp-home {
     background-image: url("../img/icon_home153.png");
-    background-size: 60px 60px;
-    background-repeat: no-repeat;
     background-position: center 0;
-    }
+    background-repeat: no-repeat;
+    background-size: 34px 38px;
+}
 
     .ui-icon-myapp-map {
     background-image: url("../img/icon_location32.png");
     background-size: 60px 60px;
     background-repeat: no-repeat;
-    background-position: center 0;
+    background-position: center -9px;
     }
 
-    .ui-icon-myapp-map {
+    .ui-icon-myapp-upload {
     background-image: url("../img/icon_upload36.png");
-    background-size: 60px 60px;
+    background-size: 35px 35px;
     background-repeat: no-repeat;
     background-position: center 0;
     }
@@ -101,31 +102,59 @@
     }
     .ui-icon-myapp-home {
     background-image: url("../img/icon_home153.png");
-    background-size: 60px 60px;
-    background-repeat: no-repeat;
     background-position: center 0;
-    }
+    background-repeat: no-repeat;
+    background-size: 34px 38px;
+}
 
     .ui-icon-myapp-map {
     background-image: url("../img/icon_location32.png");
     background-size: 60px 60px;
     background-repeat: no-repeat;
-    background-position: center 0;
+    background-position: center -9px;
     }
 
     .ui-icon-myapp-upload {
     background-image: url("../img/icon_upload36.png");
-    background-size: 60px 60px;
+    background-size: 35px 35px;
     background-repeat: no-repeat;
     background-position: center 0;
     }
+}
+
+#submitButton{
+    height: 60px;
+}
+.ui-title{
+    color: #e6e9ed !important;
+    border: none !important;
+    font-size: 1.2em !important;
+}
+.ui-page{
+    background-color: #e6e9ed !important;
+}
+.ui-header, .ui-footer {
+    background-color: #313941 !important;
+}
+
+.gameList{
+    height: 65px;
+    display: block;
+}
+
+.ui-btn-left, .ui-btn-right {
+    margin-top: 5px !important;
+}
+
+footer .ui-btn {
+    padding-top: 35px !important;
 }
 
 #subnav {
     height: 180px;
     padding-left: 10px;
     width: 195px;
-    background-color: #656565;
+    background-color: #656565 !important;
     border-radius: 0.6em;
 }
 
@@ -219,9 +248,9 @@ footer .ui-btn {
   max-width: 90%;
 }
 
-.errorText {
-  color: red;
-}
+/*#map {
+  height: 400px;
+}*/
 
 .map {
   height: 400px;
