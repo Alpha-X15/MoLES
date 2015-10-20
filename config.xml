@@ -72,6 +72,7 @@
   <access origin="http://tile.openstreetmap.org" subdomains="true" />
   <plugin name="cordova-plugin-whitelist" version="1"/>
   <plugin name="SQLitePlugin" value="SQLitePlugin" />
+  <plugin name="Capture" value="CDVCapture" />
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
@@ -87,7 +88,7 @@
     <allow-intent href="itms-apps:*"/>
   </platform>
  <feature name="debug-server" required="true"> -->
-  <param name="domain" value="http://192.168.178.31:8080"/>
+  <!-- <param name="domain" value="http://192.168.178.31:8080"/> -->
   <!-- <param name="domain" value="http://141.83.80.160:8080"/> -->
   <param name="key" value="MoLes123"/>
 </feature>
