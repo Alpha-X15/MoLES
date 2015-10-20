@@ -103,7 +103,7 @@
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#login_page')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#login_page')">Options</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -125,14 +125,9 @@
                             <div class="input">
                                 <input type="password" name="password" id="password" value="" placeholder="Password" autocorrect="off" autocapitalize="off"/>
                             </div>
+                            <p id="loginErrorText"></p>
                             <button id="submitButton">Login</button>
                           </div>
-                          <!-- <button id="OfflineTestButton">Login Offline</button> -->
-
-                            <div data-position-to="window" data-role="popup" id="positionWindowError" data-overlay-theme="a">
-                                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-                                <h1>Login Faild!</h1>
-                            </div>
                     </div>
                     <script type="text/javascript">
                                     function changeTitle(){
@@ -156,7 +151,7 @@
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#games_page')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#games_page')">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
                             </div>
@@ -191,7 +186,7 @@
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#places_page')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#places_page')">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
                             </div>
@@ -228,7 +223,7 @@
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#questions_list_page')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#questions_list_page')">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
                             </div>
@@ -268,7 +263,7 @@
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#question_detail')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#question_detail')">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
                             </div>
@@ -312,7 +307,7 @@
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#textanswer_page')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#textanswer_page')">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
                             </div>
@@ -346,7 +341,7 @@
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#answers_page')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#answers_page')">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
                             </div>
@@ -385,12 +380,12 @@
                     <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"  href="javaScript:void(0)" onclick="backTo('#maps_page')"> Back </a>
                     <h1 id="headerTitle">Map</h1>
                     <a href="#positionWindow8" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
-                        <div data-role="popup" id="positionWindow7" data-overlay-theme="a">
+                        <div data-role="popup" id="positionWindow8" data-overlay-theme="a">
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#maps_page')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#maps_page')">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
                             </div>
@@ -417,7 +412,7 @@
             <!-- options page here -->
             <div data-role="page" id="options_page">
                 <header data-role="header" data-position="fixed">
-                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"> Back </a>
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="javaScript:void(0)" onclick="backTo('#options_page')"> Back </a>
                     <h1 id="headerTitle">Optionen</h1>
                     <a href="#positionWindow9" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
                         <div data-role="popup" id="positionWindow9" data-overlay-theme="a">
@@ -437,11 +432,7 @@
                     </div>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <div data-type="horizontal">
-                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
-                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#options_page')">Karte</a>
-                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#options_page')">Upload</a>
-                    </div>
+                    <img id="login_footer_img" src="img/uni_imis.png" />
                 </footer>
             </div>
 
@@ -456,7 +447,7 @@
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#upload_page')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#upload_page')">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
                             </div>
@@ -489,7 +480,7 @@
                             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
                             <div data-role="navbar">
                             <ul data-role="listview" id="subnav">
-                                <li><a href="#options_page">Options</a></li>
+                                <li><a href="javaScript:void(0)" onclick="showOptionsPage('#help_page')">Options</a></li>
                                 <li><a href="#login_page">Logout</a></li>
                             </ul>
                             </div>
@@ -519,7 +510,7 @@
                             <div data-role="navbar">
                                 <ul data-role="listview" id="subnav">
                                     <li><a href="javaScript:void(0)" onclick="showHelpPage('#answer_detail_page')">Hilfe</a></li>
-                                    <li><a href="#options_page">Options</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#answer_detail_page')">Options</a></li>
                                     <li><a href="#login_page">Logout</a></li>
                                 </ul>
                             </div>

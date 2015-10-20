@@ -26,9 +26,7 @@ var app = {
       GAMELIST_URL: 'gameInstances/index/index.json',
       LOCATION_URL: 'gameInstanceLocations/getUserLastLocations/instance:1.json',
       LOCATION_URL2: 'gameInstanceLocations/add.json',
-      // ALLMISSIONS_URL: '/games/view/{GameID}.json',
       ALLMISSIONS_URL: '/games/view/{GameID}.json',
-      // GAMEIMAGE_URL: '/molesmedia/image/normal/rgb/640x640/{Filename}',
       GAMEIMAGE_URL: 'molesmedia/image/thumb/cropped/320x320/{Filename}',
       REGISTERANSWER_URL: 'gameInstanceAnswers/add.json',
       UPLOADANSWER_URL: 'Media/upload.json',
@@ -37,7 +35,11 @@ var app = {
     {
       platform: '',
       directory: '',
-      // connection: '',
+      map_marker:
+      {
+
+      },
+      marker_layer:[],
     },
     // Application Constructor
     initialize: function() {
@@ -77,7 +79,6 @@ var app = {
         app.report('Received Event: ' + id);
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemFail);
 
-
         // Test for getting OS and version
         app.report(window.device.platform);
         app.report(window.device.version);
@@ -86,13 +87,38 @@ var app = {
         $(document).on("pageshow","#maps_page",function()
         {
           $.mobile.activePage.find('.map').leaflet();
-          // var map = new initializeMap();
-          var map = $('#map');
-          app.report(JSON.stringify(map.offset(), null, 4));
-          map.height($(window).height() - map.offset().top);
-          map.width($(window).width() - map.offset().left);
-          // map.invalidateSize();
-            // initializeMap();
+          var mapDiv = $('#map');
+          mapDiv.height($(window).height() - mapDiv.offset().top);
+          mapDiv.width($(window).width() - mapDiv.offset().left);
+
+          var map = $('#map').leaflet('getMap');
+
+          if(localStorage.getItem('_mapCenterLat') !== null && localStorage.getItem('_mapCenterLng') !== null)
+          {
+             var mapCenter = [localStorage.getItem('_mapCenterLat'), localStorage.getItem('_mapCenterLng')];
+              map.setView(mapCenter);
+          }
+
+          if(app.devinfo.marker_layer.length > 0)
+          {
+            for(var layermarker in app.devinfo.marker_layer)
+            {
+              map.removeLayer(app.devinfo.marker_layer[layermarker]);
+            }
+          }
+
+          var mymarker;
+          for(var marker in app.devinfo.map_marker)
+          {
+            var myicon = L.icon({
+              iconUrl: 'img/marker.png',
+              iconSize: [38, 68],
+              iconAnchor: [22, 94]
+            });
+            mymarker = L.marker(app.devinfo.map_marker[marker], {icon: myicon});
+            map.addLayer(mymarker);
+            app.devinfo.marker_layer.push(mymarker);
+          }
         });
 
         $(document).on('click', '#submitButton', function(e)
@@ -103,11 +129,6 @@ var app = {
           }
           loginWebservice($('input[name=username]').val(), $('input[name=password]').val());
         });
-
-        // $(document).on('click', '#OfflineTestButton', function(e)
-        // {
-        //   offlineLogin($('input[name=username]').val(), getAuth($('input[name=username]').val(), $('input[name=password]').val()));
-        // });
 
         $(document).on("pagebeforeshow", "#games_page", function()
         {
@@ -166,8 +187,6 @@ var app = {
 
 function onFileSystemSuccess(fileSystem)
 {
-  // app.report("FileSystemSuccess");
-  // app.report(app.devinfo.platform);
   var directoryEntry = fileSystem.root;
 
   if(app.devinfo.platform == "iOS")
@@ -269,8 +288,111 @@ function showHelpPage(sourceID)
 {
   localStorage.setItem('_helpFor', sourceID);
   $('#helpText').empty();
-  $('#helpText').append("Hier sollte die Hilfe für die "+sourceID+" stehen ");
-  $.mobile.changePage($('#help_page'));
+  if(sourceID == "#games_page")
+  {
+  	$('#helpText').append("In der Spieleliste findest Du alle verfügbaren Spiele. Wähle das Spiel aus, welches Du spielen möchtest und es wird für Dich heruntergeladen. Für diesen Vorgang benötigst Du eine Verbindung zum Internet. Wenn Du keine Internetverbindung hast, werden Dir nur die Spiele angezeigt, die Du bereits heruntergeladen hast.");
+  	$.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#places_page")
+  {
+  	$('#helpText').append("Jedes Spiel kann verschiedene Orte besitzen, an denen Du Fragen beantworten kannst. Begib Dich an einen Ort und wähle ihn aus um Dir die Fragen vor Ort anzusehen.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#questions_list_page")
+  {
+  	$('#helpText').append("Die Frageliste enthält alle Fragen zu dem von Dir ausgewählten Ort. Wähle eine Frage, indem Du sie auswählst. Anschließend kannst Du sie beantworten.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#question_detail")
+  {
+  	$('#helpText').append("Für jede Frage stehen Dir vier verschiedene Antwortmöglichkeiten zur Verfügung. Du kannst ein Foto machen, ein Video aufnehmen, eine Sound-Datei erstellen oder eine Textantwort geben. Du kannst mehr als eine Antwort pro Frage geben. Unter Antworten findest Du alle Antworten, die Du zu dieser Frage bereits gegeben hast. Dort kannst Du diese auch bearbeiten oder löschen.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#textanswer_page")
+  {
+  	$('#helpText').append("Gib hier eine Textantwort zu deiner ausgewählten Frage. Speicherst Du Deine Antwort kehrst Du zur Frage zurück. Um eine Antwort nachträglich zu bearbeiten wählst du Antworten und anschließend deine gegebene Textantwort aus. Jetzt kannst Du den Text bearbeiten.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#answer_detail_page")
+  {
+  	$('#helpText').append("Du kannst Dir Deine Antworten nachträglich anschauen. Wenn Du eine Textantwort ausgewählt hast, kannst Du sie hier verändern. Wähle Änderungen speichern und Du gelangst zurück zu Deinen gegebenen Antworten. Bilder, Audiodateien und Videos kannst Du Dir ebenfalls noch einmal anschauen. Wähle Löschen um eine noch nicht hochgeladene Antwort zu entfernen.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#answers_page")
+  {
+  	$('#helpText').append("Hier findest Du alle Antworten, die Du zur ausgewählten Frage gegeben hast. Wähle eine Antwort aus um sie anzusehen. Wähle das Zahnrad einer Antwort aus um diese zu löschen oder einzeln hochzuladen. Beim Löschen einer bereits hochgeladenen Antwort, wird diese nur von deinem Gerät entfernt.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#upload_page")
+  {
+  	$('#helpText').append("Alle von Dir gegebenen Antworten können gleichzeitig im Upload-Bereich hochgeladen werden. Wähle dafür einfach Antworten hochladen aus.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#options_page")
+  {
+  	$('#helpText').append("Einstellungen zur Sprache findest Du hier.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#login_page")
+  {
+  	$('#helpText').append("Melde Dich mit Deinem Benutzernamen und Deinem Passwort im MoLES-Player an. Für die erstmalige Anmeldung benötigst Du eine Internetverbindung.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else
+  {
+	  $('#helpText').append("Hier sollte die Hilfe für die "+sourceID+" stehen ");
+	  $.mobile.changePage($('#help_page'));
+  }
+}
+
+function showOptionsPage(sourceID)
+{
+  localStorage.setItem('_OptionsFrom', sourceID);
+  // $('#helpText').empty();
+  if(sourceID == "#games_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#places_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#questions_list_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#question_detail")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#textanswer_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#answer_detail_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#answers_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#upload_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#help_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#login_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else
+  {
+	  $.mobile.changePage($('#options_page'));
+  }
 }
 
 function showMapsPage(sourceID)
@@ -294,6 +416,10 @@ function backTo(sourceID)
   {
     $.mobile.changePage($(localStorage.getItem('_MapsFrom')));
   }
+  else if (sourceID == "#options_page")
+  {
+    $.mobile.changePage($(localStorage.getItem('_OptionsFrom')));
+  }
 }
 
 function setIdForAnswerOptions(task_id, answer_id)
@@ -307,9 +433,13 @@ function playPauseVideo()
     var myVideo = $("#answer_video").get(0);
 
     if (myVideo.paused)
-        myVideo.play();
+    {
+      myVideo.play();
+    }
     else
+    {
         myVideo.pause();
+    }
 }
 
 function playAudio()
@@ -354,7 +484,6 @@ function playAudio()
 
         var duration = Math.ceil(dur);
         var durMinutes = Math.floor(duration/60);
-        // var durSeconds = duration-(durMinutes*60);
         var durSeconds = (duration % 60)-1;
 
         durDisplay = str_pad_left(durMinutes, '0', 2)+':'+str_pad_left(durSeconds, '0', 2);
@@ -392,20 +521,3 @@ function str_pad_left(string,pad,length)
 {
     return (new Array(length+1).join(pad)+string).slice(-length);
 }
-
-// function initializeMap()
-// {
-//     var map = L.map('map',{
-//       center: [51.505, -0.09],
-//       zoom: 13
-//     });
-//
-//     // L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',{
-//     //   maxZoom: 18
-//     // }).addTo(map);
-//     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
-//       maxZoom: 18
-//     }).addTo(map);
-//
-//     // map.invalidateSize();
-// }

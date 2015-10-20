@@ -43,7 +43,7 @@ function loginWebservice(user, passw)
         else if (msg.data.valid == false)
         {
 						$.mobile.loading('hide');
-            alert("Es scheint sich ein Fehler in deinen Zugangsdaten eingeschlichen zu haben. Probiere es bitte erneut.");
+            $('#loginErrorText').append("Es scheint sich ein Fehler in deinen Zugangsdaten eingeschlichen zu haben. Probiere es bitte erneut.");
         }
       }
   })
@@ -52,7 +52,7 @@ function loginWebservice(user, passw)
       app.report("Status: " + jqXHR.status);
       app.report("Login request failed: " + textStatus);
 			$.mobile.loading('hide');
-      alert("Der Login ist fehlgeschlagen. Probiere es bitte erneut.");
+      $('#loginErrorText').append("Der Login ist fehlgeschlagen. Probiere es bitte erneut.");
 
   });
 }
@@ -97,7 +97,7 @@ function getGameList()
           var gamesListContent = '';
           for(var i = 0; i<gameInstances.length; i++)
           {
-              gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["id"]+'-'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'"><input type="hidden" id="game_'+gameInstances[i]["GameInstance"]["id"]+'" value="'+encodeURIComponent(JSON.stringify(gameInstances[i]))+'"><a href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
+              gamesListContent += '<li id="'+gameInstances[i]["GameInstance"]["id"]+'-'+gameInstances[i]["GameInstance"]["game_id"]+'-'+gameInstances[i]["GameInstance"]["name"]+'" class="gameList"><input type="hidden" id="game_'+gameInstances[i]["GameInstance"]["id"]+'" value="'+encodeURIComponent(JSON.stringify(gameInstances[i]))+'"><a style="height:60px; vertical-align: center; line-height:60px;" href="javaScript:void(0)">'+gameInstances[i]["GameInstance"]["name"]+'</a></li>';
           }
           $('#gameList').append(gamesListContent);
 
@@ -177,7 +177,7 @@ function getLocationList(choosen_game_id, game_name, gameObj)
         var placesListContent = '';
         for(var i = 0; i<placeInstances["Mission"].length; i++)
         {
-            placesListContent += '<li id="'+placeInstances["Mission"][i]["id"]+'-'+placeInstances["Mission"][i]["name"]+'"><a href="javaScript:void(0)">'+placeInstances["Mission"][i]["name"]+'</a></li>';
+            placesListContent += '<li id="'+placeInstances["Mission"][i]["id"]+'-'+placeInstances["Mission"][i]["name"]+'"><a style="height:60px; vertical-align: center; line-height:60px;" href="javaScript:void(0)">'+placeInstances["Mission"][i]["name"]+'</a></li>';
         }
         $('#placesList').append(placesListContent);
 

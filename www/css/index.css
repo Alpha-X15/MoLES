@@ -140,17 +140,6 @@ h1#headerTitle::after { background:url(../img/header.png)no-repeat; content:" ";
     background-color: #313941 !important;
 }
 
-#placesList li{
-    margin-bottom: 10px;
-} 
-#taskList li{
-    margin-bottom: 10px;
-} 
-#gameList li{
-    margin-bottom: 10px;
-}
-
-
 #answersList img {margin-left: 10px; margin-top: 20px;}
 
 .ui-btn-left, .ui-btn-right {
@@ -259,15 +248,15 @@ footer .ui-btn {
   max-width: 90%;
 }
 
-/*#map {
-  height: 400px;
-}*/
-
 .map {
   height: 400px;
   width: 100%;
   margin:0 auto;
   margin-left: -10px;
+}
+
+#loginErrorText {
+  color: red;
 }
 
 /*

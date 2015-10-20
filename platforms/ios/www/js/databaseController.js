@@ -453,7 +453,7 @@ function buildOfflineGamesPage(userid)
       $('#gameList').empty();
       for(var i = 0; i<res.rows.length; i++)
       {
-          gamesListContent += '<li id="'+res.rows.item(i).game_inst_id+'-'+res.rows.item(i).game_id+'-'+res.rows.item(i).game_name+'"><a href="javaScript:void(0)">'+res.rows.item(i).game_name+'</a></li>';
+          gamesListContent += '<li id="'+res.rows.item(i).game_inst_id+'-'+res.rows.item(i).game_id+'-'+res.rows.item(i).game_name+'"><a style="height:60px; vertical-align: center; line-height:60px;" href="javaScript:void(0)">'+res.rows.item(i).game_name+'</a></li>';
       }
 
       $('#gameList').append(gamesListContent);
@@ -498,7 +498,7 @@ function buildOfflineLocationPage(game_id, game_name)
 
         for(var i = 0; i<res.rows.length; i++)
         {
-            placesListContent += '<li id="'+res.rows.item(i).mission_id+'-'+res.rows.item(i).name+'"><a href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
+            placesListContent += '<li id="'+res.rows.item(i).mission_id+'-'+res.rows.item(i).name+'"><a style="height:60px; vertical-align: center; line-height:60px;" href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
         }
         $('#placesList').append(placesListContent);
 
@@ -548,7 +548,7 @@ function buildTaskPage(id)
       $('#taskList').empty();
       for(var i = 0; i<res.rows.length; i++)
       {
-          taskListContent += '<li id="'+res.rows.item(i).task_id+'-'+res.rows.item(i).name+'"><a href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
+          taskListContent += '<li id="'+res.rows.item(i).task_id+'-'+res.rows.item(i).name+'"><a style="height:60px; vertical-align: center; line-height:60px;" href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
       }
 
       $('#taskList').append(taskListContent);
@@ -610,7 +610,6 @@ function buildAnswersPage()
   {
     tx.executeSql('SELECT * FROM moles_answers WHERE task_id=?', [task_id], function(tx, res)
     {
-      // app.report(JSON.stringify(res.rows.item(0), null, 4));
       if(res.rows.length > 0)
       {
         for(var i = 0; i<res.rows.length; i++)
@@ -639,7 +638,6 @@ function buildAnswersPage()
   });
 }
 
-// function deleteAnswer(task_id, answer_id)
 function deleteAnswer()
 {
   var answer_id = localStorage.getItem('_answerOption');
@@ -811,6 +809,7 @@ function getMapMarkers(game_id)
 {
   var db = openDatabase();
 
+  var map_marker = [];
   db.transaction(function(tx)
   {
     tx.executeSql('SELECT lat, lng FROM moles_locations WHERE game_id=?', [game_id], function(tx, res)
@@ -822,32 +821,17 @@ function getMapMarkers(game_id)
         {
           map_marker.pop();
         }
-        // var map_markers = '<script>var map_marker=[';
-        // var map = $('#map').html()
-        // app.report(JSON.stringify(map, null, 4));
-        // for(var i = 0; i<res.rows.length; i++)
-        // {
-        //   // map_markers +='{lat:'+res.rows.item(i).lat.toFixed(2)+',lng:'+res.rows.item(i).lng.toFixed(2)+', icon: new L.Icon()}';
-        //   // map_markers += res.rows.item(i);
-        //   L.marker([res.rows.item(i).lat.toFixed(2), res.rows.item(i).lng.toFixed(2)]).addTo(map);
-        // }
-        // map_markers += ']; </script>';
-        // $('#map').append(map_markers);
+
         for(var i = 0; i<res.rows.length; i++)
         {
-          var myicon = L.icon({
-            iconUrl: 'img/marker.png',
-            iconSize: [38, 68],
-            iconAnchor: [22, 94]
-          });
-          map_marker.push({lat: res.rows.item(i).lat, lng: res.rows.item(i).lng, icon: myicon});
+          map_marker.push({lat: res.rows.item(i).lat, lng: res.rows.item(i).lng});
         }
-        app.report(JSON.stringify(map_marker[0], null, 4));
-        var lat = res.rows.item(0).lat;
-        var lng = res.rows.item(0).lng;
-        $('#map').attr("data-lat", lat.toFixed(2));
-        $('#map').attr("data-lng", lng.toFixed(2));
-        // $('#map').load("js/map-marker.js");
+        var lat = res.rows.item(0).lat.toFixed(2);
+        var lng = res.rows.item(0).lng.toFixed(2);
+
+        localStorage.setItem('_mapCenterLat', lat);
+        localStorage.setItem('_mapCenterLng', lng);
+        app.devinfo.map_marker = map_marker;
       }
     });
   });

@@ -453,7 +453,7 @@ function buildOfflineGamesPage(userid)
       $('#gameList').empty();
       for(var i = 0; i<res.rows.length; i++)
       {
-          gamesListContent += '<li id="'+res.rows.item(i).game_inst_id+'-'+res.rows.item(i).game_id+'-'+res.rows.item(i).game_name+'"><a href="javaScript:void(0)">'+res.rows.item(i).game_name+'</a></li>';
+          gamesListContent += '<li id="'+res.rows.item(i).game_inst_id+'-'+res.rows.item(i).game_id+'-'+res.rows.item(i).game_name+'"><a style="height:60px; vertical-align: center; line-height:60px;" href="javaScript:void(0)">'+res.rows.item(i).game_name+'</a></li>';
       }
 
       $('#gameList').append(gamesListContent);
@@ -498,7 +498,7 @@ function buildOfflineLocationPage(game_id, game_name)
 
         for(var i = 0; i<res.rows.length; i++)
         {
-            placesListContent += '<li id="'+res.rows.item(i).mission_id+'-'+res.rows.item(i).name+'"><a href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
+            placesListContent += '<li id="'+res.rows.item(i).mission_id+'-'+res.rows.item(i).name+'"><a style="height:60px; vertical-align: center; line-height:60px;" href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
         }
         $('#placesList').append(placesListContent);
 
@@ -548,7 +548,7 @@ function buildTaskPage(id)
       $('#taskList').empty();
       for(var i = 0; i<res.rows.length; i++)
       {
-          taskListContent += '<li id="'+res.rows.item(i).task_id+'-'+res.rows.item(i).name+'"><a href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
+          taskListContent += '<li id="'+res.rows.item(i).task_id+'-'+res.rows.item(i).name+'"><a style="height:60px; vertical-align: center; line-height:60px;" href="javaScript:void(0)">'+res.rows.item(i).name+'</a></li>';
       }
 
       $('#taskList').append(taskListContent);

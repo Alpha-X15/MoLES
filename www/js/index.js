@@ -290,7 +290,7 @@ function showHelpPage(sourceID)
   $('#helpText').empty();
   if(sourceID == "#games_page")
   {
-  	$('#helpText').append("In der Spieleliste findest Du alle verfügbaren Spiele. Wähle das Spiel aus, welches Du spielen möchtest und es wird für Dich heruntergeladen. Für diesen Vorgang benötigst Du eine Verbindung zum Internet. Wenn Du keine Internetverbindung hast, werden Dir nur die Spiele angezeigt, die Du bereits heruntergeladen hast.");	 
+  	$('#helpText').append("In der Spieleliste findest Du alle verfügbaren Spiele. Wähle das Spiel aus, welches Du spielen möchtest und es wird für Dich heruntergeladen. Für diesen Vorgang benötigst Du eine Verbindung zum Internet. Wenn Du keine Internetverbindung hast, werden Dir nur die Spiele angezeigt, die Du bereits heruntergeladen hast.");
   	$.mobile.changePage($('#help_page'));
   }
   else if(sourceID == "#places_page")
@@ -345,6 +345,56 @@ function showHelpPage(sourceID)
   }
 }
 
+function showOptionsPage(sourceID)
+{
+  localStorage.setItem('_OptionsFrom', sourceID);
+  // $('#helpText').empty();
+  if(sourceID == "#games_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#places_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#questions_list_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#question_detail")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#textanswer_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#answer_detail_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#answers_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#upload_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#help_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else if(sourceID == "#login_page")
+  {
+  	$.mobile.changePage($('#options_page'));
+  }
+  else
+  {
+	  $.mobile.changePage($('#options_page'));
+  }
+}
+
 function showMapsPage(sourceID)
 {
   localStorage.setItem('_MapsFrom', sourceID);
@@ -365,6 +415,10 @@ function backTo(sourceID)
   else if (sourceID == "#maps_page")
   {
     $.mobile.changePage($(localStorage.getItem('_MapsFrom')));
+  }
+  else if (sourceID == "#options_page")
+  {
+    $.mobile.changePage($(localStorage.getItem('_OptionsFrom')));
   }
 }
 

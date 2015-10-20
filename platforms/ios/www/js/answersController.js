@@ -15,7 +15,6 @@ function getAnswerAudio()
   app.report("should start audio");
   var captureSuccess = function(mediaFiles)
   {
-    alert("AudioCaptureSuccess");
     var path, name;
     app.report(JSON.stringify(mediaFiles, null, 4));
 
@@ -55,7 +54,7 @@ function getAnswerAudio()
 
     var captureError = function(error)
     {
-      navigator.notification.alert('Error code: '+error.code, null, 'Capture Error');
+          app.report('Error code: ' + error.code);
     }
 
     navigator.device.capture.captureAudio(captureSuccess, captureError, {limit: 1});
@@ -65,7 +64,6 @@ function getAnswerPicture()
 {
   var captureSuccess = function(mediaFiles)
   {
-    alert("PictureCaptureSuccess");
     var path, name;
 
     if(app.devinfo.platform === "iOS")
@@ -77,7 +75,6 @@ function getAnswerPicture()
       path = mediaFiles[0].fullPath;
     }
 
-    alert(path);
     oldname = mediaFiles[0].name;
 
     var date = new Date();
@@ -96,9 +93,7 @@ function getAnswerPicture()
           }
 
           app.report(newFileUri);
-          //alert(newFileUri);
           oldFileUri = path;
-          alert(newFileUri+"<br>"+oldFileUri);
           newname = 'picture_'+time;
 
           window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
@@ -112,7 +107,7 @@ function getAnswerPicture()
   // capture error callback
   var captureError = function(error)
   {
-    navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+      app.report('Error code: ' + error.code);
   };
 
   // start image capture
@@ -124,7 +119,6 @@ function getAnswerVideo()
   // capture callback
   var captureSuccess = function(mediaFiles)
   {
-    alert("VideoCaptureSuccess");
     var path, name;
 
     if(app.devinfo.platform === "iOS")
@@ -151,7 +145,7 @@ function getAnswerVideo()
         {
           newFileUri = app.devinfo.directory+"answers";
         }
-        
+
         oldFilrUri = path;
         newname = 'video_'+time;
 
@@ -165,7 +159,7 @@ function getAnswerVideo()
   // capture error callback
   var captureError = function(error)
   {
-    navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+    app.report('Error code: ' + error.code);
   };
 
   // start video capture
@@ -175,28 +169,24 @@ function getAnswerVideo()
 function errorCallback(error)
 {
   app.report("Error "+ error.code);
-  alert("FirstError "+ error.code);
   app.report(JSON.stringify(error, null, 4));
 }
 
 function errorSecondCallback(error)
 {
   app.report("Error "+ error.code);
-  alert("Second resolve Error "+ error.code);
   app.report(JSON.stringify(error, null, 4));
 }
 
 function errorMoveCallback(error)
 {
   app.report("Error "+ error.code);
-  alert("MOVE TO Error "+ error.code);
   app.report(JSON.stringify(error, null, 4));
 }
 
 function successAudioCallback(entry)
 {
   app.report("newpath "+entry.fullPath);
-  alert("newpath "+entry.fullPath);
   app.report(JSON.stringify(entry, null, 4));
   storeAnswer("Audio", entry.name, entry.nativeURL);
 }
@@ -204,7 +194,6 @@ function successAudioCallback(entry)
 function successVideoCallback(entry)
 {
   app.report("newpath "+entry.fullPath);
-  alert("newpath "+entry.fullPath);
   app.report(JSON.stringify(entry, null, 4));
   storeAnswer("Video", entry.name, entry.nativeURL);
 }
