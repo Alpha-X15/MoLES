@@ -126,7 +126,7 @@
 #answers a {
     height: 13px;
     padding-top: 47px;
-    width: 16%;
+    width: 15%;
     text-align: center;
 }
 
@@ -165,12 +165,12 @@
     font-size: 1.2em !important;
 }
 
-h1#headerTitle::after { 
-    background:url(../img/header.png)no-repeat; 
-    content:" "; 
-    width:30px; 
-    height: 30px; 
-    margin-left: 5px; 
+h1#headerTitle::after {
+    background:url(../img/header.png)no-repeat;
+    content:" ";
+    width:30px;
+    height: 30px;
+    margin-left: 5px;
     position: absolute;
 }
 
@@ -183,7 +183,7 @@ h1#headerTitle::after {
 }
 
 #answersList img {
-    margin-left: 10px; 
+    margin-left: 10px;
     margin-top: 20px;
 }
 

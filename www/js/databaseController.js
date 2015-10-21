@@ -788,7 +788,8 @@ function buildAnswerDetailPage(id)
             answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a>';
             break;
           case "Video":
-            answerDetailContent += '<video id="answer_video" width="320"><source src="'+res.rows.item(0).answer_value+'" type="video/mp4">Your browser does not support HTML5 video.</video>';
+            // answerDetailContent += '<video id="answer_video" width="320"> <source src="'+res.rows.item(0).answer_value+'" type="video/mp4">Your browser does not support HTML5 video.</video>';
+            answerDetailContent += '<video id="answer_video" width="320" webkit-playsinline><source src="'+res.rows.item(0).answer_value+'" type="video/quicktime">Your browser does not support HTML5 video.</video>';
             answerDetailContent += '<a class="playBtn" data-role="button" href="javaScript:void(0)" onclick="playPauseVideo()">Play/Pause</a>';
             answerDetailContent += '<a class="deleteBtn" data-role="button" href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a>';
             break;

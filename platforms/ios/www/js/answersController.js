@@ -140,14 +140,15 @@ function getAnswerVideo()
       function(fileEntry)
       {
         newFileUri = app.devinfo.directory+"files/answers";
+        newname = 'video_'+time;
 
         if(app.devinfo.platform === "iOS")
         {
           newFileUri = app.devinfo.directory+"answers";
+          newname = 'video_'+time+'.mov';
         }
 
         oldFilrUri = path;
-        newname = 'video_'+time;
 
         window.resolveLocalFileSystemURL(newFileUri, function(dirEntry)
         {
@@ -201,7 +202,6 @@ function successVideoCallback(entry)
 function successPictureCallback(entry)
 {
   app.report("newpath "+entry.fullPath);
-  alert("newpath "+entry.fullPath);
   app.report(JSON.stringify(entry, null, 4));
   storeAnswer("Picture", entry.name, entry.nativeURL);
 }

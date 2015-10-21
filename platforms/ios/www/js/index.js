@@ -445,7 +445,7 @@ function playPauseVideo()
 function playAudio()
 {
     var audio = JSON.parse(localStorage.getItem('_answerDetail'));
-    var path = audio.answer_value;
+    var path = audio.answer_value.replace("file://", "");
     var durDisplay='';
     // Play the audio file at url
     app.report("Should play audio "+audio.answer_value);
@@ -454,11 +454,13 @@ function playAudio()
         function ()
         {
             app.report("playAudio():Audio Success");
+            //alert("Success");
         },
         // error callback
         function (err)
         {
             app.report("playAudio():Audio Error: " + err);
+            //alert(JSON.stringify(err, null, 4));
         },
         function (status)
         {

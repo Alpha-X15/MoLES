@@ -9,28 +9,28 @@
 
     .ui-icon-myapp-video {
     background-image: url("../img/icon_slate2.png");
-    background-size: 16px 16px;
+    background-size: 26px 26px;
     background-repeat: no-repeat;
-    background-position: center 10px;
+    background-position: center 12px;
     }
 
     .ui-icon-myapp-picture {
     background-image: url("../img/icon_slr2.png");
-    background-size: 16px 14px;
+    background-size: 30px 25px;
     background-repeat: no-repeat;
     background-position: center 11px;
     }
 
     .ui-icon-myapp-text {
     background-image: url("../img/icon_pencil43.png");
-    background-size: 16px 16px;
+    background-size: 26px 26px;
     background-repeat: no-repeat;
     background-position: center 10px;
     }
 
     .ui-icon-myapp-sound {
     background-image: url("../img/icon_microphone9.png");
-    background-size: 16px 16px;
+    background-size: 26px 26px;
     background-repeat: no-repeat;
     background-position: center 10px;
     }
@@ -69,34 +69,30 @@
         display: block;
     }
 
-    #answers a {
-        width: 15%;
-    }
-
     .ui-icon-myapp-video {
     background-image: url("../img/icon_slate2.png");
-    background-size: 16px 16px;
+    background-size: 24px 24px;
     background-repeat: no-repeat;
-    background-position: center 10px;
+    background-position: center 12px;
     }
 
     .ui-icon-myapp-picture {
     background-image: url("../img/icon_slr2.png");
-    background-size: 16px 14px;
+    background-size: 26px 22px;
     background-repeat: no-repeat;
     background-position: center 11px;
     }
 
     .ui-icon-myapp-text {
     background-image: url("../img/icon_pencil43.png");
-    background-size: 16px 16px;
+    background-size: 26px 26px;
     background-repeat: no-repeat;
     background-position: center 10px;
     }
 
     .ui-icon-myapp-sound {
     background-image: url("../img/icon_microphone9.png");
-    background-size: 16px 16px;
+    background-size: 26px 26px;
     background-repeat: no-repeat;
     background-position: center 10px;
     }
@@ -105,7 +101,7 @@
     background-position: center 0;
     background-repeat: no-repeat;
     background-size: 34px 38px;
-}
+    }
 
     .ui-icon-myapp-map {
     background-image: url("../img/icon_location32.png");
@@ -122,25 +118,74 @@
     }
 }
 
+#question_detail button {
+    height: 60px;
+    width: 96%;
+}
+
+#answers a {
+    height: 13px;
+    padding-top: 47px;
+    width: 15%;
+    text-align: center;
+}
+
+#answers a.ui-btn-icon-left::after, #answers a.ui-btn-icon-right::after, #answers a.ui-btn-icon-top::after, #answers a.ui-btn-icon-bottom::after, #answers a.ui-btn-icon-notext::after {
+    border-radius: 2em;
+    content: "";
+    display: none;
+    height: 40px;
+    left: 39%;
+    position: absolute;
+    top: 0.4em;
+    width: 40px;
+}
+
+#answers a.ui-btn.ui-first-child {
+    border-bottom-left-radius: 0.6em;
+    border-top-left-radius: 0.6em;
+}
+
+#answers a.ui-btn.ui-last-child {
+    border-bottom-right-radius: 0.6em;
+    border-top-right-radius: 0.6em;
+}
+
+#answers {
+    margin: 0 !important;
+}
+
 #submitButton{
     height: 60px;
 }
+
 .ui-title{
     color: #e6e9ed !important;
     border: none !important;
     font-size: 1.2em !important;
 }
 
-h1#headerTitle::after { background:url(../img/header.png)no-repeat; content:" "; width:30px; height: 30px; margin-left: 5px; position: absolute;}
+h1#headerTitle::after {
+    background:url(../img/header.png)no-repeat;
+    content:" ";
+    width:30px;
+    height: 30px;
+    margin-left: 5px;
+    position: absolute;
+}
 
 .ui-page{
     background-color: #e6e9ed !important;
 }
+
 .ui-header, .ui-footer {
     background-color: #313941 !important;
 }
 
-#answersList img {margin-left: 10px; margin-top: 20px;}
+#answersList img {
+    margin-left: 10px;
+    margin-top: 20px;
+}
 
 .ui-btn-left, .ui-btn-right {
     margin-top: 5px !important;
@@ -161,12 +206,19 @@ footer .ui-btn {
 #subnav li {
     height: 40px;
     margin-top: 15px;
-    width: 180px;
+    min-width: 180px;
+    max-width: 180px;
 }
 
 #subnav li a {
     /*border: 1px solid #bbbbbb;*/
    border-radius: 0.6em;
+   height: 22px;
+    padding-top: 18px;
+}
+
+#subnav li a.ui-btn{
+    margin: 0;
 }
 
 .app {

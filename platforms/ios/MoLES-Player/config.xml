@@ -75,6 +75,7 @@
     <preference name="loadUrlTimeoutValue" value="50000" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="iosPersistentFileLocation" value="Compatibility" />
+    <preference name="AllowInlineMediaPlayback" value="true" />
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />
