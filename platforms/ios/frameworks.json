@@ -1,0 +1,5 @@
+{
+    "libsqlite3.dylib": 1,
+    "AudioToolbox.framework": 1,
+    "SystemConfiguration.framework": 1
+}

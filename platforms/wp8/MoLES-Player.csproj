@@ -229,6 +229,11 @@
         <PostBuildEvent>
         </PostBuildEvent>
     </PropertyGroup>
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
     <ItemGroup>
         <Compile Include="Plugins\org.apache.cordova.dialogs\Notification.cs" />
     </ItemGroup>
@@ -250,8 +255,6 @@
     <ItemGroup>
         <Compile Include="Plugins\org.apache.cordova.network-information\NetworkStatus.cs" />
     </ItemGroup>
-    <ItemGroup />
-    <ItemGroup />
     <ItemGroup>
         <Compile Include="Plugins\com.brodysoft.sqlitePlugin\SQLitePlugin.cs" />
     </ItemGroup>
