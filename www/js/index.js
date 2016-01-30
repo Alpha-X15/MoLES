@@ -295,7 +295,7 @@ function showHelpPage(sourceID)
   }
   else if(sourceID == "#places_page")
   {
-  	$('#helpText').append("Jedes Spiel kann verschiedene Orte besitzen, an denen Du Fragen beantworten kannst. Begib Dich an einen Ort und wähle ihn aus um Dir die Fragen vor Ort anzusehen.");
+  	$('#helpText').append("Jedes Spiel kann verschiedene Orte besitzen, an denen Du Fragen beantworten kannst. Begib Dich an einen Ort und wähle ihn aus um Dir die Fragen vor Ort anzusehen. Schaue in der Karte nach, wenn du einen Ort nicht kennst.");
 	 $.mobile.changePage($('#help_page'));
   }
   else if(sourceID == "#questions_list_page")
@@ -336,6 +336,11 @@ function showHelpPage(sourceID)
   else if(sourceID == "#login_page")
   {
   	$('#helpText').append("Melde Dich mit Deinem Benutzernamen und Deinem Passwort im MoLES-Player an. Für die erstmalige Anmeldung benötigst Du eine Internetverbindung.");
+	 $.mobile.changePage($('#help_page'));
+  }
+  else if(sourceID == "#maps_page")
+  {
+  	$('#helpText').append("In der Karte sind alle zum jeweiligen Spiel gehörende Orte makiert. Wenn du bei einer Aufgabe nicht weißt, zu welchem Ort sie gehört, kannst du hier die Position herausfinden.");
 	 $.mobile.changePage($('#help_page'));
   }
   else
