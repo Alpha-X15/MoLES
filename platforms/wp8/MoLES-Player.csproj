@@ -151,6 +151,14 @@
             <SubType>Designer</SubType>
             <Generator>MSBuild:Compile</Generator>
         </Page>
+        <Page Include="Plugins\cordova-plugin-media-capture\AudioRecorder.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="Plugins\cordova-plugin-media-capture\VideoRecorder.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
     </ItemGroup>
     <ItemGroup>
         <ApplicationDefinition Include="App.xaml">
@@ -221,6 +229,11 @@
         <PostBuildEvent>
         </PostBuildEvent>
     </PropertyGroup>
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
     <ItemGroup>
         <Compile Include="Plugins\org.apache.cordova.dialogs\Notification.cs" />
     </ItemGroup>
@@ -232,5 +245,296 @@
     <ItemGroup />
     <ItemGroup>
         <Content Include="Plugins\org.apache.cordova.dialogs\notification-beep.wav" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.device\Device.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.splashscreen\SplashScreen.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.network-information\NetworkStatus.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\SQLitePlugin.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\SQLite.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\_Custom.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\BtreeInt_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\Btree_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\Delegates.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\Hash_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\VdbeInt_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\Vdbe_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\alter_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\analyze_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\attach_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\auth_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\backup_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\bitvec_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\btmutex_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\btree_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\build_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\callback_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\complete_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\crypto.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\ctime_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\date_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\delete_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\expr_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\fault_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\fkey_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\func_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\global_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\hash_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\hwtime_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\insert_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\journal_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\keywordhash_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\legacy_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\loadext_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\main_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\malloc_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\mem_Pool.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\memjournal_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\mutex_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\mutex_noop_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\notify_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\opcodes_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\opcodes_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\os_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\os_common_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\os_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\os_win_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\pager_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\pager_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\parse_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\parse_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\pcache1_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\pcache_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\pcache_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\pragma_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\prepare_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\printf_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\random_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\resolve_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\rowset_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\select_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\sqlite3_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\sqliteInt_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\sqliteLimit_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\status_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\table_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\tokenize_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\trigger_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\update_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\utf_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\util_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\vacuum_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\vdbe_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\vdbeapi_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\vdbeaux_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\vdbeblob_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\vdbemem_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\vdbetrace_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\vtab_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\wal_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\wal_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\walker_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.brodysoft.sqlitePlugin\where_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-file-transfer\FileTransfer.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-media-capture\Capture.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-media-capture\AudioCaptureTask.cs" />
+    </ItemGroup>
+    <ItemGroup />
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-media-capture\AudioRecorder.xaml.cs">
+            <DependentUpon>AudioRecorder.xaml</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-media-capture\VideoCaptureTask.cs" />
+    </ItemGroup>
+    <ItemGroup />
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-media-capture\VideoRecorder.xaml.cs">
+            <DependentUpon>VideoRecorder.xaml</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-statusbar\StatusBar.cs" />
     </ItemGroup>
 </Project>

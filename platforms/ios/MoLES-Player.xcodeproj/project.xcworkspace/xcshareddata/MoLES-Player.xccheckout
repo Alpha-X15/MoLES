@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0A0EC176-77BD-47ED-B99B-F3447F199ED0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MoLES-Player</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FE4888FFF6BD4188F7589829CEFA0B644DF4B4E9</key>
+		<string>https://github.com/Alpha-X15/MoLES.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/MoLES-Player.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FE4888FFF6BD4188F7589829CEFA0B644DF4B4E9</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Alpha-X15/MoLES.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FE4888FFF6BD4188F7589829CEFA0B644DF4B4E9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FE4888FFF6BD4188F7589829CEFA0B644DF4B4E9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MoLES</string>
+		</dict>
+	</array>
+</dict>
+</plist>

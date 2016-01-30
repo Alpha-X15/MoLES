@@ -4,7 +4,37 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "package.windows.appxmanifest": {
+                "parents": {
+                    "/Package/Capabilities": []
+                }
+            },
+            "package.windows80.appxmanifest": {
+                "parents": {
+                    "/Package/Capabilities": []
+                }
+            },
+            "package.phone.appxmanifest": {
+                "parents": {
+                    "/Package/Capabilities": []
+                }
+            },
+            "package.appxmanifest": {
+                "parents": {
+                    "/Package/Capabilities": [
+                        {
+                            "xml": "<DeviceCapability Name=\"webcam\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<DeviceCapability Name=\"microphone\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
     },
     "installed_plugins": {
         "cordova-plugin-whitelist": {
@@ -12,7 +42,35 @@
         },
         "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "MoLES-Player"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "org.apache.cordova.splashscreen": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "org.apache.cordova.network-information": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "com.brodysoft.sqlitePlugin": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "MoLES-Player"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "MoLES-Player"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "MoLES-Player"
+        }
+    }
 }

@@ -1,0 +1,17 @@
+<data type="array">
+        <languageKey index="default" type="array">
+            <label index="login">Login</label>
+        </languageKey>
+        
+        <languageKey index="de-DE" type="array">
+            <label index="login">Anmelden</label>
+        </languageKey>
+        
+        <languageKey index="en-US" type="array">
+            <label index="login">Login</label>
+        </languageKey>
+        
+        <languageKey index="en-GB" type="array">
+            <label index="login">Please Login</label>
+        </languageKey>
+</data>

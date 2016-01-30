@@ -1,3 +1,316 @@
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    /*.ui-icon-myapp-logo {
+    background-image: url("../img/header.png");
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    }*/
+
+    .ui-icon-myapp-video {
+    background-image: url("../img/icon_slate2.png");
+    background-size: 26px 26px;
+    background-repeat: no-repeat;
+    background-position: center 12px;
+    }
+
+    .ui-icon-myapp-picture {
+    background-image: url("../img/icon_slr2.png");
+    background-size: 30px 25px;
+    background-repeat: no-repeat;
+    background-position: center 11px;
+    }
+
+    .ui-icon-myapp-text {
+    background-image: url("../img/icon_pencil43.png");
+    background-size: 26px 26px;
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    }
+
+    .ui-icon-myapp-sound {
+    background-image: url("../img/icon_microphone9.png");
+    background-size: 26px 26px;
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    }
+
+.ui-icon-myapp-home {
+    background-image: url("../img/icon_home153.png");
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-size: 34px 38px;
+}
+
+    .ui-icon-myapp-map {
+    background-image: url("../img/icon_location32.png");
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center -9px;
+    }
+
+    .ui-icon-myapp-upload {
+    background-image: url("../img/icon_upload36.png");
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    }
+}
+
+@media only screen {
+    /*.ui-icon-myapp-logo {
+    background-image: url("../img/header.png");
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }*/
+
+    .ui-controlgroup-horizontal .ui-controlgroup-controls {
+        display: block;
+    }
+
+    .ui-icon-myapp-video {
+    background-image: url("../img/icon_slate2.png");
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    background-position: center 12px;
+    }
+
+    .ui-icon-myapp-picture {
+    background-image: url("../img/icon_slr2.png");
+    background-size: 26px 22px;
+    background-repeat: no-repeat;
+    background-position: center 11px;
+    }
+
+    .ui-icon-myapp-text {
+    background-image: url("../img/icon_pencil43.png");
+    background-size: 26px 26px;
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    }
+
+    .ui-icon-myapp-sound {
+    background-image: url("../img/icon_microphone9.png");
+    background-size: 26px 26px;
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    }
+    .ui-icon-myapp-home {
+    background-image: url("../img/icon_home153.png");
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-size: 34px 38px;
+    }
+
+    .ui-icon-myapp-map {
+    background-image: url("../img/icon_location32.png");
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center -9px;
+    }
+
+    .ui-icon-myapp-upload {
+    background-image: url("../img/icon_upload36.png");
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    }
+}
+
+#question_detail button {
+    height: 60px;
+    width: 96%;
+}
+
+#answers a {
+    height: 13px;
+    padding-top: 47px;
+    width: 15%;
+    text-align: center;
+}
+
+#answers a.ui-btn-icon-left::after, #answers a.ui-btn-icon-right::after, #answers a.ui-btn-icon-top::after, #answers a.ui-btn-icon-bottom::after, #answers a.ui-btn-icon-notext::after {
+    border-radius: 2em;
+    content: "";
+    display: none;
+    height: 40px;
+    left: 39%;
+    position: absolute;
+    top: 0.4em;
+    width: 40px;
+}
+
+#answers a.ui-btn.ui-first-child {
+    border-bottom-left-radius: 0.6em;
+    border-top-left-radius: 0.6em;
+}
+
+#answers a.ui-btn.ui-last-child {
+    border-bottom-right-radius: 0.6em;
+    border-top-right-radius: 0.6em;
+}
+
+#answers {
+    margin: 0 !important;
+}
+
+#submitButton{
+    height: 60px;
+}
+
+.ui-title{
+    color: #e6e9ed !important;
+    border: none !important;
+    font-size: 1.2em !important;
+}
+
+h1#headerTitle::after {
+    background:url(../img/header.png)no-repeat;
+    content:" ";
+    width:30px;
+    height: 30px;
+    margin-left: 5px;
+    position: absolute;
+}
+
+.ui-page{
+    background-color: #e6e9ed !important;
+}
+
+.ui-header, .ui-footer {
+    background-color: #313941 !important;
+}
+
+#answersList img {
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.ui-btn-left, .ui-btn-right {
+    margin-top: 5px !important;
+}
+
+footer .ui-btn {
+    padding-top: 35px !important;
+}
+
+#subnav {
+    height: 180px;
+    padding-left: 10px;
+    width: 195px;
+    background-color: #656565 !important;
+    border-radius: 0.6em;
+}
+
+#subnav li {
+    height: 40px;
+    margin-top: 15px;
+    min-width: 180px;
+    max-width: 180px;
+}
+
+#subnav li a {
+    /*border: 1px solid #bbbbbb;*/
+   border-radius: 0.6em;
+   height: 22px;
+    padding-top: 18px;
+}
+
+#subnav li a.ui-btn{
+    margin: 0;
+}
+
+.app {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login_footer_img {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#loginForm img{
+    width: 30px;
+    float: left;
+    border: 1px solid #656565;
+    border-radius: 0.6em;
+    display: block;
+    height: 35px;
+}
+
+#loginForm {
+  margin-top: 60px;
+}
+
+.input {
+    width: 90%%;
+    margin-left: 35px;
+}
+
+footer div {
+    text-align: center;
+    width: 100%;
+}
+
+footer div a {
+    width: 25%;
+}
+
+footer .ui-btn-icon-top::after {
+    display: none;
+}
+
+footer .ui-btn {
+    padding-top: 65px;
+}
+
+#gameList > li, #placesList > li, #taskList > li {
+  border-radius: 10px !important;
+}
+
+#taskTitle, #locationTitle, #placesTitle, #spieleTitle {
+  width: 100%;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  padding-left: auto;
+  padding-right: auto;
+  text-align: center;
+}
+
+.imageContainer {
+    width: 100%;
+}
+
+#taskImage, #locationImage {
+  display: block;
+  max-width: 60%;
+  margin: auto;
+}
+
+.answerDetailImage {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+}
+
+.map {
+  height: 400px;
+  width: 100%;
+  margin:0 auto;
+  margin-left: -10px;
+}
+
+#loginErrorText {
+  color: red;
+}
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -16,15 +329,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-* {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+/** {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -webkit-user-select: none;
     background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
@@ -53,42 +365,233 @@ body {
 
 header , footer {
     background-color: #656565;
-    position: absolute;
+    position: fixed;
+    z-index: 999;
+    color: #e7e7e7;
 }
 
 header {
     width: 100%;
-    min-height: 60px;
+    min-height: 40px;
     top: 0;
+}
+
+#back {
+    background-image: url("../img/icon_back44.png");
+    background-repeat: no-repeat;
+    width: 35%;
+    min-height: 30px;
+    background-size: contain;
+    display: block;
+    margin-top: 5px;
+    margin-left: -30px;
+    text-align: left;
+}
+
+#back a {
+    width: 30px;
+    min-height: 30px;
+    display: block;
+}
+
+#title {
+    width: 60%;
+}*/
+
+/*#title img {
+    float: left;
+    margin-right: 10px;
+    width: 30px;
+    min-height: 30px;
+    margin-top: 5px;
+}*/
+
+/*#options {
+    background-image: url("../img/icon_menu34.png");
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    display: block;
+    margin-top: 5px;
+}
+
+header ul {
+    list-style: none;
+}
+
+header ul li {
+    float: left;
+}*/
+
+/*header ul li ul {
+    margin-left: -40px;
+    margin-top: 30px;
+    background-color: #656565;
+    width: 60px;
+    height: 80px;
+    padding-top: 15px;
+    display: none;
+}
+
+header ul:hover li ul {
+    display: block;
+}
+
+header ul li ul li {
+    width: 60px;
+    text-align: right;
+    margin-right: 15px;
+    margin-left:
+    clear: both;
+    margin-left: -30px;
+    height: 25px;
+}
+
+header ul li ul li a {
+    text-decoration: none;
+    color: #e7e7e7;
+}*/
+
+/*#main {
+    background-color: #e7e7e7;
+    clear: both;
+    margin-bottom: 22%;
+    margin-top: -13%;
+    position: relative;
+    width: 100%;
+    z-index: 10;
+}
+
+#loginForm {
+    margin-top: 80px;
+}
+
+#loginForm label {
+    float: left;
+    margin-top: 20px;
+}
+
+#loginForm input {
+    height: 40px;
+    width: 200px;
+    margin-top: 5px;
+}
+
+#submitButton {
+    margin-left: 70px;
+}
+
+.mainButton {
+    height: 40px;
+    width: 200px;
+    margin-top: 5px;
+    margin-left: 70px;
 }
 
 footer {
     width: 100%;
-    min-height: 120px;
+    height: 90px;
     bottom: 0;
 }
 
-/* Portrait layout (default) */
-.app {
-    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
-    left:50%;
-    top:40%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
+footer ul {
+    list-style: none;
+    margin-top: 5px;
 }
 
+footer ul li {
+    float: left;
+    width: 33%;
+    margin-right: 5%;
+}
+
+footer ul li img{
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    display: block;
+    border: none;
+    margin-left: 22%;
+}
+
+footer ul li h3 {
+    margin-left: 26%;
+    margin-top: 0px;
+}
+
+#home {
+    margin-left: -30px;
+    border-right: 1px solid #e7e7e7;
+}
+
+#map {
+    border-right: 1px solid #e7e7e7;
+}
+
+#upload {
+    margin-right: 0;
+    width: 30px;
+}
+
+
+#home img {
+    background-image: url("../img/icon_home153.png");
+}
+
+#map img {
+    background-image: url("../img/icon_location32.png");
+}
+
+#upload h3 {
+    margin-left: 56%;
+}
+
+#upload img {
+    background-image: url("../img/icon_upload36.png");
+    margin-left: 55%;
+}*/
+
+
+/* Portrait layout (default) */
+/*.app {
+    background:url(../img/logo.png) no-repeat center top;
+    position:absolute;
+    left:50%;
+    top:40%;
+    height:50px;
+    width:300px;
+    text-align:center;
+    margin:-115px 0px 0px -112px;
+}*/
+
+/*input {
+    height: 40px;
+    width: 200px;
+    border: solid thin #656565;
+    border-radius: 15px;
+}
+
+button {
+    color: #656565;
+    background: #ffffff;
+}
+
+#login_btn {
+    width: 200px;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}*/
+
 /* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+/*@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
     .app {
         background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
+        padding:75px 0px 75px 170px;
+        margin:-90px 0px 0px -198px;
+
     }
 }
 
@@ -96,7 +599,6 @@ h1 {
     font-size:24px;
     font-weight:normal;
     margin:0px;
-    overflow:visible;
     padding:0px;
     text-align:center;
 }
@@ -125,14 +627,14 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 @-webkit-keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
-}
+}*/

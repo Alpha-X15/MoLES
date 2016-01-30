@@ -24,33 +24,530 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+        <link rel="stylesheet" href="css/themes/jqueryTheme.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/leaflet.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+
+        <title>MoLES-Player</title>
+        <script>
+            var title = "";
+            function checklanguage()
+            {
+                var languageCode = "default";
+                navigator.globalization.getPreferredLanguage(function (language)
+                {
+                    console.log(language.value); languageCode = language.value
+                },
+                function () {
+                    console.log("keine language");
+                });
+
+                var req = new XMLHttpRequest();
+                req.open('GET', 'language/language.xml', true);
+                req.onreadystatechange = function()
+                {
+                    if (req.readyState === 4)
+                    {
+                        var doc = req.responseXML;
+                        var entrie = getCode(doc);
+                    }
+
+                    function getCode(doc)
+                    {
+                        var entries = doc.getElementsByTagName('languageKey');
+                        var labels = doc.getElementsByTagName('label');
+
+                        for (var i = 0, l = entries.length; i < l; i++)
+                        {
+                            var entry = entries[i];
+                            var label = labels[i];
+
+                            if(languageCode == entry.getAttribute("index"))
+                            {
+                                if(label.getAttribute("index") == "login")
+                                {
+                                    title = entry.getElementsByTagName('label')[0].textContent;
+                                    console.log(entry.getElementsByTagName('label')[0].textContent);
+                                    console.log(label.getAttribute("index"));
+                                    changeTitle();
+                                }
+                            }
+                            else
+                            {
+                                if(label.getAttribute("index") == "login")
+                                {
+                                    title = "Login";
+                                }
+                            }
+                        }
+                    }
+                };
+                req.send(null);
+            }
+       </script>
     </head>
     <body>
-        <div id="wrapper">
-            <header>
-                <a href="/">Back</a>
-            </header>
-            <main>
-                <div class="app">
-                    <h1>PhoneGap</h1>
-                    <div id="deviceready" class="blink">
-                        <p class="event listening">Connecting to Device</p>
-                        <p class="event received">Device is Ready</p>
+        <!-- Page with Login here -->
+          <div data-role="page" id="login_page">
+                <header data-role="header" data-position="fixed">
+                    <h1 id="headerTitle">Login</h1>
+                    <a href="#positionWindow" data-position-to="window" data-rel="popup" class="submenue ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#login_page')">Hilfe</a></li>
+                                    <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#login_page')">Options</a></li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                        <!-- <div id="deviceready" class="blink">
+                            <p class="event listening">Connecting to Device</p>
+                            <p class="event received">Device is Ready</p>
+                        </div> -->
+
+                        <div id="loginForm">
+                            <img src="img/icon_profile.png" alt="Username:" />
+                            <div class="input">
+                                <input type="text" name="username" id="username" value="" placeholder="Username" autocorrect="off" autocapitalize="off"/>
+                            </div>
+                            <img src="img/icon_key142.png" alt="Passwort:" />
+                            <div class="input">
+                                <input type="password" name="password" id="password" value="" placeholder="Password" autocorrect="off" autocapitalize="off"/>
+                            </div>
+                            <p id="loginErrorText"></p>
+                            <button id="submitButton">Login</button>
+                          </div>
+                    </div>
+                    <script type="text/javascript">
+                                    function changeTitle(){
+                                        document.getElementById('headerTitle').innerHTML = title;
+                                    }
+                    </script>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                    <img id="login_footer_img" src="img/uni_imis.png" />
+                </footer>
+            </div>
+
+            <!-- Page with gameslist here -->
+            <div data-role="page" id="games_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#login_page"> Back </a>
+                    <h1 id="headerTitle">Spielliste</h1>
+                    <a href="#positionWindow2" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow2" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#games_page')">Hilfe</a></li>
+                                    <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#games_page')">Options</a></li>-->
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                        <h1 id="spieleTitle">Wähle ein Spiel:</h1>
+                        <ul id="gameList" data-role="listview">
+
+                        </ul>
                     </div>
                 </div>
-                <script type="text/javascript" src="cordova.js"></script>
-                <script type="text/javascript" src="js/index.js"></script>
-                <script type="text/javascript">
-                    app.initialize();
-                </script>
-            </main>
-            <footer>
-                <p>footer</p>
-            </footer>
-        </div>
+                <footer data-role="footer" data-position="fixed">
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#games_page')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#games_page')">Upload</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- Page with places here -->
+            <div data-role="page" id="places_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#games_page"> Back </a>
+                    <h1 id="headerTitle">Ort</h1>
+                    <a href="#positionWindow3" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow3" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#places_page')">Hilfe</a></li>
+                                    <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#places_page')">Options</a></li>-->
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                        <h1 id="placesTitle"></h1>
+                        <p id="placesText"></p>
+                        <h3>Wählen Sie einen Ort aus:</h3>
+                        <ul id="placesList" data-role="listview">
+
+                        </ul>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#places_page')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#places_page')">Upload</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- page with list of questions here -->
+            <div data-role="page" id="questions_list_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#places_page"> Back </a>
+                    <h1 id="headerTitle">Fragen</h1>
+                    <a href="#positionWindow4" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow4" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#questions_list_page')">Hilfe</a></li>
+                                    <li><a href="javaScript:void(0)" onclick="showOptionsPage('#questions_list_page')">Options</a></li>
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                        <h1 id="locationTitle"></h1>
+                        <p id="locationText"></p>
+                        <div class="imageContainer">
+                          <img id="locationImage" src=""></img>
+                        </div>
+                        <h3>Frage auswählen:</h3>
+                        <ul id="taskList" data-role="listview">
+
+                        </ul>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#questions_list_page')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#questions_list_page')">Upload</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- detail question page here -->
+            <div data-role="page" id="question_detail">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#questions_list_page"> Back </a>
+                    <h1 id="headerTitle">Frage</h1>
+                    <a href="#positionWindow5" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow5" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#question_detail')">Hilfe</a></li>
+                                    <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#question_detail')">Options</a></li>-->
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                        <h1 id="taskTitle"></h1>
+                        <p id="taskText"></p>
+                        <div class="imageContainer">
+                          <img id="taskImage" src=""></img>
+                        </div>
+                        <h3>Bearbeite diese Aufgabe in dem Du einen oder mehrere Antworten erstellst:</h3>
+                            <div id="answers" data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <a id="pictureAnswerBTN" href="javaScript:void(0)" title=" picture " data-role="button" data-icon="myapp-picture" data-iconpos="top" data-inline="true" onclick="getAnswerPicture()">Picture</a>
+                                <a id="videoAnswerBTN" href="javaScript:void(0)" title=" video " data-role="button" data-icon="myapp-video" data-iconpos="top" data-inline="true" onclick="getAnswerVideo()">Video</a>
+                                <a id="audioAnswerBTN" href="javaScript:void(0)" title=" sound " data-role="button" data-icon="myapp-sound" data-iconpos="top" data-inline="true" onclick="getAnswerAudio()">Sound</a>
+                                <a id="textAnswerBTN"  href="#textanswer_page" title=" text " data-role="button" data-icon="myapp-text" data-iconpos="top" data-inline="true">Text</a>
+                            </div>
+                            <button onclick="buildAnswersPage()">Antworten</button>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#question_detail')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#question_detail')">Upload</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- textanswer page here -->
+            <div data-role="page" id="textanswer_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#question_detail"> Back </a>
+                    <h1 id="headerTitle">Textantwort</h1>
+                    <a href="#positionWindow6" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow6" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#textanswer_page')">Hilfe</a></li>
+                                    <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#textanswer_page')">Options</a></li>-->
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                      <label for="textAnswerArea">Bitte geben sie eine Textantwort ein:</label>
+                      <textarea id="textAnswerArea" name="text"></textarea>
+                      <a data-role="button" href="javaScript:void(0)" onclick="getAnswerText()">Speichern</a>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                   <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#textanswer_page')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#textanswer_page')">Upload</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- answers page here -->
+            <div data-role="page" id="answers_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#question_detail"> Back </a>
+                    <h1 id="headerTitle">Antworten</h1>
+                    <a href="#positionWindow7" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow7" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#answers_page')">Hilfe</a></li>
+                                    <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#answers_page')">Options</a></li>-->
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                      <h1>Eigene Antworten:</h1>
+                      <ul id="answersList" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">
+
+                      </ul>
+                      <div data-role="popup" id="answerOptions" data-overlay-theme="a">
+                        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                        <div data-role="navbar">
+                          <ul data-role="listview" id="subnav">
+                            <li><a href="javaScript:void(0)" onclick="deleteAnswer()">Löschen</a></li>
+                            <li><a href="javaScript:void(0)" onclick="getSingleAnswerForUpload()">Upload</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                   <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#answers_page')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#answers_page')">Upload</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- maps page here -->
+            <div data-role="page" id="maps_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button"  href="javaScript:void(0)" onclick="backTo('#maps_page')"> Back </a>
+                    <h1 id="headerTitle">Map</h1>
+                    <a href="#positionWindow8" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow8" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#maps_page')">Hilfe</a></li>
+                                    <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#maps_page')">Options</a></li>-->
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                        <!-- <div id="map" style="width:100%; height:70%; position:absolute"> -->
+                        <div id="map" class="map">
+
+                        </div>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#maps_page')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#maps_page')">Upload</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- options page here -->
+            <div data-role="page" id="options_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="javaScript:void(0)" onclick="backTo('#options_page')"> Back </a>
+                    <h1 id="headerTitle">Optionen</h1>
+                    <a href="#positionWindow9" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow9" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                            <ul data-role="listview" id="subnav">
+                                <li><a href="javaScript:void(0)" onclick="showHelpPage('#options_page')">Hilfe</a></li>
+                                <li><a href="#login_page">Logout</a></li>
+                            </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                        <h1>Optionen:</h1>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                    <img id="login_footer_img" src="img/uni_imis.png" />
+                </footer>
+            </div>
+
+            <!-- upload page here -->
+            <div data-role="page" id="upload_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="javaScript:void(0)" onclick="backTo('#upload_page')"> Back </a>
+                    <h1 id="headerTitle">Upload</h1>
+                    <a href="#positionWindow10" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow10" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#upload_page')">Hilfe</a></li>
+                                  <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#upload_page')">Options</a></li>-->
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                        <h1>Upload:</h1>
+                        <p id="uploadText"></p>
+                        <a data-role="button" href="javaScript:void(0)" onclick="getAnswersForUpload()">Antworten hochladen</a>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                    <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#upload_page')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#upload_page')">Upload</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- help page here -->
+            <div data-role="page" id="help_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="javaScript:void(0)" onclick="backTo('#help_page')"> Back </a>
+                    <h1 id="headerTitle">Hilfe</h1>
+                    <a href="#positionWindow11" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow11" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                            <ul data-role="listview" id="subnav">
+                                <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#help_page')">Options</a></li>-->
+                                <li><a href="#login_page">Logout</a></li>
+                            </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div class="app">
+                        <h1>Hilfe:</h1>
+                        <p id="helpText">
+                        </p>
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                    <img id="login_footer_img" src="img/uni_imis.png" />
+                </footer>
+            </div>
+
+            <!-- answerdetail page here -->
+            <div data-role="page" id="answer_detail_page">
+                <header data-role="header" data-position="fixed">
+                    <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-back ui-btn-icon-notext ui-shadow" data-form="ui-icon" title=" Back " data-role="button" role="button" href="#answers_page"> Back </a>
+                    <h1 id="headerTitle">Antworten</h1>
+                    <a href="#positionWindow12" data-position-to="window" data-rel="popup" class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" title="Navigation" data-role="button" role="button">
+                        <div data-role="popup" id="positionWindow12" data-overlay-theme="a">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                            <div data-role="navbar">
+                                <ul data-role="listview" id="subnav">
+                                    <li><a href="javaScript:void(0)" onclick="showHelpPage('#answer_detail_page')">Hilfe</a></li>
+                                    <!--<li><a href="javaScript:void(0)" onclick="showOptionsPage('#answer_detail_page')">Options</a></li>-->
+                                    <li><a href="#login_page">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div data-role="main" id="main">
+                    <div id="answerDetailContentDiv" class="app">
+
+
+                    </div>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                   <div data-type="horizontal">
+                        <a title=" home " data-role="button" data-icon="myapp-home" data-iconpos="top" data-inline="true" href="#games_page">Home</a>
+                        <a title=" map " data-role="button" data-icon="myapp-map" data-iconpos="top" data-inline="true" href="javaScript:void(0)" onclick="showMapsPage('#answer_detail_page')">Karte</a>
+                        <a href="javaScript:void(0)" title=" upload " data-role="button" data-icon="myapp-upload" data-iconpos="top" data-inline="true" onclick="getAnswersUploadCount('#answers_page')">Upload</a>
+                    </div>
+                </footer>
+            </div>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/crypto-min.js"></script>
+        <script src="js/webserviceController.js"></script>
+        <script src="js/answersController.js"></script>
+        <script src="js/databaseController.js"></script>
+        <script type="text/javascript" src="js/leaflet.js"></script>
+        <script type="text/javascript" src="js/jqm.leaflet.min.js"></script>
+        <script type="text/javascript" src="js/fastclick.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <!-- <script src="http://192.168.1.7:8080/target/target-script-min.js#anonymous"></script> -->
+        <!-- <script src="http://192.168.0.18:8080/target/target-script-min.js#anonymous"></script> -->
+        <!-- <script src="http://141.83.80.160:8080/target/target-script-min.js#anonymous"></script> -->
+        <script>
+          app.initialize();
+        </script>
     </body>
 </html>

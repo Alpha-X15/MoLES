@@ -11,13 +11,18 @@
   <preference name="prerendered-icon" value="true"/>
   <preference name="stay-in-webview" value="false"/>
   <preference name="ios-statusbarstyle" value="black-opaque"/>
+  <preference name="StatusBarOverlaysWebView" value="false" />
   <preference name="detect-data-types" value="true"/>
   <preference name="exit-on-suspend" value="false"/>
   <preference name="show-splash-screen-spinner" value="true"/>
   <preference name="auto-hide-splash-screen" value="true"/>
   <preference name="disable-cursor" value="false"/>
-  <preference name="android-minSdkVersion" value="7"/>
+  <preference name="android-minSdkVersion" value="14"/>
   <preference name="android-installLocation" value="auto"/>
+  <preference name="loadUrlTimeoutValue" value="50000" />
+  <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+  <preference name="iosPersistentFileLocation" value="Compatibility" />
+  <preference name="AllowInlineMediaPlayback" value="true"/>
   <gap:plugin name="org.apache.cordova.battery-status"/>
   <gap:plugin name="org.apache.cordova.camera"/>
   <gap:plugin name="org.apache.cordova.media-capture"/>
@@ -63,13 +68,19 @@
   <gap:splash src="www/res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
   <access origin="*"/>
   <access origin="http://molescore.mesh.de" subdomains="true"/>
+  <access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
+  <access origin="http://phonegap.com" subdomains="true" />  - same as above, but including subdomains, such as http://build.phonegap.com/
+  <access origin="http://tile.openstreetmap.org" subdomains="true" />
   <plugin name="cordova-plugin-whitelist" version="1"/>
+  <plugin name="SQLitePlugin" value="SQLitePlugin" />
+  <plugin name="Capture" value="CDVCapture" />
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
   <allow-intent href="sms:*"/>
   <allow-intent href="mailto:*"/>
   <allow-intent href="geo:*"/>
+  <allow-intent href="data:*"/>
   <platform name="android">
     <allow-intent href="market:*"/>
   </platform>
@@ -77,4 +88,10 @@
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
   </platform>
+ <feature name="debug-server" required="true"> -->
+  <!-- <param name="domain" value="http://192.168.178.31:8080"/> -->
+  <!-- <param name="domain" value="http://141.83.80.160:8080"/> -->
+  <param name="key" value="MoLes123"/>
+</feature>
+
 </widget>
